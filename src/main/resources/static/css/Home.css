@@ -18,7 +18,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     max-width: 100%;
-    height: 93vh;
+    height: 100vh;
+    padding-top: 62px;
 }
 
 h1 {
@@ -85,9 +86,12 @@ body{
     background-color: whitesmoke;
     width: 15%;
     position: fixed;
+    /*top: 0px;*/
+    overscroll-behavior: contain;
     display: block;
     height: 100%;
     transition-delay: 0.3s;
+    padding-top: 60px;
 }
 
 .sidebar a{
@@ -105,7 +109,7 @@ h4{
     font-family: cursive;
     color: crimson;
     font-size: 25px;
-    padding-top: 13px;
+    padding-top: 15px;
     padding-bottom: 1px;
 }
 
@@ -129,11 +133,67 @@ h4{
     font-size: 25px;
     padding-left: 16%;
     display: block;
+    padding-top: 62px;
 }
 
 .dashboard_banner{
     padding-left: 9%;
-    padding-top: 5%;
+    padding-top: 62px;
     padding-right: 2%;
     width: 95rem;
+}
+
+.greet{
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 80px;
+    font-family: "Bell MT";
+    text-shadow: blue;
+    color: black;
+    padding-top: 62px;
+    color: brown;
+}
+
+.card-title{
+    font-family: cursive;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
+    color: darkblue;
+}
+
+.card-text{
+    font-family: cursive;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 35px;
+    color: maroon;
+}
+
+.card-header-tabs{
+    font-weight: bold;
+    font-style: italic;
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
+
+.guide{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: left;
+    font-family: "Cooper Black";
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.bot{
+    width: 26%;
+    color: black;
+}
+
+.DP{
+    padding-top: 25%;
+    background-image: url("../img/855804886_292466.png");
 }

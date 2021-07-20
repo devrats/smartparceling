@@ -1,6 +1,5 @@
 
 const start = () => {
-    console.log("kkkk")
     if ($(".sidebar").is(":visible")){
          $(".bar").css("display","none")
      }
@@ -10,14 +9,13 @@ const start = () => {
 }
 
 const toggle = () => {
-    // console.log($(".sidebar").is(":visible"))
     if($(".sidebar").is(":visible")){
         $(".sidebar").css("display","none")
         $(".sidebar").css("transition","0.3")
         $(".sidebar").prop("disabled","true")
         $(".bar").css("display","block")
         $(".bar").css("padding-left","2px")
-        $(".dashboard_banner").css("padding-left","2px")
+        $(".dashboard_banner").css("padding-left","0%")
     }
     else{
         $(".sidebar").css("display","block")

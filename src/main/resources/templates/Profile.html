@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <title>Profile</title>
 </head>
-<body>
-
+<body onload="start()">
+<div th:replace="Navigation::nav"></div>
+<div th:replace="SideBar::side"></div>
+<i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<section class="container text-center dashboard_banner">
+    <section class="DP">
+        <img src="" th:src="@{/img/855804886_292466.png}">
+    </section>
+</section>
+<div th:replace="About::foot"></div>
 </body>
 </html>
