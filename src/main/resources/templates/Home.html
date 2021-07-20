@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>Smart Parceling</title>
+<head th:replace="Head::frag(${title})">
 </head>
 <body>
-<h1>This Is Home</h1>
+<nav th:replace="HomeNavigation::nav"></nav>
+<section class="banner">
+    <h1>Smart Parceling</h1>
+    <p class="motto"> A new and interactive way to send your parcel to your loved ones </p>
+    <div class="card border-primary mb-3 mx-auto" style="width: 22rem;">
+        <h5 class="card-header">Login to your account</h5>
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">User Name</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+<footer class="footer" th:replace="About::foot"></footer>
 </body>
 </html>

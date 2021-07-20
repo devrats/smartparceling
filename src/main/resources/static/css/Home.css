@@ -1,0 +1,139 @@
+
+.navbar-expand-lg .navbar-collapse .navbar-nav .nav-item .nav-link {
+    font-family: "Bookman Old Style";
+    font-style: italic;
+    font-size: 15px;
+}
+
+.navbar-expand-lg .navbar-brand {
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: cursive;
+    text-shadow: blue;
+}
+
+.banner {
+    background-image: url("../img/foto-blogartikel-10-767x511.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    height: 93vh;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 80px;
+    font-family: "Edwardian Script ITC";
+    text-shadow: blue;
+    color: black;
+}
+
+.motto {
+    color: crimson;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: "Times New Roman";
+    text-align: center;
+}
+
+.card {
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.banner .card .card-header{
+    color: olive;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.footer{
+    background-color: #e2e2e2;
+    font-family: "Times New Roman";
+    font-weight: bold;
+    font-size: 15px;
+    border-width: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+body{
+    background-color: #e2e2e2;
+}
+
+.register{
+    text-align: center;
+    font-weight: bold;
+    font-family: "Edwardian Script ITC";
+    font-style: italic;
+    color: crimson;
+    font-size: 15vh;
+}
+
+.icon{
+    justify-content: center;
+    width: 15vh;
+    hight: 15vh;
+}
+
+.sidebar{
+    background-color: whitesmoke;
+    width: 15%;
+    position: fixed;
+    display: block;
+    height: 100%;
+    transition-delay: 0.3s;
+}
+
+.sidebar a{
+    padding: 10px 25px;
+    display: block;
+    color: black;
+    font-style: italic;
+    font-family: "Times New Roman";
+    font-size: 15px;
+    text-decoration: none;
+    width: 100%;
+}
+
+h4{
+    font-family: cursive;
+    color: crimson;
+    font-size: 25px;
+    padding-top: 13px;
+    padding-bottom: 1px;
+}
+
+.sidebar a:hover{
+    background-color: burlywood;
+}
+
+.sidebar .present{
+    background-color: blueviolet;
+    color: whitesmoke;
+}
+
+.sidebar .cross{
+    position: absolute;
+    left: 90%;
+    font-size: 25px;
+}
+
+.bar{
+    position: fixed;
+    font-size: 25px;
+    padding-left: 16%;
+    display: block;
+}
+
+.dashboard_banner{
+    padding-left: 9%;
+    padding-top: 5%;
+    padding-right: 2%;
+    width: 95rem;
+}

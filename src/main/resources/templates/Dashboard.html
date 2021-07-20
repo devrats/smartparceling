@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
+<head th:replace="Head::frag(${title})">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
 </head>
-<body>
-
+<body onload="start()">
+<nav th:replace="Navigation::nav"/>
+<div th:replace="SideBar::side"></div>
+<i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<section class="container text-center dashboard_banner">
+    <div class="card text-center" style="width: 70rem;">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" tabindex="-1">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</section>
+<footer th:replace="About::foot"/>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="Head::frag(${title})">
     <meta charset="UTF-8">
-    <title>Navigation</title>
+    <title>Title</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="nav">
@@ -14,16 +14,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${title}=='Dashboard' ? 'active' : ''" aria-current="page" href="#" th:href="@{/dashboard}">DASHBOARD</a>
+                    <a class="nav-link" th:classappend="${title}=='Smart Parceling' ? 'active' : ''" aria-current="page" href="#" th:href="@{/}">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${title}=='Profile' ? 'active' : ''" href="#" th:href="@{/profile}">PROFILE</a>
+                    <a class="nav-link" th:classappend="${title}=='Sign Up' ? 'active' : ''" href="#" th:href="@{/register}">SIGN UP</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${title}=='Recharge' ? 'active' : ''" href="#" th:href="@{/rechaarge}">RECHARGE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${title}=='Login' ? 'active' : ''" href="#" th:href="@{/logout}">LOGOUT</a>
+                    <a class="nav-link" th:classappend="${title}=='Login' ? 'active' : ''" href="#" th:href="@{/login}">LOG IN</a>
                 </li>
             </ul>
         </div>
