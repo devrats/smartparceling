@@ -9,10 +9,67 @@
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <section class="container text-center dashboard_banner">
-    <section class="DP">
-        <img src="" th:src="@{/img/855804886_292466.png}">
-    </section>
+    <div class="card" style="padding-top: 10px; width: 108%">
+        <div class="card-body">
+            <img src="" class="dp" th:src="@{/img/WhatsApp Image 2021-07-20 at 21.45.31.png}">
+            <h1 class="greet" style="font-size: 60px;padding-top: 10px">Welcome To Your Profile</h1>
+        </div>
+    </div>
+    <h1 class="guide">Your Details</h1>
+    <div class="card" style="width: 108%; font-size: 18px; text-align: left">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Unique ID: <span style="color: white"> &emsp;</span> 12345678</li>
+            <li class="list-group-item">Name: <span style="color: white"> &emsp;</span> Devvrat Sharma
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">Email:<span style="color: white"> &emsp;</span> devvvrats@gmail.com
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">Phone:<span style="color: white"> &emsp;</span> 8532066858
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">Username:<span style="color: white"> &emsp;</span> devrtas
+            </li>
+            <li class="list-group-item">Account Balance: <span style="color: white">&emsp; </span> 50 pika Coins
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/recharge}">~ recharge</a></span>
+            </li>
+            <li class="list-group-item">Address: <span style="color: white"> &emsp;</span> 137/A blaji puram
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">Address Line 2: <span style="color: white"> &emsp;</span> albatiya road
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">City: <span style="color: white"> &emsp;</span> Agra
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">State: <span style="color: white"> &emsp;</span> uttar pradesh
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+            <li class="list-group-item">Zip: <span style="color: white"> &emsp;</span> 282010
+                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                    class="edit"
+                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
+            </li>
+        </ul>
+    </div>
+    <div th:replace="About::foot"></div>
 </section>
-<div th:replace="About::foot"></div>
+
 </body>
 </html>

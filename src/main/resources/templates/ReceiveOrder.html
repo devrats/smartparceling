@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="Head::frag(${title})">
     <meta charset="UTF-8">
-    <title>Request your order</title>
+    <title>Title</title>
 </head>
 <body onload="start()">
 <div th:replace="Navigation::nav"/>
@@ -12,31 +12,20 @@
     <div class="card" style="width: 108%">
         <div class="card-body">
             <div class="container text-center">
-                <img class="icon" src="" style="height: 18vh; width: 18vh"  th:src="@{https://cdn3.iconfinder.com/data/icons/logistics-delivery-4-2/50/162-512.png}">
+                <img class="icon" src="" style="height: 20vh; width: 20vh"
+                     th:src="@{https://www.wellesley.edu/sites/all/themes/bootstrap/image/admission/visit-us.svg}">
             </div>
             <form class="row g-3" style="text-align: left">
-                <h1 class="register" style="font-family: 'Times New Roman'; font-size: 10vh">Request Your Order</h1>
-                <div class="mb-3">
-                    <label for="exampleInputName" class="form-label">Item</label>
-                    <input type="text" class="form-control" id="exampleInputName" placeholder="Item" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputName4" class="form-label">Weight</label>
-                    <input type="number" class="form-control" placeholder="Weight" id="exampleInputName4"
-                            required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPhone" class="form-label">Date</label>
-                    <input type="date" placeholder="DD/MM/YYYY" class="form-control" id="exampleInputPhone" required>
-                </div>
-                <h2 class="guide">Pick up pint</h2>
+                <h1 class="register" style="font-family: 'Times New Roman'; font-size: 10vh; padding-top: 5px; padding-bottom: 5px">Request your visit</h1>
+                <h2 class="guide">Going From</h2>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Address</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="House/Flat No.">
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    <input type="text" class="form-control" id="inputAddress2"
+                           placeholder="Apartment, studio, or floor">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
@@ -88,22 +77,23 @@
                     <label for="inputZip" class="form-label">Zip</label>
                     <input type="text" placeholder="Zip" class="form-control" id="inputZip">
                 </div>
-                <h2 class="guide">Destination Point</h2>
+                <h2 class="guide">Going To</h2>
                 <div class="col-12">
-                    <label for="inputAddress7" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress7" placeholder="House/Flat No.">
+                    <label for="inputAddress3" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress3" placeholder="House/Flat No.">
                 </div>
                 <div class="col-12">
                     <label for="inputAddress3" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress3" placeholder="Apartment, studio, or floor">
+                    <input type="text" class="form-control" id="inputAddress5"
+                           placeholder="Apartment, studio, or floor">
                 </div>
                 <div class="col-md-6">
-                    <label for="inputCity1" class="form-label">City</label>
-                    <input type="text" placeholder="City" class="form-control" id="inputCity1">
+                    <label for="inputCity6" class="form-label">City</label>
+                    <input type="text" placeholder="City" class="form-control" id="inputCity6">
                 </div>
                 <div class="col-md-4">
-                    <label for="inputState1" class="form-label">State</label>
-                    <select id="inputState1" class="form-select">
+                    <label for="inputState5" class="form-label">State</label>
+                    <select id="inputState5" class="form-select">
                         <option selected>Choose...</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -144,12 +134,30 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <label for="inputZip1" class="form-label">Zip</label>
-                    <input type="text" placeholder="Zip" class="form-control" id="inputZip1">
+                    <label for="inputZip0" class="form-label">Zip</label>
+                    <input type="text" placeholder="Zip" class="form-control" id="inputZip0">
                 </div>
-                <br>
-                <div class="container text-center">
-                    <button type="submit" class="btn btn-outline-success btn-warning bot">Request</button>
+                <div class="mb-3">
+                    <label for="exampleInputName4" class="form-label">Weight you can carry</label>
+                    <input type="number" class="form-control" placeholder="Weight" id="exampleInputName4"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPhone" class="form-label">Date</label>
+                    <input type="date" placeholder="DD/MM/YYYY" class="form-control" id="exampleInputPhone" required>
+                </div>
+                <div>
+                    <label for="inputState7" class="form-label">Traveling via</label>
+                    <select id="inputState7" class="form-select">
+                        <option selected>Choose...</option>
+                        <option value="Andhra Pradesh">Road</option>
+                        <option value="Andaman and Nicobar Islands">Train</option>
+                        <option value="Arunachal Pradesh">Air</option>
+                    </select>
+                    <br>
+                    <div class="container text-center">
+                        <button type="submit" class="btn btn-outline-success btn-warning bot">Request</button>
+                    </div>
                 </div>
             </form>
         </div>

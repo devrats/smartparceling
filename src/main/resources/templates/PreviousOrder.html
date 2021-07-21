@@ -2,52 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="Head::frag(${title})">
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Recharge</title>
 </head>
 <body onload="start()">
-<nav th:replace="Navigation::nav"/>
-<div th:replace="SideBar::side"></div>
+<div th:replace="Navigation::nav"/>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<div th:replace="SideBar::side"/>
 <section class="container text-center dashboard_banner">
-    <h1 class="greet">Hello User!</h1>
-    <div class="card text-center" style="width: 108%;">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/dashboard/1}" href="#"
-                       th:classappend="${value}==1 ? 'active' : ''">Order Requested</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/dashboard/2}" href="#"
-                       th:classappend="${value}==2 ? 'active' : ''">Order Completed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/dashboard/3}" href="#" tabindex="-1"
-                       th:classappend="${value}==3 ? 'active' : ''">Pika Coins</a>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body" th:if="${value}==1">
-            <h5 class="card-title">Your Requested Orders Till Now</h5>
-            <p class="card-text">5</p>
-        </div>
-        <div class="card-body" th:if="${value}==2">
-            <h5 class="card-title">Your Completed Orders Till Now</h5>
-            <p class="card-text">5</p>
-        </div>
-        <div class="card-body" th:if="${value}==3">
-            <h5 class="card-title">Pika Coins In Your Account</h5>
-            <p class="card-text">5</p>
-        </div>
-    </div>
-    <div class="container text-center" style="padding-top: 15px; padding-bottom: 10px">
-        <a th:href="@{/user/requestOrder}"> <input type="submit" class="btn btn-outline-danger btn-warning bot"
-                                                   value="Request Order"> </a>
-        <span>&emsp;</span>
-        <a th:href="@{/user/receiveOrder}"> <input type="submit" class="btn btn-outline-danger btn-info bot"
-                                                   value="Receive Order"> </a>
-    </div>
-    <h1 class="guide">Orders You Have Requested</h1>
+    <h1 class="greet" style="color: blue; font-family: 'Britannic Bold'">Your Previous Orders</h1>
+    <h1 class="guide">Orders You Have Completed</h1>
     <div class="card" style="width: 108%">
         <div class="card-body">
             <table class="table">
@@ -73,11 +36,8 @@
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
-                                                                       class="btn btn-outline-success action"
-                                                                       value="Accept"> </a>
-                            <a href=""> <input type="submit"
-                                                                       class="btn btn-outline-danger action"
-                                                                       value="Reject"> </a>
+                                               class="btn btn-outline-danger action"
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -91,11 +51,8 @@
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
-                                               class="btn btn-outline-success action"
-                                               value="Accept"> </a>
-                            <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Reject"> </a>
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -109,11 +66,8 @@
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
-                                               class="btn btn-outline-success action"
-                                               value="Accept"> </a>
-                            <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Reject"> </a>
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -121,7 +75,7 @@
             </table>
         </div>
     </div>
-    <h1 class="guide">Orders You Can Complete</h1>
+    <h1 class="guide">Your Completed Order</h1>
     <div class="card" style="width: 108%">
         <div class="card-body">
             <table class="table">
@@ -148,7 +102,7 @@
                         <div class="container text-center">
                             <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -163,7 +117,7 @@
                         <div class="container text-center">
                             <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -178,7 +132,7 @@
                         <div class="container text-center">
                             <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
+                                               value="Remove"> </a>
                         </div>
                     </td>
                 </tr>
@@ -186,7 +140,7 @@
             </table>
         </div>
     </div>
-    <footer th:replace="About::foot"/>
+    <div th:replace="About::foot"/>
 </section>
 
 </body>

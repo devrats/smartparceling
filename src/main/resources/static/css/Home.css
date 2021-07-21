@@ -109,7 +109,7 @@ h4{
     font-family: cursive;
     color: crimson;
     font-size: 25px;
-    padding-top: 15px;
+    padding-top: 20px;
     padding-bottom: 1px;
 }
 
@@ -124,6 +124,7 @@ h4{
 
 .sidebar .cross{
     position: absolute;
+    padding-top: 5px;
     left: 90%;
     font-size: 25px;
 }
@@ -131,7 +132,6 @@ h4{
 .bar{
     position: fixed;
     font-size: 25px;
-    padding-left: 16%;
     display: block;
     padding-top: 62px;
 }
@@ -193,7 +193,51 @@ h4{
     color: black;
 }
 
-.DP{
-    padding-top: 25%;
-    background-image: url("../img/855804886_292466.png");
+.dp{
+    padding-top: 50px;
+    border-radius: 100%;
+    height: 20rem;
+    width: 17rem;
+    object-fit: cover;
+}
+
+.edit{
+    color: blue;
+    font-family: "Times New Roman";
+    font-size: 18px;
+    text-decoration: none;
+
+}
+.lol a:hover{
+    color: brown;
+    font-size: 18.5px;
+}
+
+.list-group-item{
+    color: darkmagenta;
+    font-family: "Times New Roman";
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.action{
+    height: 22px;
+    width: 55px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 0px 0px 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.recharge{
+    font-size: 20px;
+    font-style: italic;
+    font-weight: initial;
+    color: darkmagenta;
 }

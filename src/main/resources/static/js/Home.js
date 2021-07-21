@@ -1,11 +1,6 @@
 
 const start = () => {
-    if ($(".sidebar").is(":visible")){
-         $(".bar").css("display","none")
-     }
-     else{
 
-    }
 }
 
 const toggle = () => {

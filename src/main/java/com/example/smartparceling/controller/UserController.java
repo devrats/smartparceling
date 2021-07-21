@@ -29,4 +29,34 @@ public class UserController {
         return "Profile";
     }
 
+    @RequestMapping("/receiveOrder")
+    public String receiveOrder(Model model) {
+        model.addAttribute("title","Receive Order");
+        return "ReceiveOrder";
+    }
+
+    @RequestMapping("/requestOrder")
+    public String requestOrder(Model model) {
+        model.addAttribute("title","Request Order");
+        return "RequestOrder";
+    }
+
+    @RequestMapping("/editProfile")
+    public String editProfile(Model model) {
+        model.addAttribute("title","Edit Profile");
+        return "Edit";
+    }
+
+    @RequestMapping("/previousOrder")
+    public String previousOrder(Model model) {
+        model.addAttribute("title","Previous Order");
+        return "PreviousOrder";
+    }
+
+    @RequestMapping("/recharge")
+    public String recharge(Model model) {
+        model.addAttribute("title","Recharge");
+        return "Recharge";
+    }
+
 }
