@@ -368,3 +368,7 @@ a {
 .login_card{
     width: 90%;
 }
+
+.warning{
+    color: red;
+}

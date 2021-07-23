@@ -8,6 +8,7 @@
 package com.example.smartparceling.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,16 +19,23 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "This field cannot be blank")
     private String name;
-    private long phone;
-    @Column(unique = true, nullable = false)
+    @NotBlank(message = "This field cannot be blank")
+    private String phone;
+    @NotBlank(message = "This field cannot be blank")
+    @Column(unique = true)
     private String userName;
-    @Column(nullable = false)
+    @NotBlank(message = "This field cannot be blank")
+    @Size(max = 20,min = 8,message = "Password must contain 8 to 20 character")
     private String password;
+    @NotBlank(message = "This field cannot be blank")
     private String email;
     private byte[] image;
     private int accountBalance;
     private String role;
+    @AssertTrue(message = "Must agree term and condition")
+    private boolean agree;
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private Address address;
     @OneToMany(mappedBy = "person")
@@ -55,6 +63,91 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Visit> visits;
 
+    public Person(int id, String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address, List<Visit> visits) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+        this.visits = visits;
+    }
+
+    public Person(String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address, List<OrderRequested> orderRequested) {
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+        this.orderRequested = orderRequested;
+    }
+
+    public Person(String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address) {
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+    }
+
+    public Person() {
+    }
+
+    public Person(int id, String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+    }
+
+    public Person(int id, String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address, List<OrderRequested> orderRequested, List<OrderCompletedByUser> orderCompletedByUser, List<OrderCompleted> orderCompleted, List<OrderPending> orderPending, List<OrderReceived> orderReceived, List<OrderOnTheWay> orderOnTheWay, List<OrderCompletedByUser> orderCompletedByUserFor, List<OrderCompleted> orderCompletedBy, List<OrderPending> orderPendingFrom, List<OrderReceived> orderReceivedFrom, List<OrderOnTheWay> orderOnTheWayBy, List<Visit> visits) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+        this.orderRequested = orderRequested;
+        this.orderCompletedByUser = orderCompletedByUser;
+        this.orderCompleted = orderCompleted;
+        this.orderPending = orderPending;
+        this.orderReceived = orderReceived;
+        this.orderOnTheWay = orderOnTheWay;
+        this.orderCompletedByUserFor = orderCompletedByUserFor;
+        this.orderCompletedBy = orderCompletedBy;
+        this.orderPendingFrom = orderPendingFrom;
+        this.orderReceivedFrom = orderReceivedFrom;
+        this.orderOnTheWayBy = orderOnTheWayBy;
+        this.visits = visits;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -67,6 +160,7 @@ public class Person {
                 ", image=" + Arrays.toString(image) +
                 ", accountBalance=" + accountBalance +
                 ", role='" + role + '\'' +
+                ", agree=" + agree +
                 ", address=" + address +
                 ", orderRequested=" + orderRequested +
                 ", orderCompletedByUser=" + orderCompletedByUser +
@@ -88,14 +182,22 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return getId() == person.getId() && getPhone() == person.getPhone() && getAccountBalance() == person.getAccountBalance() && Objects.equals(getName(), person.getName()) && Objects.equals(getUserName(), person.getUserName()) && Objects.equals(getPassword(), person.getPassword()) && Objects.equals(getEmail(), person.getEmail()) && Arrays.equals(getImage(), person.getImage()) && Objects.equals(getRole(), person.getRole()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getOrderRequested(), person.getOrderRequested()) && Objects.equals(getOrderCompletedByUser(), person.getOrderCompletedByUser()) && Objects.equals(getOrderCompleted(), person.getOrderCompleted()) && Objects.equals(getOrderPending(), person.getOrderPending()) && Objects.equals(getOrderReceived(), person.getOrderReceived()) && Objects.equals(getOrderOnTheWay(), person.getOrderOnTheWay()) && Objects.equals(getOrderCompletedByUserFor(), person.getOrderCompletedByUserFor()) && Objects.equals(getOrderCompletedBy(), person.getOrderCompletedBy()) && Objects.equals(getOrderPendingFrom(), person.getOrderPendingFrom()) && Objects.equals(getOrderReceivedFrom(), person.getOrderReceivedFrom()) && Objects.equals(getOrderOnTheWayBy(), person.getOrderOnTheWayBy()) && Objects.equals(getVisits(), person.getVisits());
+        return getId() == person.getId() && getPhone() == person.getPhone() && getAccountBalance() == person.getAccountBalance() && isAgree() == person.isAgree() && Objects.equals(getName(), person.getName()) && Objects.equals(getUserName(), person.getUserName()) && Objects.equals(getPassword(), person.getPassword()) && Objects.equals(getEmail(), person.getEmail()) && Arrays.equals(getImage(), person.getImage()) && Objects.equals(getRole(), person.getRole()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getOrderRequested(), person.getOrderRequested()) && Objects.equals(getOrderCompletedByUser(), person.getOrderCompletedByUser()) && Objects.equals(getOrderCompleted(), person.getOrderCompleted()) && Objects.equals(getOrderPending(), person.getOrderPending()) && Objects.equals(getOrderReceived(), person.getOrderReceived()) && Objects.equals(getOrderOnTheWay(), person.getOrderOnTheWay()) && Objects.equals(getOrderCompletedByUserFor(), person.getOrderCompletedByUserFor()) && Objects.equals(getOrderCompletedBy(), person.getOrderCompletedBy()) && Objects.equals(getOrderPendingFrom(), person.getOrderPendingFrom()) && Objects.equals(getOrderReceivedFrom(), person.getOrderReceivedFrom()) && Objects.equals(getOrderOnTheWayBy(), person.getOrderOnTheWayBy()) && Objects.equals(getVisits(), person.getVisits());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getId(), getName(), getPhone(), getUserName(), getPassword(), getEmail(), getAccountBalance(), getRole(), getAddress(), getOrderRequested(), getOrderCompletedByUser(), getOrderCompleted(), getOrderPending(), getOrderReceived(), getOrderOnTheWay(), getOrderCompletedByUserFor(), getOrderCompletedBy(), getOrderPendingFrom(), getOrderReceivedFrom(), getOrderOnTheWayBy(), getVisits());
+        int result = Objects.hash(getId(), getName(), getPhone(), getUserName(), getPassword(), getEmail(), getAccountBalance(), getRole(), isAgree(), getAddress(), getOrderRequested(), getOrderCompletedByUser(), getOrderCompleted(), getOrderPending(), getOrderReceived(), getOrderOnTheWay(), getOrderCompletedByUserFor(), getOrderCompletedBy(), getOrderPendingFrom(), getOrderReceivedFrom(), getOrderOnTheWayBy(), getVisits());
         result = 31 * result + Arrays.hashCode(getImage());
         return result;
+    }
+
+    public boolean isAgree() {
+        return agree;
+    }
+
+    public void setAgree(boolean agree) {
+        this.agree = agree;
     }
 
     public int getId() {
@@ -114,11 +216,11 @@ public class Person {
         this.name = name;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -274,94 +376,4 @@ public class Person {
         this.visits = visits;
     }
 
-    public Person(int id, String name, long phone, String userName, String password, String email, byte[] image, int accountBalance, String role, Address address, List<Visit> visits) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.image = image;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-        this.visits = visits;
-    }
-
-    public Person(String name, long phone, String userName, String password, String email, byte[] image, int accountBalance, String role, Address address, List<OrderRequested> orderRequested) {
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.image = image;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-        this.orderRequested = orderRequested;
-    }
-
-    public Person(String name, long phone, String userName, String password, String email, int accountBalance, String role, Address address) {
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-    }
-
-    public Person(String name, long phone, String userName, String password, String email, byte[] image, int accountBalance, String role, Address address) {
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.image = image;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-    }
-
-    public Person(int id, String name, long phone, String userName, String password, String email, byte[] image, int accountBalance, String role, Address address) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.image = image;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-    }
-
-    public Person() {
-    }
-
-    public Person(int id, String name, long phone, String userName, String password, String email, byte[] image, int accountBalance, String role, Address address, List<OrderRequested> orderRequested, List<OrderCompletedByUser> orderCompletedByUser, List<OrderCompleted> orderCompleted, List<OrderPending> orderPending, List<OrderReceived> orderReceived, List<OrderOnTheWay> orderOnTheWay, List<OrderCompletedByUser> orderCompletedByUserFor, List<OrderCompleted> orderCompletedBy, List<OrderPending> orderPendingFrom, List<OrderReceived> orderReceivedFrom, List<OrderOnTheWay> orderOnTheWayBy, List<Visit> visits) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.image = image;
-        this.accountBalance = accountBalance;
-        this.role = role;
-        this.address = address;
-        this.orderRequested = orderRequested;
-        this.orderCompletedByUser = orderCompletedByUser;
-        this.orderCompleted = orderCompleted;
-        this.orderPending = orderPending;
-        this.orderReceived = orderReceived;
-        this.orderOnTheWay = orderOnTheWay;
-        this.orderCompletedByUserFor = orderCompletedByUserFor;
-        this.orderCompletedBy = orderCompletedBy;
-        this.orderPendingFrom = orderPendingFrom;
-        this.orderReceivedFrom = orderReceivedFrom;
-        this.orderOnTheWayBy = orderOnTheWayBy;
-        this.visits = visits;
-    }
 }

@@ -312,3 +312,7 @@ a{
     height: 22vh;
     width: 22vh;
 }
+
+.warning{
+    color: red;
+}
