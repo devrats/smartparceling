@@ -8,9 +8,13 @@
 <nav th:replace="Navigation::nav"/>
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
-<section class="container text-center dashboard_banner">
+<section class="dashboard_banner" id="banneres"
+
+
+>
+
     <h1 class="greet">Hello User!</h1>
-    <div class="card text-center" style="width: 108%;">
+    <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -40,7 +44,7 @@
             <p class="card-text">5</p>
         </div>
     </div>
-    <div class="container text-center" style="padding-top: 15px; padding-bottom: 10px">
+    <div class="container text-center botton1">
         <a th:href="@{/user/requestOrder}"> <input type="submit" class="btn btn-outline-danger btn-warning bot"
                                                    value="Request Order"> </a>
         <span>&emsp;</span>
@@ -48,7 +52,7 @@
                                                    value="Receive Order"> </a>
     </div>
     <h1 class="guide">Orders You Have Requested</h1>
-    <div class="card" style="width: 108%">
+    <div class="card">
         <div class="card-body">
             <table class="table">
                 <thead>
@@ -122,7 +126,7 @@
         </div>
     </div>
     <h1 class="guide">Orders You Can Complete</h1>
-    <div class="card" style="width: 108%">
+    <div class="card">
         <div class="card-body">
             <table class="table">
                 <thead>

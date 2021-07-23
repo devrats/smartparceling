@@ -31,13 +31,13 @@ public class UserController {
 
     @RequestMapping("/receiveOrder")
     public String receiveOrder(Model model) {
-        model.addAttribute("title","Receive Order");
+        model.addAttribute("title","Receive Orders");
         return "ReceiveOrder";
     }
 
     @RequestMapping("/requestOrder")
     public String requestOrder(Model model) {
-        model.addAttribute("title","Request Order");
+        model.addAttribute("title","Request Orders");
         return "RequestOrder";
     }
 
@@ -49,7 +49,7 @@ public class UserController {
 
     @RequestMapping("/previousOrder")
     public String previousOrder(Model model) {
-        model.addAttribute("title","Previous Order");
+        model.addAttribute("title","Previous Orders");
         return "PreviousOrder";
     }
 

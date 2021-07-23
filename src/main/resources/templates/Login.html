@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Register yourself</title>
 </head>
-<body>
+<body onload="start1()">
 <nav th:replace="HomeNavigation::nav"/>
-<div class="card mx-auto scroll" style="width: 50rem; padding-top: 62px">
+<section class="profile">
+<section id="banneres">
+<div class="card mx-auto scroll">
     <div class="card-body">
         <div class="container text-center">
             <img class="icon" src="" th:src="@{https://image.flaticon.com/icons/png/512/2921/2921222.png}">
         </div>
-        <form class="row g-3">
+        <form class="row g-3 form" style="text-align: left">
             <h1 class="register">Register Here</h1>
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Name</label>
@@ -41,7 +43,7 @@
             </div>
             <div class="col-12">
                 <label for="inputAddress2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Street/Area">
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">City</label>
@@ -104,12 +106,13 @@
             </div>
             <div class="container text-center">
                 <button type="submit" class="btn btn-outline-danger btn-warning bot">Submit</button>
-                <span>&emsp;</span>
                 <button type="reset" class="btn btn-outline-danger btn-info bot">Reset</button>
             </div>
         </form>
     </div>
 </div>
+</section>
+</section>
 <div th:replace="About::foot"/>
 </body>
 </html>

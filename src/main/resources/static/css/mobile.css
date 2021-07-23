@@ -1,16 +1,20 @@
 
 .navbar-expand-lg .navbar-collapse .navbar-nav .nav-item .nav-link {
-    font-family: "Bookman Old Style";
+    font-family: "Times New Roman";
     font-style: italic;
-    font-size: 15px;
+    font-size: 50px;
 }
 
 .navbar-expand-lg .navbar-brand {
-    font-size: 25px;
+    font-size: 60px;
     font-style: italic;
     font-weight: bold;
     font-family: cursive;
     text-shadow: blue;
+}
+
+.navbar-toggler-icon {
+    font-size: 50px;
 }
 
 .banner {
@@ -21,19 +25,31 @@
     padding-top: 62px;
 }
 
+.login_bot {
+    width: 48%;
+    color: black;
+    font-size: 45px;
+    border-radius: 5%;
+    font-family: "Times New Roman";
+    font-weight: bold;
+    font-style: initial;
+}
+
 h1 {
+    font-family: "Times New Roman";
+    padding-top: 75px;
     text-align: center;
-    font-weight: bolder;
     font-style: italic;
-    font-size: 80px;
-    font-family: "Edwardian Script ITC";
+    font-size: 120px;
+    padding-bottom: 50px;
     text-shadow: blue;
     color: cornsilk;
 }
 
 .motto {
     color: lightgoldenrodyellow;
-    font-size: 40px;
+    padding-bottom: 50px;
+    font-size: 65px;
     font-style: italic;
     font-weight: bold;
     font-family: "Times New Roman";
@@ -44,218 +60,238 @@ h1 {
     border-radius: 5px;
     border-width: 5px;
     border-style: solid;
-    width: 108%;
+    width: 100%;
+    padding-left: 0px;
 }
 
-.banner .card .card-header{
+.banner .card .card-header {
     color: olive;
     font-weight: bold;
     font-family: cursive;
+    font-size: 50px;
 }
 
-.footer{
+.footer {
     background-color: #e2e2e2;
     font-family: "Times New Roman";
     font-weight: bold;
-    font-size: 15px;
+    font-size: 30px;
     border-width: 0px;
     padding: 0px;
     text-align: center;
 }
 
-body{
+body {
     background-color: #e2e2e2;
 }
 
-.register{
+.register {
     text-align: center;
     font-weight: bold;
-    font-family: "Edwardian Script ITC";
+    font-family: cursive;
     font-style: italic;
     color: crimson;
-    font-size: 15vh;
+    font-size: 150px;
 }
 
-.icon{
+.icon {
     justify-content: center;
-    width: 15vh;
-    hight: 15vh;
+    height: 14vh;
+    width: 14vh;
 }
 
-.sidebar{
+.sidebar {
     background-color: whitesmoke;
-    width: 15%;
+    width: 70%;
     position: fixed;
     /*top: 0px;*/
     overscroll-behavior: contain;
     display: block;
     height: 100%;
     transition-delay: 0.3s;
-    padding-top: 60px;
+    padding-top: 125px;
+    z-index: 3;
 }
 
-.sidebar a{
-    padding: 10px 25px;
+.sidebar a {
+    padding-top: 25px;
+    padding-bottom: 12px;
+    padding-left: 15px;
     display: block;
     color: black;
     font-style: italic;
     font-family: "Times New Roman";
-    font-size: 15px;
+    font-size: 45px;
     text-decoration: none;
     width: 100%;
 }
 
-h4{
+h4 {
     font-family: cursive;
     color: crimson;
-    font-size: 25px;
+    font-size: 80px;
     padding-top: 20px;
-    padding-bottom: 1px;
+    padding-bottom: 24px;
+    padding-left: 10px;
 }
 
-.sidebar a:hover{
+.sidebar a:hover {
     background-color: burlywood;
 }
 
-.sidebar .present{
+.sidebar .present {
     background-color: blueviolet;
     color: whitesmoke;
 }
 
-.sidebar .cross{
+.sidebar .cross {
     position: absolute;
     padding-top: 5px;
     left: 90%;
-    font-size: 25px;
+    font-size: 70px;
 }
 
-.bar{
+.bar {
     position: fixed;
-    font-size: 25px;
+    font-size: 70px;
     display: block;
-    padding-top: 62px;
+    padding-top: 125px;
+    padding-left: 10px;
 }
 
-.dashboard_banner{
-    padding-left: 9%;
+.dashboard_banner {
     padding-top: 62px;
-    padding-right: 2%;
-    width: 95rem;
+    width: 100%;
+    z-index: 1;
+    padding-left: 2px;
 }
 
-.greet{
+.greet {
     text-align: center;
     font-weight: bolder;
     font-style: italic;
-    font-size: 80px;
+    font-size: 150px;
     font-family: "Bell MT";
     text-shadow: blue;
-    padding-top: 62px;
+    color: black;
+    padding-top: 120px;
+    padding-bottom: 60px;
     color: brown;
 }
 
-.card-title{
+.card-title {
     font-family: cursive;
     font-style: italic;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 55px;
     color: darkblue;
 }
 
-.card-text{
+.card-text {
     font-family: cursive;
     font-style: italic;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 65px;
     color: maroon;
 }
 
-.card-header-tabs{
+.card-header-tabs {
     font-weight: bold;
     font-style: italic;
     font-family: "Times New Roman";
-    font-size: 20px;
+    font-size: 35px;
 }
 
-.guide{
+.guide {
+    color: black;
     font-style: italic;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 66px;
     text-align: left;
     font-family: "Cooper Black";
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.bot {
+    width: 48%;
     color: black;
+    font-size: 40px;
+    border-radius: 5%;
+    font-family: "Times New Roman";
+    font-weight: bold;
+    font-style: initial;
 }
 
-.bot{
-    width: 26%;
-    color: black;
+.botton1 {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-.botton1{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.dp{
+.dp {
     padding-top: 50px;
     border-radius: 100%;
-    height: 20rem;
-    width: 17rem;
+    height: 29rem;
+    width: 26rem;
     object-fit: cover;
 }
 
-.edit{
+.edit {
     color: blue;
     font-family: "Times New Roman";
-    font-size: 18px;
+    font-size: 35px;
     text-decoration: none;
 
 }
-.lol a:hover{
+
+.lol a:hover {
     color: brown;
-    font-size: 18.5px;
+    font-size: 55px;
 }
 
-.list-group-item{
+.list-group-item {
     color: darkmagenta;
     font-family: "Times New Roman";
     font-weight: bold;
     font-style: italic;
-    font-size: 20px;
+    font-size: 48px;
 }
 
-.action{
-    height: 22px;
-    width: 55px;
-    font-size: 14px;
+.action {
+    height: 43px;
+    width: 88px;
+    font-size: 27px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     padding: 0px 0px 0px 0px;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.recharge{
-    font-size: 20px;
+.recharge {
+    font-size: 40px;
     font-style: italic;
     font-weight: initial;
     color: darkmagenta;
 }
 
+.table {
+    font-size: 32px;
+}
+
+.profile {
+    padding-top: 200px;
+}
+
 .welcome_note {
-    text-align: center;
-    font-weight: bolder;
-    font-style: italic;
     font-family: "Bell MT";
     text-shadow: blue;
     color: brown;
-    font-size: 60px;
-    padding-top: 10px
+    font-size: 70px;
+    padding-top: 20px;
 }
 
 .request{
@@ -264,17 +300,37 @@ a{
     font-style: italic;
     color: crimson;
     font-family:'Times New Roman';
-    font-size: 10vh;
+    font-size: 100px;
 }
 
 .request_icon{
-    height: 18vh;
-    width: 18vh;
+    height: 12vh;
+    width: 12vh;
+}
+
+.form{
+    font-size: 40px;
+    font-style: initial;
+    font-weight: bold;
+    font-family: "Times New Roman";
+}
+
+.form-control{
+    font-size: 40px;
+}
+
+.form-select{
+    font-size: 40px;
+}
+
+.receive_icon{
+    width: 14vh;
+    height: 14vh;
 }
 
 .edit_icon{
-    height: 18vh;
-    width: 18vh;
+    height: 14vh;
+    width: 14vh;
 }
 
 .recharge_msg {
@@ -284,31 +340,31 @@ a{
     font-size: 100px;
     font-family: "Bell MT";
     text-shadow: blue;
-    padding-top: 120px;
+    padding-top: 180px;
     padding-bottom: 60px;
     color: indigo;
 }
 
-.remove{
-    height: 22px;
-    width: 55px;
-    font-size: 14px;
+.previous_order {
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 100px;
+    text-shadow: blue;
+    padding-top: 180px;
+    padding-bottom: 60px;
+}
+
+.remove {
+    height: 43px;
+    width: 88px;
+    font-size: 23px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     padding: 0px 0px 0px 0px;
 }
 
-.login{
-    padding-top: 80px;
-    width: 50rem;
-}
-
 .login_card{
-    width: 22rem;
-}
-
-.receive_icon{
-    height: 22vh;
-    width: 22vh;
+    width: 90%;
 }

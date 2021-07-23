@@ -8,14 +8,15 @@
 <div th:replace="Navigation::nav"/>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <div th:replace="SideBar::side"/>
-<section class="container text-center dashboard_banner">
-    <div class="card" style="width: 108%">
+<section class="profile">
+<section id="banneres">
+    <div class="card">
         <div class="card-body">
             <div class="container text-center">
-                <img class="icon" src="" th:src="@{https://cdn1.iconfinder.com/data/icons/symbol-color-users-1/32/user_2-edit-512.png}">
+                <img class="edit_icon" src="" th:src="@{https://cdn1.iconfinder.com/data/icons/symbol-color-users-1/32/user_2-edit-512.png}">
             </div>
-            <form class="row g-3" style="text-align: left">
-                <h1 class="register" style="font-family: 'Times New Roman'; font-size: 10vh">Edit Profile</h1>
+            <form class="row g-3 form" style="text-align: left">
+                <h1 class="request">Edit Profile</h1>
                 <div class="mb-3">
                     <label for="exampleInputName" class="form-label">Name</label>
                     <input type="text" class="form-control" id="exampleInputName" placeholder="Name" required>
@@ -40,7 +41,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
@@ -101,7 +102,6 @@
     </div>
     <div th:replace="About::foot"/>
 </section>
-
-
+</section>
 </body>
 </html>

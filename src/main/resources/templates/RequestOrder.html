@@ -8,14 +8,15 @@
 <div th:replace="Navigation::nav"/>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <div th:replace="SideBar::side"/>
-<section class="container text-center dashboard_banner">
-    <div class="card" style="width: 108%">
+<section class="profile">
+<section id="banneres">
+    <div class="card">
         <div class="card-body">
             <div class="container text-center">
-                <img class="icon" src="" style="height: 18vh; width: 18vh"  th:src="@{https://cdn3.iconfinder.com/data/icons/logistics-delivery-4-2/50/162-512.png}">
+                <img class="request_icon" src=""  th:src="@{https://cdn3.iconfinder.com/data/icons/logistics-delivery-4-2/50/162-512.png}">
             </div>
-            <form class="row g-3" style="text-align: left">
-                <h1 class="register" style="font-family: 'Times New Roman'; font-size: 10vh">Request Your Order</h1>
+            <form class="row g-3 form" style="text-align: left">
+                <h1 class="request">Request Your Order</h1>
                 <div class="mb-3">
                     <label for="exampleInputName" class="form-label">Item</label>
                     <input type="text" class="form-control" id="exampleInputName" placeholder="Item" required>
@@ -36,7 +37,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
@@ -95,7 +96,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress3" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress3" placeholder="Apartment, studio, or floor">
+                    <input type="text" class="form-control" id="inputAddress3" placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity1" class="form-label">City</label>
@@ -156,6 +157,6 @@
     </div>
     <div th:replace="About::foot"/>
 </section>
-
+</section>
 </body>
 </html>

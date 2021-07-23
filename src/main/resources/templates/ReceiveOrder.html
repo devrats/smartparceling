@@ -8,15 +8,16 @@
 <div th:replace="Navigation::nav"/>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <div th:replace="SideBar::side"/>
-<section class="container text-center dashboard_banner">
-    <div class="card" style="width: 108%">
+<section class="profile">
+<section id="banneres">
+    <div class="card">
         <div class="card-body">
             <div class="container text-center">
-                <img class="icon" src="" style="height: 20vh; width: 20vh"
+                <img class="receive_icon" src=""
                      th:src="@{https://www.wellesley.edu/sites/all/themes/bootstrap/image/admission/visit-us.svg}">
             </div>
-            <form class="row g-3" style="text-align: left">
-                <h1 class="register" style="font-family: 'Times New Roman'; font-size: 10vh; padding-top: 5px; padding-bottom: 5px">Request your visit</h1>
+            <form class="row g-3 form" style="text-align: left">
+                <h1 class="request">Request your visit</h1>
                 <h2 class="guide">Going From</h2>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Address</label>
@@ -25,7 +26,7 @@
                 <div class="col-12">
                     <label for="inputAddress2" class="form-label">Address 2</label>
                     <input type="text" class="form-control" id="inputAddress2"
-                           placeholder="Apartment, studio, or floor">
+                           placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
@@ -85,7 +86,7 @@
                 <div class="col-12">
                     <label for="inputAddress3" class="form-label">Address 2</label>
                     <input type="text" class="form-control" id="inputAddress5"
-                           placeholder="Apartment, studio, or floor">
+                           placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity6" class="form-label">City</label>
@@ -164,6 +165,6 @@
     </div>
     <div th:replace="About::foot"/>
 </section>
-
+</section>
 </body>
 </html>
