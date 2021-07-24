@@ -11,12 +11,11 @@ import com.example.smartparceling.database.PersonRepository;
 import com.example.smartparceling.entity.Address;
 import com.example.smartparceling.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
@@ -28,6 +27,8 @@ public class HomeController {
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping("/")
     public String home(Model model){
@@ -43,25 +44,33 @@ public class HomeController {
         return "Login";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/signin")
     public String login(Model model){
         model.addAttribute("title","Login");
-        return "Home";
+        return "SignIn";
     }
 
-    @RequestMapping("/loginsuccess")
+    @PostMapping("/loginsuccess")
     public String loginSuccess(Model model, @RequestParam(name = "confirm_password")
             String password, @ModelAttribute @Valid Person person, BindingResult result) throws Exception {
         person.getAddress().setPerson(person);
         model.addAttribute("passwords",password);
         model.addAttribute("pass",false);
         model.addAttribute("userAvailable",false);
-        List<Person> personList = personRepository.findPersonByUserName(person.getUserName());
-        if(!personList.isEmpty()){
+        Person personList = personRepository.findPersonByUserName(person.getUserName());
+        if(!(personList ==null)){
             model.addAttribute("userAvailable",true);
+            model.addAttribute("person",person);
+            model.addAttribute("address",person.getAddress());
+            model.addAttribute("title","Sign Up");
+            return "Login";
         }
         if(!person.getPassword().equals(password)){
             model.addAttribute("pass",true);
+            model.addAttribute("person",person);
+            model.addAttribute("address",person.getAddress());
+            model.addAttribute("title","Sign Up");
+            return "Login";
         }
         if(result.hasErrors()){
             model.addAttribute("person",person);
@@ -69,17 +78,20 @@ public class HomeController {
             model.addAttribute("title","Sign Up");
             return "Login";
         } else {
+            person.setRole("ROLE_USER");
+            person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
             personRepository.save(person);
             model.addAttribute("title","Login");
-            return "Home";
+            return "redirect:/user/dashboard/1";
         }
 
     }
 
-    @RequestMapping("/userlogin")
-    public RedirectView userLogin(Model model){
-        RedirectView redirectView = new RedirectView("/user/dashboard/1");
-        return redirectView;
+    @RequestMapping("/signin-error")
+    public String signInError(Model model){
+        model.addAttribute("title","Login");
+        model.addAttribute("signin-error",true);
+        return "SignIn";
     }
 
 }

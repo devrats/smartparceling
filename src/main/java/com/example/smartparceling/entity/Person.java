@@ -27,14 +27,13 @@ public class Person {
     @Column(unique = true)
     private String userName;
     @NotBlank(message = "This field cannot be blank")
-    @Size(max = 20,min = 8,message = "Password must contain 8 to 20 character")
+    @Size(min = 8,message = "Password must contain 8 to 20 character")
     private String password;
     @NotBlank(message = "This field cannot be blank")
     private String email;
     private byte[] image;
     private int accountBalance;
     private String role;
-    @AssertTrue(message = "Must agree term and condition")
     private boolean agree;
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private Address address;

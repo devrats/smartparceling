@@ -11,9 +11,10 @@ import com.example.smartparceling.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.Period;
 import java.util.List;
 
 @Component
 public interface PersonRepository extends JpaRepository<Person, Integer> {
-    public List<Person> findPersonByUserName(String userName);
+    public Person findPersonByUserName(String userName);
 }

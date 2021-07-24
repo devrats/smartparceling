@@ -10,14 +10,18 @@ package com.example.smartparceling.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @RequestMapping("/user")
 @Controller
 public class UserController {
 
     @RequestMapping("/dashboard/{path}")
-    public String dashboard(@PathVariable("path") int path, Model model) {
+    public String dashboard(@PathVariable("path") int path, Model model, Principal principal) {
+        model.addAttribute("principal",principal);
         model.addAttribute("title", "Dashboard");
         model.addAttribute("value", path);
         return "Dashboard";
