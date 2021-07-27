@@ -15,6 +15,7 @@ import java.util.Objects;
 public class OrderOnTheWay {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     private Person person;

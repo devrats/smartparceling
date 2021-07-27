@@ -16,25 +16,30 @@
                 <img class="receive_icon" src=""
                      th:src="@{https://www.wellesley.edu/sites/all/themes/bootstrap/image/admission/visit-us.svg}">
             </div>
-            <form class="row g-3 form" style="text-align: left">
+            <form class="row g-3 form" style="text-align: left" th:action="@{/user/receiveOrderNow}"
+                  th:object="${visit}" method="post">
                 <h1 class="request">Request your visit</h1>
                 <h2 class="guide">Going From</h2>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="House/Flat No.">
+                    <input type="text" th:value="${from.houseNumber}" name="from.houseNumber" class="form-control" id="inputAddress" placeholder="House/Flat No."
+                           th:classappend="${from.houseNumber}=='' ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${from.houseNumber}==''">This field cannot be blank</div>
                 </div>
                 <div class="col-12">
-                    <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2"
-                           placeholder="Street/Area">
+                    <label for="inputAddress2" class="form-label" >Address 2</label>
+                    <input type="text" th:value="${from.street}" name="from.street" class="form-control" id="inputAddress2" placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
-                    <input type="text" placeholder="City" class="form-control" id="inputCity">
+                    <input type="text" th:value="${from.city}" name="from.city" placeholder="City" class="form-control" id="inputCity"
+                           th:classappend="${from.city}=='' ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${from.city}==''">This field cannot be blank</div>
                 </div>
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
-                    <select id="inputState" class="form-select">
+                    <select id="inputState" name="from.state" class="form-select"
+                            th:classappend="${from.state}=='Choose...' ? 'is-invalid': ''" >
                         <option selected>Choose...</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -53,7 +58,7 @@
                         <option value="Haryana">Haryana</option>
                         <option value="Himachal Pradesh">Himachal Pradesh</option>
                         <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Jh+arkhand">Jharkhand</option>
                         <option value="Karnataka">Karnataka</option>
                         <option value="Kerala">Kerala</option>
                         <option value="Madhya Pradesh">Madhya Pradesh</option>
@@ -73,28 +78,35 @@
                         <option value="Uttarakhand">Uttarakhand</option>
                         <option value="West Bengal">West Bengal</option>
                     </select>
+                    <div class="invalid-feedback" th:if="${from.state}=='Choose...'">This field cannot be blank</div>
                 </div>
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
-                    <input type="text" placeholder="Zip" class="form-control" id="inputZip">
+                    <input type="text" th:value="${from.zip}" placeholder="Zip" name="from.zip" class="form-control" id="inputZip"
+                           th:classappend="${zip_true1} ? 'is-invalid' : ''">
+                    <div class="text-danger" th:if="${zip_true1}">Zip code must be of 6 digits</div>
                 </div>
                 <h2 class="guide">Going To</h2>
                 <div class="col-12">
-                    <label for="inputAddress3" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress3" placeholder="House/Flat No.">
+                    <label for="inputAddress1" class="form-label">Address</label>
+                    <input type="text" th:value="${to.houseNumber}" name="to.houseNumber" class="form-control" id="inputAddress1" placeholder="House/Flat No."
+                           th:classappend="${to.houseNumber}=='' ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${to.houseNumber}==''">This field cannot be blank</div>
                 </div>
                 <div class="col-12">
-                    <label for="inputAddress3" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress5"
-                           placeholder="Street/Area">
+                    <label for="inputAddress21" class="form-label" >Address 2</label>
+                    <input type="text" th:value="${to.street}" name="to.street" class="form-control" id="inputAddress21" placeholder="Street/Area">
                 </div>
                 <div class="col-md-6">
-                    <label for="inputCity6" class="form-label">City</label>
-                    <input type="text" placeholder="City" class="form-control" id="inputCity6">
+                    <label for="inputCity1" class="form-label">City</label>
+                    <input type="text" th:value="${to.city}" name="to.city" placeholder="City" class="form-control" id="inputCity1"
+                           th:classappend="${to.city}=='' ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${to.city}==''">This field cannot be blank</div>
                 </div>
                 <div class="col-md-4">
-                    <label for="inputState5" class="form-label">State</label>
-                    <select id="inputState5" class="form-select">
+                    <label for="inputState1" class="form-label">State</label>
+                    <select id="inputState1" name="to.state" class="form-select"
+                            th:classappend="${to.state}=='Choose...' ? 'is-invalid': ''" >
                         <option selected>Choose...</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -113,7 +125,7 @@
                         <option value="Haryana">Haryana</option>
                         <option value="Himachal Pradesh">Himachal Pradesh</option>
                         <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Jh+arkhand">Jharkhand</option>
                         <option value="Karnataka">Karnataka</option>
                         <option value="Kerala">Kerala</option>
                         <option value="Madhya Pradesh">Madhya Pradesh</option>
@@ -133,23 +145,31 @@
                         <option value="Uttarakhand">Uttarakhand</option>
                         <option value="West Bengal">West Bengal</option>
                     </select>
+                    <div class="invalid-feedback" th:if="${to.state}=='Choose...'">This field cannot be blank</div>
                 </div>
                 <div class="col-md-2">
-                    <label for="inputZip0" class="form-label">Zip</label>
-                    <input type="text" placeholder="Zip" class="form-control" id="inputZip0">
+                    <label for="inputZip1" class="form-label">Zip</label>
+                    <input type="text" th:value="${to.zip}" placeholder="Zip" name="to.zip" class="form-control" id="inputZip1"
+                           th:classappend="${zip_true2} ? 'is-invalid' : ''">
+                    <div class="text-danger" th:if="${zip_true2}">Zip code must be of 6 digits</div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputName4" class="form-label">Weight you can carry</label>
-                    <input type="number" class="form-control" placeholder="Weight" id="exampleInputName4"
-                           required>
+                    <label for="exampleInputName4" class="form-label">Weight</label>
+                    <input type="number" class="form-control" name="weight" th:value="${visit.weight}" placeholder="Weight"
+                           id="exampleInputName4" step="any" th:classappend="${weight} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${weight}">This field cannot be blank</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPhone" class="form-label">Date</label>
-                    <input type="date" placeholder="DD/MM/YYYY" class="form-control" id="exampleInputPhone" required>
+                    <input type="date" placeholder="DD/MM/YYYY" name="date" class="form-control" id="exampleInputPhone"
+                           th:value="${#dates.format(visit.date,'yyyy-MM-dd')}" th:classappend="${#fields.hasErrors('date')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:each ="e:${#fields.errors('date')}" th:text="${e}"></div>
                 </div>
                 <div>
                     <label for="inputState7" class="form-label">Traveling via</label>
-                    <select id="inputState7" class="form-select">
+                    <select id="inputState7" name="via" th:classappend="${visit.via}=='Choose...' ? 'is-invalid' : ''"
+                            class="form-select">
+                        <div th:if="${visit.via}=='Choose...'" class="text-danger">This field cannot be blank</div>
                         <option selected>Choose...</option>
                         <option value="Andhra Pradesh">Road</option>
                         <option value="Andaman and Nicobar Islands">Train</option>

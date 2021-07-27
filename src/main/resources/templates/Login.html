@@ -38,7 +38,7 @@
             <div class="mb-3">
                 <label for="exampleInputUserName" class="form-label">Username</label>
                 <input type="text" name="userName" th:value="${person.userName}" placeholder="Username" class="form-control" id="exampleInputUserName"
-                       th:classappend="${#fields.hasErrors('userName')} ? 'is-invalid' : ''">
+                       th:classappend="${#fields.hasErrors('userName') || userAvailable} ? 'is-invalid' : ''">
                 <div class="invalid-feedback" th:each ="e:${#fields.errors('userName')}" th:text="${e}"></div>
                 <div class="text-danger" th:if="${userAvailable}">username is taken please try another</div>
             </div>
@@ -59,7 +59,8 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
-                <input type="password" name="confirm_password" th:value="${passwords}" placeholder="Confirm Password" class="form-control" id="exampleInputPassword2">
+                <input type="password" name="confirm_password" th:value="${passwords}"
+                       th:classappend="${pass} ? 'is-invalid' : ''" placeholder="Confirm Password" class="form-control" id="exampleInputPassword2">
                 <div class="text-danger" th:if="${pass}">Password doesn't match</div>
             </div>
             <br>
@@ -89,7 +90,7 @@
             </div>
             <div class="col-md-4">
                 <label for="inputState" class="form-label">State</label>
-                <select id="inputState" th:value="${address.state}" name="address.state" class="form-select"
+                <select id="inputState" name="address.state" class="form-select"
                         th:classappend="${address.state}=='Choose...' ? 'is-invalid': ''" >
                     <option selected>Choose...</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -135,12 +136,12 @@
                 <label for="inputZip" class="form-label">Zip</label>
                 <input type="text" th:value="${address.zip}" placeholder="Zip" name="address.zip" class="form-control" id="inputZip"
                        th:classappend="${address.zip}=='' ? 'is-invalid' : ''">
-                <div class="invalid-feedback" th:if="${address.zip}==''">This field cannot be blank</div>
+                <div class="text-danger" th:if="${zip_true}">Zip code must be of 6 digits</div>
             </div>
             <br>
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" th:value="${person.agree}" name="agree" type="checkbox" id="gridCheck"
+                    <input class="form-check-input" name="agree" type="checkbox" id="gridCheck"
                            th:classappend="${#fields.hasErrors('agree')} ? 'is-invalid' : ''" style="text-align: center;">
                     <label class="form-check-label" for="gridCheck" style="text-align: center;">
                         Agree term and condition

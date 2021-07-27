@@ -13,7 +13,7 @@
 
 >
 
-    <h1 class="greet">Hello User!</h1>
+    <h1 class="greet">Hello <span th:text="${user_name}"/>!</h1>
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -51,7 +51,7 @@
         <a th:href="@{/user/receiveOrder}"> <input type="submit" class="btn btn-outline-danger btn-info bot"
                                                    value="Receive Order"> </a>
     </div>
-    <h1 class="guide">Orders You Have Requested</h1>
+    <h1 class="guide">Orders You Can Complete</h1>
     <div class="card">
         <div class="card-body">
             <table class="table">
@@ -125,7 +125,137 @@
             </table>
         </div>
     </div>
-    <h1 class="guide">Orders You Can Complete</h1>
+    <h1 class="guide">Orders You Have Requested</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Via</th>
+                    <th scope="col"> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry the Bird</td>
+                    <td>hmmm</td>
+                    <td>@twitter</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1 class="guide">Your orders on the way</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Thing</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>hoooo</td>
+                    <td>hmmm</td>
+                    <td>@twitter</td>
+                    <td>pika</td>
+                    <td>dora</td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1 class="guide">Your Pending Orders</h1>
     <div class="card">
         <div class="card-body">
             <table class="table">

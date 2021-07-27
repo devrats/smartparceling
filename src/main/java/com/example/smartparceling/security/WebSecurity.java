@@ -43,7 +43,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/user/**").hasRole("USER")
                 .and()
-                .formLogin().loginPage("/signin")
+                .formLogin().loginPage("/signin").defaultSuccessUrl("/user/dashboard/1")
                 .and().csrf().disable();
     }
 

@@ -19,50 +19,50 @@
     <h1 class="guide">Your Details</h1>
     <div class="card" style="text-align: left">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Unique ID: <span style="color: white"> &emsp;</span> 12345678</li>
-            <li class="list-group-item">Name: <span style="color: white"> &emsp;</span> Devvrat Sharma
+            <li class="list-group-item">Unique ID: &emsp; <span th:text="${person.id}"/></li>
+            <li class="list-group-item">Name:  &emsp; <span th:text="${person.name}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">Email:<span style="color: white"> &emsp;</span> devvvrats@gmail.com
+            <li class="list-group-item">Email: &emsp; <span th:text="${person.email}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">Phone:<span style="color: white"> &emsp;</span> 8532066858
+            <li class="list-group-item">Phone: &emsp; <span th:text="${person.phone}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">Username:<span style="color: white"> &emsp;</span> devrtas
+            <li class="list-group-item">Username: &emsp; <span th:text="${person.userName}"/>
             </li>
-            <li class="list-group-item">Account Balance: <span style="color: white">&emsp; </span> 50 pika Coins
+            <li class="list-group-item">Account Balance: &emsp;  <span th:text="${person.accountBalance}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/recharge}">~ recharge</a></span>
             </li>
-            <li class="list-group-item">Address: <span style="color: white"> &emsp;</span> 137/A blaji puram
+            <li class="list-group-item">Address: &emsp; <span th:text="${address.houseNumber}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">Address Line 2: <span style="color: white"> &emsp;</span> albatiya road
+            <li class="list-group-item">Address Line 2:  &emsp; <span th:text="${address.street}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">City: <span style="color: white"> &emsp;</span> Agra
+            <li class="list-group-item">City: &emsp; <span th:text="${address.city}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">State: <span style="color: white"> &emsp;</span> uttar pradesh
+            <li class="list-group-item">State:  &emsp; <span th:text="${address.state}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>
             </li>
-            <li class="list-group-item">Zip: <span style="color: white"> &emsp;</span> 282010
+            <li class="list-group-item">Zip:  &emsp; <span th:text="${address.zip}"/>
                 <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
                                                                                     class="edit"
                                                                                     th:href="@{/user/editProfile}">~ edit</a></span>

@@ -14,6 +14,7 @@ import java.util.Objects;
 public class OrderRequested {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     private Person person;

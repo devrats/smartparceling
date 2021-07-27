@@ -7,7 +7,12 @@
 
 package com.example.smartparceling.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Period;
 import java.util.Date;
 import java.util.Objects;
@@ -26,6 +31,8 @@ public class Visit {
     private Address to;
     private float weight;
     private String via;
+    @NotNull(message = "This field cannot be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Override

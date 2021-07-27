@@ -7,10 +7,10 @@
 
 package com.example.smartparceling.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,13 +19,14 @@ public class Orders {
 
     @Id
     private int id;
+    @NotBlank(message = "This Field cannot be blank")
     private String thing;
     @OneToOne(mappedBy = "orderFrom",cascade = CascadeType.ALL)
     private Address from;
     @OneToOne(mappedBy = "orderTo", cascade = CascadeType.ALL)
     private Address to;
     private float weight;
-    private String via;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @OneToOne(mappedBy = "order")
     private OrderCompleted orderCompleted;
@@ -46,7 +47,6 @@ public class Orders {
                 ", from=" + from +
                 ", to=" + to +
                 ", weight=" + weight +
-                ", via='" + via + '\'' +
                 ", date=" + date +
                 ", orderCompleted=" + orderCompleted +
                 ", orderOnTheWay=" + orderOnTheWay +
@@ -61,12 +61,12 @@ public class Orders {
         if (this == o) return true;
         if (!(o instanceof Orders)) return false;
         Orders orders = (Orders) o;
-        return getId() == orders.getId() && Float.compare(orders.getWeight(), getWeight()) == 0 && Objects.equals(getThing(), orders.getThing()) && Objects.equals(getFrom(), orders.getFrom()) && Objects.equals(getTo(), orders.getTo()) && Objects.equals(getVia(), orders.getVia()) && Objects.equals(getDate(), orders.getDate()) && Objects.equals(getOrderCompleted(), orders.getOrderCompleted()) && Objects.equals(getOrderOnTheWay(), orders.getOrderOnTheWay()) && Objects.equals(getOrderPending(), orders.getOrderPending()) && Objects.equals(getOrderReceived(), orders.getOrderReceived()) && Objects.equals(getOrderRequested(), orders.getOrderRequested());
+        return getId() == orders.getId() && Float.compare(orders.getWeight(), getWeight()) == 0 && Objects.equals(getThing(), orders.getThing()) && Objects.equals(getFrom(), orders.getFrom()) && Objects.equals(getTo(), orders.getTo()) && Objects.equals(getDate(), orders.getDate()) && Objects.equals(getOrderCompleted(), orders.getOrderCompleted()) && Objects.equals(getOrderOnTheWay(), orders.getOrderOnTheWay()) && Objects.equals(getOrderPending(), orders.getOrderPending()) && Objects.equals(getOrderReceived(), orders.getOrderReceived()) && Objects.equals(getOrderRequested(), orders.getOrderRequested());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getThing(), getFrom(), getTo(), getWeight(), getVia(), getDate(), getOrderCompleted(), getOrderOnTheWay(), getOrderPending(), getOrderReceived(), getOrderRequested());
+        return Objects.hash(getId(), getThing(), getFrom(), getTo(), getWeight(), getDate(), getOrderCompleted(), getOrderOnTheWay(), getOrderPending(), getOrderReceived(), getOrderRequested());
     }
 
     public int getId() {
@@ -107,14 +107,6 @@ public class Orders {
 
     public void setWeight(float weight) {
         this.weight = weight;
-    }
-
-    public String getVia() {
-        return via;
-    }
-
-    public void setVia(String via) {
-        this.via = via;
     }
 
     public Date getDate() {
@@ -165,57 +157,52 @@ public class Orders {
         this.orderRequested = orderRequested;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderRequested orderRequested) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderRequested orderRequested) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderRequested = orderRequested;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderReceived orderReceived) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderReceived orderReceived) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderReceived = orderReceived;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderPending orderPending) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderPending orderPending) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderPending = orderPending;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderOnTheWay orderOnTheWay) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderOnTheWay orderOnTheWay) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderOnTheWay = orderOnTheWay;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderCompleted orderCompleted) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderCompleted orderCompleted) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderCompleted = orderCompleted;
     }
@@ -223,13 +210,12 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, String via, Date date, OrderCompleted orderCompleted, OrderOnTheWay orderOnTheWay, OrderPending orderPending, OrderReceived orderReceived, OrderRequested orderRequested) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderCompleted orderCompleted, OrderOnTheWay orderOnTheWay, OrderPending orderPending, OrderReceived orderReceived, OrderRequested orderRequested) {
         this.id = id;
         this.thing = thing;
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.via = via;
         this.date = date;
         this.orderCompleted = orderCompleted;
         this.orderOnTheWay = orderOnTheWay;
