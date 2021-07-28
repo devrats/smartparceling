@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface OrderReceivedRepository extends JpaRepository<OrderReceived,Integer> {
+
+    public OrderReceived findOrderReceivedById(int id);
 }

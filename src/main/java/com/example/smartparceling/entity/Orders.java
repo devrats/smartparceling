@@ -21,9 +21,9 @@ public class Orders {
     private int id;
     @NotBlank(message = "This Field cannot be blank")
     private String thing;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "orderFrom",cascade = CascadeType.ALL)
     private Address from;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "orderTo",cascade = CascadeType.ALL)
     private Address to;
     private float weight;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

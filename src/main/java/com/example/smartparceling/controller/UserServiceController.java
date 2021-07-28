@@ -39,6 +39,10 @@ public class UserServiceController {
     private PaymentRepository paymentRepository;
     @Autowired
     private OrderReceivedRepository orderReceivedRepository;
+    @Autowired
+    private OrderPendingRepository orderPendingRepository;
+    @Autowired
+    private OrderOnTheWayRepository orderOnTheWayRepository;
 
     @PostMapping("/update")
     public String update(Model model, Principal principal, @ModelAttribute Person person, BindingResult result)
@@ -78,11 +82,9 @@ public class UserServiceController {
         Address from = orderRequested.getOrder().getFrom();
         Address to = orderRequested.getOrder().getTo();
         Orders order = orderRequested.getOrder();
-        orderRequested.getOrder().setId(7);
-//        orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
-//        orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
-//        orderRequested.getOrder().getFrom().setOrderTo(orderRequested.getOrder());
-//        orderRequested.getOrder().getTo().setOrderFrom(orderRequested.getOrder());
+        orderRequested.getOrder().setId(9);
+        orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
+        orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
         Person person = personRepository.findPersonByUserName(principal.getName());
         List<OrderRequested> orderRequestedList1 = person.getOrderRequested();
         orderRequestedList1.add(orderRequested);
@@ -178,13 +180,13 @@ public class UserServiceController {
         } else {
             visitRepository.save(visit);
             personRepository.save(person);
-            List<OrderRequested> orderRequestedList = orderRequestedRepository.findOrder(
-                    visit.getFrom().getCity(), visit.getTo().getCity(),
-                    visit.getWeight(), visit.getFrom().getState(), visit.getFrom().getState());
-            System.out.println("1");
-            System.out.println(orderRequestedList);
+            List<Integer> orderRequestedListInt = orderRequestedRepository.findOrder(visit.getFrom().getCity(),
+                    visit.getFrom().getState(),visit.getTo().getCity(),visit.getTo().getState(),
+                    visit.getWeight(),visit.getDate());
             List<OrderReceived> orderReceivedList = person.getOrderReceived();
-            for (OrderRequested orderRequested : orderRequestedList) {
+            for (Integer orderRequestedInt : orderRequestedListInt) {
+                OrderRequested orderRequested = orderRequestedRepository.
+                        findOrderRequestedById(orderRequestedInt);
                 OrderReceived orderReceived = new OrderReceived();
                 orderReceived.setOrder(orderRequested.getOrder());
                 orderReceived.setOwner(orderRequested.getPerson());
@@ -230,5 +232,51 @@ public class UserServiceController {
         person.setAccountBalance(person.getAccountBalance() + (int) amount);
         personRepository.save(person);
         return payment.toString();
+    }
+
+    @RequestMapping("/acceptOrder/{id}")
+    public String acceptOrder(@PathVariable("id") int id, Model model,Principal principal){
+        boolean isOwner = false;
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        List<OrderReceived> orderReceived1 = person.getOrderReceived();
+        for (OrderReceived orderReceived : orderReceived1) {
+            if(person.getId() == orderReceived.getPerson().getId()){
+                isOwner = true;
+                break;
+            }
+        }
+        if(isOwner){
+            OrderReceived orderReceived = orderReceivedRepository.findOrderReceivedById(id);
+            Person user = personRepository.findPersonById(orderReceived.getOwner().getId());
+            OrderPending orderPending = new OrderPending();
+            OrderOnTheWay orderOnTheWay = new OrderOnTheWay();
+            orderPending.setOrder(orderReceived.getOrder());
+            orderPending.setPerson(orderReceived.getPerson());
+            orderPending.setOwner(orderReceived.getOwner());
+            orderOnTheWay.setOrder(orderReceived.getOrder());
+            orderOnTheWay.setPerson(orderReceived.getOwner());
+            orderOnTheWay.setUser(orderReceived.getPerson());
+            List<OrderPending> orderPending1 = person.getOrderPending();
+            List<OrderOnTheWay> orderOnTheWay1 = user.getOrderOnTheWay();
+            orderOnTheWay1.add(orderOnTheWay);
+            orderPending1.add(orderPending);
+            orderPendingRepository.save(orderPending);
+            orderOnTheWayRepository.save(orderOnTheWay);
+            OrderRequested orderRequested = orderRequestedRepository.
+                    findOrderRequestedByOrder(orderReceived.getOrder());
+            List<OrderRequested> orderRequested1 = user.getOrderRequested();
+            orderRequested1.remove(orderRequested);
+            orderReceived1.remove(orderReceived);
+            person.setOrderReceived(orderReceived1);
+            user.setOrderRequested(orderRequested1);
+            personRepository.save(person);
+            personRepository.save(user);
+            orderRequestedRepository.delete(orderRequested);
+            orderReceivedRepository.delete(orderReceived);
+            return "redirect:/user/dashboard/1";
+        }
+        else {
+            return "redirect:/user/dashboard/1";
+        }
     }
 }

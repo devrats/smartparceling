@@ -21,7 +21,7 @@ public class OrderOnTheWay {
     private Person person;
     @ManyToOne
     private Person user;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     private Orders order;
 
     @Override

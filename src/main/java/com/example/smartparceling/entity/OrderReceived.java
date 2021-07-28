@@ -20,7 +20,7 @@ public class OrderReceived {
     private Person person;
     @ManyToOne
     private Person owner;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     private Orders order;
 
     @Override

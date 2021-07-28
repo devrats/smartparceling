@@ -23,13 +23,13 @@ public class Address {
     private String zip;
     @OneToOne()
     private Person person;
-    @OneToOne(mappedBy = "from")
+    @OneToOne()
     private Orders orderFrom;
-    @OneToOne(mappedBy = "to")
+    @OneToOne()
     private Orders orderTo;
-    @OneToOne(mappedBy = "from")
+    @OneToOne()
     private Visit visitFrom;
-    @OneToOne(mappedBy = "to")
+    @OneToOne()
     private Visit visitTo;
 
     @Override
