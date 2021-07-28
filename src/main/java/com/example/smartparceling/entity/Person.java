@@ -33,6 +33,8 @@ public class Person {
     private byte[] image;
     private int accountBalance;
     private String role;
+    @OneToMany(mappedBy = "person")
+    private List<Payment> payment;
     @AssertTrue(message = "Must agree term and condition")
     private boolean agree;
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
@@ -61,6 +63,28 @@ public class Person {
     private List<OrderOnTheWay> orderOnTheWayBy;
     @OneToMany(mappedBy = "person")
     private List<Visit> visits;
+
+    public Person(String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, List<Payment> payment, boolean agree, Address address) {
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.payment = payment;
+        this.agree = agree;
+        this.address = address;
+    }
+
+    public List<Payment> getPayment() {
+        return payment;
+    }
+
+    public void setPayment(List<Payment> payment) {
+        this.payment = payment;
+    }
 
     public Person(int id, String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, boolean agree, Address address, List<Visit> visits) {
         this.id = id;

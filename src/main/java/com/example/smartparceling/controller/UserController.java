@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/user")
 @Controller
@@ -26,7 +28,8 @@ public class UserController {
 
     @RequestMapping("/dashboard/{path}")
     public String dashboard(@PathVariable("path") int path, Model model, Principal principal) {
-        model.addAttribute("user_name",principal.getName());
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("person",person);
         model.addAttribute("title", "Dashboard");
         model.addAttribute("value", path);
         return "Dashboard";
@@ -76,16 +79,20 @@ public class UserController {
         return "Edit";
     }
 
-    @RequestMapping("/previousOrder")
-    public String previousOrder(Model model) {
-        model.addAttribute("title","Previous Orders");
-        return "PreviousOrder";
-    }
-
     @RequestMapping("/recharge")
-    public String recharge(Model model) {
+    public String recharge(Model model,Principal principal) {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("person",person);
         model.addAttribute("title","Recharge");
         return "Recharge";
+    }
+
+    @RequestMapping("/previousOrder")
+    public String previousOrder(Model model,Principal principal) {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("person",person);
+        model.addAttribute("title","Previous Orders");
+        return "PreviousOrder";
     }
 
 }

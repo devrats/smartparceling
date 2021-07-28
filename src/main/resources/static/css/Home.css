@@ -284,8 +284,8 @@ a{
     font-size: 100px;
     font-family: "Bell MT";
     text-shadow: blue;
-    padding-top: 120px;
-    padding-bottom: 60px;
+    padding-top: 40px;
+    padding-bottom: 30px;
     color: indigo;
 }
 
@@ -315,4 +315,12 @@ a{
 
 .home_button{
     padding-top: 110px;
+}
+
+.balance_info{
+    color: black;
+    font-family: "Times New Roman";
+    font-style: italic;
+    font-weight: bold;
+    font-size: 25px;
 }

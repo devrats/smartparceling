@@ -12,17 +12,52 @@
     <h1 class="recharge_msg">Recharge Your Account</h1>
     <div class="card">
         <div class="card-body recharge" style="text-align: left">
+            <div class="balance_info">Your Current Account Balance <br> <span th:text="${person.accountBalance}"> </span> Pika Coins </div>
             Recharge your account with pika coins and use then for transferring your order at a very affordable price. <br>
-            5 &#8377; is equal to 1 pica coin.
-            <form class="row g-3">
+            1 &#8377; is equal to 1 pica coin.
+            <br>
                 <div class="mb-3">
-                    <label for="exampleInputNam" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="exampleInputNam" placeholder="Amount" required>
+                    <label for="payment_amount" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="payment_amount" placeholder="Amount" required>
                 </div>
                 <div class="container text-center">
-                    <button type="submit" class="btn btn-outline-success btn-warning bot">Recharge</button>
+                    <button type="submit" onclick="payment()" class="btn btn-outline-success btn-warning bot">Recharge</button>
                 </div>
-            </form>
+        </div>
+    </div>
+    <h1 class="guide">Previous Payments</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Transaction Id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Tax Receipt</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${person.payment}">
+                    <th th:text="${e.paymentId}"></th>
+                    <td th:text="${e.transactionId}"> </td>
+                    <td th:text="${e.status}"></td>
+                    <td th:text="${e.amount}"></td>
+                    <td th:text="${e.date}"></td>
+                    <td th:text="${e.taxReceipt}"> </td>
+                    <td>
+                        <div class="container text-center">
+                            <a href=""> <input type="submit"
+                                               class="btn btn-outline-danger action"
+                                               value="Cancel"> </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div th:replace="About::foot"/>

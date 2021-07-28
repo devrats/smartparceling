@@ -373,3 +373,11 @@ a {
 .home_button{
     padding-top: 130px;
 }
+
+.balance_info{
+    color: black;
+    font-family: "Times New Roman";
+    font-style: italic;
+    font-weight: bold;
+    font-size: 47px;
+}

@@ -18,7 +18,7 @@ public class OrderRequested {
     private int id;
     @ManyToOne
     private Person person;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Orders order;
 
     @Override

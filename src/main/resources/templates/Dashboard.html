@@ -13,7 +13,7 @@
 
 >
 
-    <h1 class="greet">Hello <span th:text="${user_name}"/>!</h1>
+    <h1 class="greet">Hello <span th:text="${person.userName}"/>!</h1>
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -41,7 +41,7 @@
         </div>
         <div class="card-body" th:if="${value}==3">
             <h5 class="card-title">Pika Coins In Your Account</h5>
-            <p class="card-text">5</p>
+            <p class="card-text" th:text="${person.accountBalance}"></p>
         </div>
     </div>
     <div class="container text-center botton1">
@@ -57,59 +57,23 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Order Id</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Weight</th>
+                    <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                                                       class="btn btn-outline-success action"
-                                                                       value="Accept"> </a>
-                            <a href=""> <input type="submit"
-                                                                       class="btn btn-outline-danger action"
-                                                                       value="Reject"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-success action"
-                                               value="Accept"> </a>
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Reject"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>hoooo</td>
-                    <td>hmmm</td>
-                    <td>@twitter</td>
-                    <td>pika</td>
-                    <td>dora</td>
+                <tr th:each="e : ${person.orderPending}">
+                    <th scope="row" th:text="${e.getOrder().getId()}"></td>
+                    <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
+                    <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
+                    <td th:text="${e.getOrder().getWeight()}"></td>
+                    <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
@@ -131,53 +95,23 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Order Id</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Weight</th>
-                    <th scope="col">Via</th>
+                    <th scope="col">Weight (in kgs)</th>
+                    <th scope="col">Thing</th>
                     <th scope="col"> Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>hmmm</td>
-                    <td>@twitter</td>
-                    <td>pika</td>
-                    <td>dora</td>
+                <tr th:each="e : ${person.orderRequested}">
+                    <th scope="row" th:text="${e.getOrder().getId()}"></td>
+                    <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
+                    <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
+                    <td th:text="${e.getOrder().getWeight()}"></td>
+                    <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
@@ -196,58 +130,31 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Order Id</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Weight</th>
+                    <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>pika</td>
-                    <td>dora</td>
+                <tr th:each="e : ${person.orderOnTheWay}">
+                    <th scope="row" th:text="${e.getOrder().getId()}"></td>
+                    <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
+                    <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
+                    <td th:text="${e.getOrder().getWeight()}"></td>
+                    <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
+                                               class="btn btn-outline-success action"
+                                               value="cancel"> </a>
                             <a href=""> <input type="submit"
                                                class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>hoooo</td>
-                    <td>hmmm</td>
-                    <td>@twitter</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
+                                               value="Completed"> </a>
                         </div>
                     </td>
                 </tr>
@@ -261,53 +168,23 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Order Id</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Weight</th>
+                    <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Via</th>
                     <th scope="col"> Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>pika</td>
-                    <td>dora</td>
-                    <td>
-                        <div class="container text-center">
-                            <a href=""> <input type="submit"
-                                               class="btn btn-outline-danger action"
-                                               value="Cancel"> </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>hmmm</td>
-                    <td>@twitter</td>
-                    <td>pika</td>
-                    <td>dora</td>
+                <tr th:each="e : ${person.orderReceived}">
+                    <th scope="row" th:text="${e.getOrder().getId()}"></td>
+                    <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
+                    <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
+                    <td th:text="${e.getOrder().getWeight()}"></td>
+                    <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href=""> <input type="submit"

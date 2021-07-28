@@ -68,7 +68,6 @@ public class HomeServiceController {
             person.setAccountBalance(10);
             person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
             personRepository.save(person);
-            model.addAttribute("title", "Login");
             return "redirect:/user/dashboard/1";
         }
 

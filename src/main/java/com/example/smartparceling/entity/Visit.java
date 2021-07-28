@@ -25,9 +25,9 @@ public class Visit {
     private int id;
     @ManyToOne()
     private Person person;
-    @OneToOne(mappedBy = "visitFrom",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Address from;
-    @OneToOne(mappedBy = "visitTo", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Address to;
     private float weight;
     private String via;

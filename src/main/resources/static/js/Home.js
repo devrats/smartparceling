@@ -28,6 +28,8 @@ const start = () => {
         $(".dashboard_banner").css("padding-left", "0px")
         let spans = document.getElementsByTagName("link")[2]
         spans.remove()
+        $('.table').dataTable( {
+            "order": [] });
     } else {
         $(".sidebar").css("display", "block")
         $(".bar").css("display", "none")
@@ -84,17 +86,99 @@ const toggleBar = () => {
 function myFunction() {
     let x = document.getElementById("exampleInputPassword1");
     if (x.type === "password") {
-        x.setAttribute('type','text')
+        x.setAttribute('type', 'text')
     } else {
         x.setAttribute("type", "password")
     }
 }
 
-const myFunction1=()=>{
+const myFunction1 = () => {
     let y = document.getElementById("exampleInputPassword2");
     if (y.type === "password") {
-        y.setAttribute('type','text')
+        y.setAttribute('type', 'text')
     } else {
-        y.setAttribute("type","password")
+        y.setAttribute("type", "password")
     }
+}
+const payment = () => {
+    let amount = $("#payment_amount").val();
+    $.ajax(
+        {
+            url: '/user/pay',
+            data: JSON.stringify({amount: amount}),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status == "created") {
+                    let options = {
+                        "key": "rzp_test_4sgOUR0hFBHwtn",
+                        "amount": response.amount,
+                        "currency": "INR",
+                        "name": "Devvrat",
+                        "description": "Recharge your account with Pika coins",
+                        "order_id": response.id,
+                        "handler": function (response) {
+                            //alert(response.razorpay_payment_id);
+                            //alert(response.razorpay_order_id);
+                            //alert(response.razorpay_signature)
+                            paymentSuccess(response.razorpay_payment_id, response.razorpay_order_id, "success")
+                        },
+                        "prefill": {
+                            "name": "",
+                            "email": "",
+                            "contact": ""
+                        },
+                        "notes": {
+                            "address": "137/A balaji puram, agra"
+
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                    let rzp1 = new Razorpay(options);
+                    rzp1.on('payment.failed', function (response) {
+                        alert(response.error.code);
+                        alert(response.error.description);
+                        alert(response.error.source);
+                        alert(response.error.step);
+                        alert(response.error.reason);
+                        alert(response.error.metadata.order_id);
+                        alert(response.error.metadata.payment_id);
+                    });
+                    rzp1.open();
+
+                }
+            }
+        }
+    )
+};
+
+function paymentSuccess(razorpay_payment_id, razorpay_order_id, paid) {
+    $.ajax(
+        {
+            url: '/user/paySuccess',
+            data: JSON.stringify({"razorpay_payment_id": razorpay_payment_id
+                ,"razorpay_order_id":razorpay_order_id, "status": paid}),
+            contentType: 'application/json',
+            type: 'POST',
+            dataType: 'json',
+            success : function (response){
+                swal.fire(
+                    'Good job!',
+                    'payment successful',
+                    'success'
+                )
+            },
+            error : function (error){
+                console.log(error)
+                swal.fire(
+                    'error',
+                    'payment successful but take some time to complete',
+                    'error'
+                )
+            }
+        }
+    )
 }

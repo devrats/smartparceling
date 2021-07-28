@@ -9,68 +9,68 @@
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <section class="profile">
-<section id="banneres">
-    <div class="card">
-        <div class="card-body container text-center">
-            <img src="" class="dp" th:src="@{/img/WhatsApp Image 2021-07-20 at 21.45.31.png}">
-            <h1 class="welcome_note">Welcome To Your Profile</h1>
+    <section id="banneres">
+        <div class="card">
+            <div class="card-body container text-center">
+                <img src="" class="dp" th:src="@{/img/WhatsApp Image 2021-07-20 at 21.45.31.png}">
+                <h1 class="welcome_note">Welcome To Your Profile</h1>
+            </div>
         </div>
-    </div>
-    <h1 class="guide">Your Details</h1>
-    <div class="card" style="text-align: left">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Unique ID: &emsp; <span th:text="${person.id}"/></li>
-            <li class="list-group-item">Name:  &emsp; <span th:text="${person.name}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">Email: &emsp; <span th:text="${person.email}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">Phone: &emsp; <span th:text="${person.phone}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">Username: &emsp; <span th:text="${person.userName}"/>
-            </li>
-            <li class="list-group-item">Account Balance: &emsp;  <span th:text="${person.accountBalance}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/recharge}">~ recharge</a></span>
-            </li>
-            <li class="list-group-item">Address: &emsp; <span th:text="${address.houseNumber}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">Address Line 2:  &emsp; <span th:text="${address.street}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">City: &emsp; <span th:text="${address.city}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">State:  &emsp; <span th:text="${address.state}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-            <li class="list-group-item">Zip:  &emsp; <span th:text="${address.zip}"/>
-                <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
-                                                                                    class="edit"
-                                                                                    th:href="@{/user/editProfile}">~ edit</a></span>
-            </li>
-        </ul>
-    </div>
-    <div th:replace="About::foot"></div>
-</section>
+        <h1 class="guide">Your Details</h1>
+        <div class="card" style="text-align: left">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Unique ID: &emsp; <span th:text="${person.id}"/></li>
+                <li class="list-group-item">Name: &emsp; <span th:text="${person.name}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">Email: &emsp; <span th:text="${person.email}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">Phone: &emsp; <span th:text="${person.phone}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">Username: &emsp; <span th:text="${person.userName}"/>
+                </li>
+                <li class="list-group-item">Account Balance: &emsp; <span th:text="${person.accountBalance}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/recharge}">~ recharge</a></span>
+                </li>
+                <li class="list-group-item">Address: &emsp; <span th:text="${address.houseNumber}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">Address Line 2: &emsp; <span th:text="${address.street}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">City: &emsp; <span th:text="${address.city}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">State: &emsp; <span th:text="${address.state}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+                <li class="list-group-item">Zip: &emsp; <span th:text="${address.zip}"/>
+                    <span class="lol" style="text-align: right; position: relative"> <a href="#" style="float: right;"
+                                                                                        class="edit"
+                                                                                        th:href="@{/user/editProfile}">~ edit</a></span>
+                </li>
+            </ul>
+        </div>
+        <div th:replace="About::foot"></div>
+    </section>
 </section>
 </body>
 </html>
