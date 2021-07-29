@@ -8,10 +8,7 @@
 <nav th:replace="Navigation::nav"/>
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
-<section class="dashboard_banner" id="banneres"
-
-
->
+<section class="dashboard_banner" id="banneres">
 
     <h1 class="greet">Hello <span th:text="${person.userName}"/>!</h1>
     <div class="card text-center">
@@ -80,7 +77,7 @@
                             <a href="#" th:href="@{'/user/acceptOrder/' + ${e.id}}"> <input type="submit"
                                                                                             class="btn btn-outline-success action"
                                                                                             value="Accept"> </a>
-                            <a href=""> <input type="submit"
+                            <a href="#" th:href="@{'/user/cancelReceivedOrder/' + ${e.id}}"> <input type="submit"
                                                class="btn btn-outline-danger action"
                                                value="Reject"> </a>
                         </div>
@@ -116,7 +113,7 @@
                     <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
                         <div class="container text-center">
-                            <a href=""> <input type="submit"
+                            <a href="#" th:href="@{'/user/cancelRequestedOrder/' + ${e.id}}"> <input type="submit"
                                                class="btn btn-outline-danger action"
                                                value="Cancel"> </a>
                         </div>
@@ -156,7 +153,7 @@
                                 <input type="submit"
                                        class="btn btn-outline-success action"
                                        value="complete"> </a>
-                            <a href=""> <input type="submit"
+                            <a href="" th:href="@{'/user/cancelOnTheWayOrder/' + ${e.id}}"> <input type="submit"
                                                class="btn btn-outline-danger action"
                                                value="Cancel"> </a>
                         </div>
@@ -196,7 +193,7 @@
                                 <input type="submit"
                                        class="btn btn-outline-success action"
                                        value="complete"> </a>
-                            <a href=""> <input type="submit"
+                            <a href="" th:href="@{'/user/cancelPendingOrder/' + ${e.id}}"> <input type="submit"
                                                class="btn btn-outline-danger action"
                                                value="Cancel"> </a>
                         </div>

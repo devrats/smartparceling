@@ -102,6 +102,7 @@ const myFunction1 = () => {
 }
 const payment = () => {
     let amount = $("#payment_amount").val();
+    console.log(amount)
     $.ajax(
         {
             url: '/user/pay',
@@ -181,4 +182,12 @@ function paymentSuccess(razorpay_payment_id, razorpay_order_id, paid) {
             }
         }
     )
+}
+
+function showOrderRecieved(){
+    if($("#order_receive").is(":visible")){
+        $("#order_receive").css("display","none")
+    } else{
+        $("#order_receive").css("display","block")
+    }
 }

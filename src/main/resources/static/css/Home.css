@@ -324,3 +324,7 @@ a{
     font-weight: bold;
     font-size: 25px;
 }
+
+#order_receive{
+    display: none;
+}

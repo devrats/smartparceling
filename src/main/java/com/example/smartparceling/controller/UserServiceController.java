@@ -39,14 +39,6 @@ public class UserServiceController {
     private OrderRequestedRepository orderRequestedRepository;
     @Autowired
     private OrderReceivedRepository orderReceivedRepository;
-    @Autowired
-    private OrderPendingRepository orderPendingRepository;
-    @Autowired
-    private OrderOnTheWayRepository orderOnTheWayRepository;
-    @Autowired
-    private OrderCompletedByUserRepository orderCompletedByUserRepository;
-    @Autowired
-    private OrderCompletedRepository orderCompletedRepository;
 
 
     @PostMapping("/update")
@@ -87,7 +79,7 @@ public class UserServiceController {
         Address from = orderRequested.getOrder().getFrom();
         Address to = orderRequested.getOrder().getTo();
         Orders order = orderRequested.getOrder();
-        orderRequested.getOrder().setId(9);
+        orderRequested.getOrder().setId(2);
         orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
         orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
         Person person = personRepository.findPersonByUserName(principal.getName());
@@ -237,97 +229,5 @@ public class UserServiceController {
         person.setAccountBalance(person.getAccountBalance() + (int) amount);
         personRepository.save(person);
         return payment.toString();
-    }
-
-    @RequestMapping("/acceptOrder/{id}")
-    public String acceptOrder(@PathVariable("id") int id, Model model,Principal principal){
-        boolean isOwner = false;
-        Person person = personRepository.findPersonByUserName(principal.getName());
-        List<OrderReceived> orderReceived1 = person.getOrderReceived();
-        for (OrderReceived orderReceived : orderReceived1) {
-            if(person.getId() == orderReceived.getPerson().getId()){
-                isOwner = true;
-                break;
-            }
-        }
-        if(isOwner){
-            OrderReceived orderReceived = orderReceivedRepository.findOrderReceivedById(id);
-            Person user = personRepository.findPersonById(orderReceived.getOwner().getId());
-            OrderPending orderPending = new OrderPending();
-            OrderOnTheWay orderOnTheWay = new OrderOnTheWay();
-            orderPending.setOrder(orderReceived.getOrder());
-            orderPending.setPerson(orderReceived.getPerson());
-            orderPending.setOwner(orderReceived.getOwner());
-            orderOnTheWay.setOrder(orderReceived.getOrder());
-            orderOnTheWay.setPerson(orderReceived.getOwner());
-            orderOnTheWay.setUser(orderReceived.getPerson());
-            List<OrderPending> orderPending1 = person.getOrderPending();
-            List<OrderOnTheWay> orderOnTheWay1 = user.getOrderOnTheWay();
-            orderOnTheWay1.add(orderOnTheWay);
-            orderPending1.add(orderPending);
-            orderPendingRepository.save(orderPending);
-            orderOnTheWayRepository.save(orderOnTheWay);
-            OrderRequested orderRequested = orderRequestedRepository.
-                    findOrderRequestedByOrder(orderReceived.getOrder());
-            List<OrderRequested> orderRequested1 = user.getOrderRequested();
-            orderRequested1.remove(orderRequested);
-            orderReceived1.remove(orderReceived);
-            person.setOrderReceived(orderReceived1);
-            user.setOrderRequested(orderRequested1);
-            personRepository.save(person);
-            personRepository.save(user);
-            orderRequestedRepository.delete(orderRequested);
-            orderReceivedRepository.delete(orderReceived);
-            return "redirect:/user/dashboard/1";
-        }
-        else {
-            return "redirect:/user/dashboard/1";
-        }
-    }
-    
-    @RequestMapping("/completeOnTheWayOrder/{id}")
-    public String completeOnTheWayOrder(@PathVariable("id") int id, Model model,Principal principal){
-        boolean isOwner = false;
-        Person person = personRepository.findPersonByUserName(principal.getName());
-        List<OrderOnTheWay> orderOnTheWays = person.getOrderOnTheWay();
-        for (OrderOnTheWay orderOnTheWay : orderOnTheWays) {
-            if(person.getId() == orderOnTheWay.getPerson().getId()){
-                isOwner = true;
-                break;
-            }
-        }
-        if(isOwner){
-            OrderOnTheWay orderOnTheWay = orderOnTheWayRepository.findOrderOnTheWayById(id);
-            Person user = personRepository.findPersonById(orderOnTheWay.getUser().getId());
-            OrderCompleted orderCompleted = new OrderCompleted();
-            OrderCompletedByUser orderCompletedByUser = new OrderCompletedByUser();
-            orderCompleted.setOrder(orderOnTheWay.getOrder());
-            orderCompleted.setPerson(orderOnTheWay.getPerson());
-            orderCompleted.setUser(orderOnTheWay.getUser());
-            orderCompletedByUser.setOrder(orderOnTheWay.getOrder());
-            orderCompletedByUser.setPerson(orderOnTheWay.getUser());
-            orderCompletedByUser.setOwner(orderOnTheWay.getPerson());
-            List<OrderCompleted> orderCompleted1 = person.getOrderCompleted();
-            List<OrderCompletedByUser> orderCompletedByUser1 = user.getOrderCompletedByUser();
-            orderCompletedByUser1.add(orderCompletedByUser);
-            orderCompleted1.add(orderCompleted);
-            orderCompletedRepository.save(orderCompleted);
-            orderCompletedByUserRepository.save(orderCompletedByUser);
-            OrderPending orderPending = orderPendingRepository.
-                    findOrderPendingByOrder(orderOnTheWay.getOrder());
-            List<OrderPending> orderPendings = user.getOrderPending();
-            orderPendings.remove(orderPending);
-            orderOnTheWays.remove(orderOnTheWay);
-            person.setOrderOnTheWay(orderOnTheWays);
-            user.setOrderPending(orderPendings);
-            personRepository.save(person);
-            personRepository.save(user);
-            orderPendingRepository.delete(orderPending);
-            orderOnTheWayRepository.delete(orderOnTheWay);
-            return "redirect:/user/dashboard/1";
-        }
-        else {
-            return "redirect:/user/dashboard/1";
-        }
     }
 }
