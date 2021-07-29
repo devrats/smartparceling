@@ -30,7 +30,7 @@
                     <th scope="row" th:text="${e.getOrder().getId()}"></th>
                     <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
                     <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
-                    <td th:text="${e.getOrder().getDate()}"> </td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
                     <td>
@@ -65,14 +65,15 @@
                     <th scope="row" th:text="${e.getOrder().getId()}"></th>
                     <td th:text="${e.getOrder().getFrom().getCity()} + ', ' + ${e.getOrder().getFrom().getState()}"></td>
                     <td th:text="${e.getOrder().getTo().getCity()} + ', ' + ${e.getOrder().getTo().getState()}" ></td>
-                    <td th:text="${e.getOrder().getDate()}"> </td>
+                    <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td>
                     <div class="container text-center">
                             <a href=""> <input type="submit"
                                                class="btn btn-outline-danger remove"
                                                value="Remove"> </a>
-                        </div>
+                    </div>
                     </td>
                 </tr>
                 </tbody>

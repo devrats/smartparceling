@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface OrderOnTheWayRepository extends JpaRepository<OrderOnTheWay,Integer> {
+    public OrderOnTheWay findOrderOnTheWayById(int id);
 }

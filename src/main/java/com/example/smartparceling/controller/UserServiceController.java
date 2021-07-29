@@ -32,17 +32,22 @@ public class UserServiceController {
     @Autowired
     private PersonRepository personRepository;
     @Autowired
-    private OrderRequestedRepository orderRequestedRepository;
-    @Autowired
     private VisitRepository visitRepository;
     @Autowired
     private PaymentRepository paymentRepository;
+    @Autowired
+    private OrderRequestedRepository orderRequestedRepository;
     @Autowired
     private OrderReceivedRepository orderReceivedRepository;
     @Autowired
     private OrderPendingRepository orderPendingRepository;
     @Autowired
     private OrderOnTheWayRepository orderOnTheWayRepository;
+    @Autowired
+    private OrderCompletedByUserRepository orderCompletedByUserRepository;
+    @Autowired
+    private OrderCompletedRepository orderCompletedRepository;
+
 
     @PostMapping("/update")
     public String update(Model model, Principal principal, @ModelAttribute Person person, BindingResult result)
@@ -273,6 +278,52 @@ public class UserServiceController {
             personRepository.save(user);
             orderRequestedRepository.delete(orderRequested);
             orderReceivedRepository.delete(orderReceived);
+            return "redirect:/user/dashboard/1";
+        }
+        else {
+            return "redirect:/user/dashboard/1";
+        }
+    }
+    
+    @RequestMapping("/completeOnTheWayOrder/{id}")
+    public String completeOnTheWayOrder(@PathVariable("id") int id, Model model,Principal principal){
+        boolean isOwner = false;
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        List<OrderOnTheWay> orderOnTheWays = person.getOrderOnTheWay();
+        for (OrderOnTheWay orderOnTheWay : orderOnTheWays) {
+            if(person.getId() == orderOnTheWay.getPerson().getId()){
+                isOwner = true;
+                break;
+            }
+        }
+        if(isOwner){
+            OrderOnTheWay orderOnTheWay = orderOnTheWayRepository.findOrderOnTheWayById(id);
+            Person user = personRepository.findPersonById(orderOnTheWay.getUser().getId());
+            OrderCompleted orderCompleted = new OrderCompleted();
+            OrderCompletedByUser orderCompletedByUser = new OrderCompletedByUser();
+            orderCompleted.setOrder(orderOnTheWay.getOrder());
+            orderCompleted.setPerson(orderOnTheWay.getPerson());
+            orderCompleted.setUser(orderOnTheWay.getUser());
+            orderCompletedByUser.setOrder(orderOnTheWay.getOrder());
+            orderCompletedByUser.setPerson(orderOnTheWay.getUser());
+            orderCompletedByUser.setOwner(orderOnTheWay.getPerson());
+            List<OrderCompleted> orderCompleted1 = person.getOrderCompleted();
+            List<OrderCompletedByUser> orderCompletedByUser1 = user.getOrderCompletedByUser();
+            orderCompletedByUser1.add(orderCompletedByUser);
+            orderCompleted1.add(orderCompleted);
+            orderCompletedRepository.save(orderCompleted);
+            orderCompletedByUserRepository.save(orderCompletedByUser);
+            OrderPending orderPending = orderPendingRepository.
+                    findOrderPendingByOrder(orderOnTheWay.getOrder());
+            List<OrderPending> orderPendings = user.getOrderPending();
+            orderPendings.remove(orderPending);
+            orderOnTheWays.remove(orderOnTheWay);
+            person.setOrderOnTheWay(orderOnTheWays);
+            user.setOrderPending(orderPendings);
+            personRepository.save(person);
+            personRepository.save(user);
+            orderPendingRepository.delete(orderPending);
+            orderOnTheWayRepository.delete(orderOnTheWay);
             return "redirect:/user/dashboard/1";
         }
         else {
