@@ -32,83 +32,102 @@ public class UserController {
     @RequestMapping("/dashboard/{path}")
     public String dashboard(@PathVariable("path") int path, Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        List<Message> message = person.getMessage();
-        List<String> messages = new ArrayList<>();
-        if(!message.isEmpty()){
-            for (Message message1 : message) {
-                messages.add(message1.getMessage());
-                messageRepository.delete(message1);
+        if (person.isEmailVerified() && person.isPhoneVerified()) {
+            List<Message> message = person.getMessage();
+            List<String> messages = new ArrayList<>();
+            if (!message.isEmpty()) {
+                for (Message message1 : message) {
+                    messages.add(message1.getMessage());
+                    messageRepository.delete(message1);
+                }
+                model.addAttribute("msg", messages);
+                message.clear();
+                person.setMessage(message);
+                model.addAttribute("title", "msg");
+                return "Message";
             }
-            model.addAttribute("msg",messages);
-            message.clear();
-            person.setMessage(message);
-            model.addAttribute("title","msg");
-            return "Message";
+            model.addAttribute("person", person);
+            model.addAttribute("title", "Dashboard");
+            model.addAttribute("value", path);
+            return "Dashboard";
+        } else if(!person.isEmailVerified()) {
+            return "redirect:/user/email";
+        } else {
+            return "redirect:/user/phone";
         }
-        model.addAttribute("person",person);
-        model.addAttribute("title", "Dashboard");
-        model.addAttribute("value", path);
-        return "Dashboard";
     }
 
     @RequestMapping("/profile")
-    public String profile(Model model,Principal principal) {
+    public String profile(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        model.addAttribute("person",person);
-        model.addAttribute("address",person.getAddress());
-        model.addAttribute("title","Profile");
+        model.addAttribute("person", person);
+        model.addAttribute("address", person.getAddress());
+        model.addAttribute("title", "Profile");
         return "Profile";
     }
 
     @RequestMapping("/receiveOrder")
     public String receiveOrder(Model model) {
-        model.addAttribute("from",new Address());
-        model.addAttribute("to",new Address());
-        model.addAttribute("visit",new Visit());
-        model.addAttribute("zip_true1",false);
-        model.addAttribute("zip_true2",false);
-        model.addAttribute("weight",false);
-        model.addAttribute("title","Receive Orders");
+        model.addAttribute("from", new Address());
+        model.addAttribute("to", new Address());
+        model.addAttribute("visit", new Visit());
+        model.addAttribute("zip_true1", false);
+        model.addAttribute("zip_true2", false);
+        model.addAttribute("weight", false);
+        model.addAttribute("title", "Receive Orders");
         return "ReceiveOrder";
     }
 
     @RequestMapping("/requestOrder")
     public String requestOrder(Model model) {
-        model.addAttribute("from",new Address());
-        model.addAttribute("to",new Address());
-        model.addAttribute("order",new Orders());
-        model.addAttribute("zip_true1",false);
-        model.addAttribute("zip_true2",false);
-        model.addAttribute("date",false);
-        model.addAttribute("weight",false);
-        model.addAttribute("title","Request Orders");
+        model.addAttribute("from", new Address());
+        model.addAttribute("to", new Address());
+        model.addAttribute("order", new Orders());
+        model.addAttribute("zip_true1", false);
+        model.addAttribute("zip_true2", false);
+        model.addAttribute("date", false);
+        model.addAttribute("weight", false);
+        model.addAttribute("title", "Request Orders");
         return "RequestOrder";
     }
 
     @RequestMapping("/editProfile")
-    public String editProfile(Model model,Principal principal) {
+    public String editProfile(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        model.addAttribute("zip_true",false);
-        model.addAttribute("person",person);
-        model.addAttribute("address",person.getAddress());
-        model.addAttribute("title","Edit Profile");
+        model.addAttribute("zip_true", false);
+        model.addAttribute("person", person);
+        model.addAttribute("address", person.getAddress());
+        model.addAttribute("title", "Edit Profile");
         return "Edit";
     }
 
     @RequestMapping("/recharge")
-    public String recharge(Model model,Principal principal) {
+    public String recharge(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        model.addAttribute("person",person);
-        model.addAttribute("title","Recharge");
+        model.addAttribute("person", person);
+        model.addAttribute("title", "Recharge");
         return "Recharge";
     }
 
     @RequestMapping("/previousOrder")
-    public String previousOrder(Model model,Principal principal) {
+    public String previousOrder(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        model.addAttribute("person",person);
-        model.addAttribute("title","Previous Orders");
+        model.addAttribute("person", person);
+        model.addAttribute("title", "Previous Orders");
         return "PreviousOrder";
     }
 
+    @RequestMapping("/creditAccount")
+    public String creditAccount(Model model,Principal principal){
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("person",person);
+        model.addAttribute("amount",false);
+        model.addAttribute("amountupi",false);
+        model.addAttribute("amt",false);
+        model.addAttribute("amtupi",false);
+        model.addAttribute("creditAccount",new CreditAccount());
+        model.addAttribute("title","Credit Account");
+        model.addAttribute("upi",false);
+        return "CreditAccount";
+    }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="Head::frag(${title})">
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+<body onload="start1()">
+<section class="profile">
+    <section id="banneres">
+        <div class="card mx-auto scroll">
+            <div class="card-body">
+                <h1 class="request"> Verify your email</h1>
+                <div class="rahul">
+                Hello <span th:text="${name}"></span>
+                <br>
+                Are you ready to gain access to all of the assets we prepared for clients of Smart Parceling
+                <br>
+                First, you must complete your registration by entering otp below:
+                <br>
+                This will verify your email address, and then you&#8217;ll officially be a part of our family.
+                <br>
+                See you there!
+                <br>
+                Best regards, the Smart Parceling team
+                <br>
+                we have sent the otp on <span th:text="${email}"></span> <br>
+                <a href="#" th:href="@{/user/changeEmailDisplay}"> click here to change</a>
+                </div>
+                <form th:action="@{/user/emailVerification}" class="form" th:if="${nonchange}">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Enter your otp here</label>
+                        <input type="text" class="form-control" name="otp" id="exampleInputPassword1"
+                               placeholder="otp" th:classappend="${wrongOtp} ? 'is-invalid' : ''">
+                        <div class="text-danger" th:if="${wrongOtp}">Wrong otp please try again</div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <form class="form" th:if="${change}" th:action="@{/user/changeEmail}">
+                    <div class="form-group">
+                        <label for="exampleInputPassword12">Enter new email</label>
+                        <input type="text" name="newEmail" class="form-control" id="exampleInputPassword12"
+                               placeholder="Password">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</section>
+</body>
+</html>

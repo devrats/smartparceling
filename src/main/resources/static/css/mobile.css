@@ -17,6 +17,11 @@
     font-size: 50px;
 }
 
+.rahul{
+    font-size: 30px;
+}
+
+
 .banner {
     background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("../img/foto-blogartikel-10-767x511.png");
     background-size: cover;

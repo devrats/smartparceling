@@ -42,6 +42,8 @@ public class UserServiceController {
     private OrderReceivedRepository orderReceivedRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CreditAccountRepository creditAccountRepository;
 
 
     @PostMapping("/update")
@@ -180,8 +182,8 @@ public class UserServiceController {
             visitRepository.save(visit);
             personRepository.save(person);
             List<Integer> orderRequestedListInt = orderRequestedRepository.findOrder(visit.getFrom().getCity(),
-                    visit.getFrom().getState(),visit.getTo().getCity(),visit.getTo().getState(),
-                    visit.getWeight(),visit.getDate());
+                    visit.getFrom().getState(), visit.getTo().getCity(), visit.getTo().getState(),
+                    visit.getWeight(), visit.getDate());
             List<OrderReceived> orderReceivedList = person.getOrderReceived();
             for (Integer orderRequestedInt : orderRequestedListInt) {
                 OrderRequested orderRequested = orderRequestedRepository.
@@ -219,9 +221,76 @@ public class UserServiceController {
         return order.toString();
     }
 
+    @RequestMapping("creditAccountNow")
+    public String creditAccountNow(Model model, Principal principal, @ModelAttribute @Valid
+            CreditAccount creditAccount, BindingResult result) {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("creditAccount", creditAccount);
+        model.addAttribute("title", "Credit Account");
+        model.addAttribute("upi", false);
+        model.addAttribute("amount",false);
+        model.addAttribute("amountupi",false);
+        model.addAttribute("amt",false);
+        model.addAttribute("amtupi",false);
+        model.addAttribute("person",person);
+        if (result.hasErrors()) {
+            return "CreditAccount";
+        }if(creditAccount.getAmount()==0){
+            model.addAttribute("amount",true);
+            return "CreditAccount";
+        } else if((person.getAccountBalance()-creditAccount.getAmount())<=10){
+            model.addAttribute("amt",true);
+            return "CreditAccount";
+        } else {
+            List<CreditAccount> creditAccounts = person.getCreditAccounts();
+            creditAccount.setPerson(person);
+            creditAccount.setUpi("");
+            creditAccount.setStatus("pending");
+            creditAccounts.add(creditAccount);
+            creditAccountRepository.save(creditAccount);
+            personRepository.save(person);
+            return "redirect:/user/dashboard/1";
+        }
+    }
+
+    @RequestMapping("creditAccountNowWithUpi")
+    public String creditAccountNowWithUpi(@RequestParam("amount") int amt, Model model, Principal principal, @RequestParam("upi") String upi) {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        model.addAttribute("creditAccount", new CreditAccount());
+        model.addAttribute("title", "Credit Account");
+        model.addAttribute("upi", false);
+        model.addAttribute("person",person);
+        model.addAttribute("amount",false);
+        model.addAttribute("amountupi",false);
+        model.addAttribute("amt",false);
+        model.addAttribute("amtupi",false);
+        if(amt==0){
+            model.addAttribute("amountupi",true);
+            return "CreditAccount";
+        }else if((person.getAccountBalance()-amt)<=10){
+            model.addAttribute("amtupi",true);
+            return "CreditAccount";
+        }else if (upi.isEmpty() || upi.isBlank()) {
+            model.addAttribute("upi", true);
+            return "CreditAccount";
+        } else {
+            CreditAccount creditAccount = new CreditAccount("0", "0", "0");
+            List<CreditAccount> creditAccounts = person.getCreditAccounts();
+            creditAccount.setPerson(person);
+            creditAccount.setUpi(upi);
+            creditAccount.setStatus("pending");
+            creditAccount.setAmount(amt);
+            creditAccounts.add(creditAccount);
+            creditAccountRepository.save(creditAccount);
+            personRepository.save(person);
+            return "redirect:/user/dashboard/1";
+        }
+
+    }
+
     @RequestMapping("/paySuccess")
     @ResponseBody
-    public ResponseEntity<String> paySuccess(@RequestBody Map<String, Object> data, Principal principal) {
+    public ResponseEntity<?> paySuccess(@RequestBody Map<String, Object> data, Principal principal) {
         Payment payment = paymentRepository.findPaymentByPaymentId((String) data.get("razorpay_order_id"));
         payment.setStatus((String) data.get("status"));
         payment.setTransactionId((String) data.get("razorpay_payment_id"));
@@ -230,6 +299,7 @@ public class UserServiceController {
         float amount = payment.getAmount();
         person.setAccountBalance(person.getAccountBalance() + (int) amount);
         personRepository.save(person);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(Map.of("msg","updated"));
     }
+
 }

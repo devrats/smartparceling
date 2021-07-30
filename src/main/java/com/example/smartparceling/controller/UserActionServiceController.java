@@ -8,6 +8,8 @@
 package com.example.smartparceling.controller;
 
 import com.example.smartparceling.database.*;
+import com.example.smartparceling.email.Email;
+import com.example.smartparceling.email.EmailService;
 import com.example.smartparceling.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,8 @@ public class UserActionServiceController {
     private OrderRepository orderRepository;
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping("/acceptOrder/{id}")
     public String acceptOrder(@PathVariable("id") int id, Model model, Principal principal) {
@@ -86,6 +90,11 @@ public class UserActionServiceController {
                 message.add(message1);
                 message1.setPerson(user);
                 user.setMessage(message);
+                Email email = new Email();
+                emailService.sendEmail(user.getEmail(), email.getHead(),
+                        email.getMsg(person.getName(),person.getEmail(),person.getPhone()));
+                emailService.sendEmail(person.getEmail(), email.getHead(),
+                        email.getMsg(user.getName(),user.getEmail(),user.getPhone()));
                 List<OrderReceived> orderReceived3 = orderReceivedRepository.findOrderReceivedsByOrder(orderRequested.getOrder());
                 for (OrderReceived received : orderReceived3) {
                     orderReceivedRepository.delete(received);

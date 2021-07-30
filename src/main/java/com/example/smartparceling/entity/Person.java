@@ -74,6 +74,16 @@ public class Person {
     private boolean isEnabled;
     @OneToMany(mappedBy = "person")
     private List<Message> message;
+    @OneToMany(mappedBy = "person")
+    private List<CreditAccount> creditAccounts;
+
+    public List<CreditAccount> getCreditAccounts() {
+        return creditAccounts;
+    }
+
+    public void setCreditAccounts(List<CreditAccount> creditAccounts) {
+        this.creditAccounts = creditAccounts;
+    }
 
     public List<Message> getMessage() {
         return message;
