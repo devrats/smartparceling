@@ -14,7 +14,7 @@
                     <img class="icon" src="" th:src="@{https://image.flaticon.com/icons/png/512/2921/2921222.png}">
                 </div>
                 <form class="row g-3 form" style="text-align: left" th:action="@{/loginsuccess}" th:object="${person}"
-                      method="post">
+                      method="post" enctype="multipart/form-data">
                     <h1 class="register">Register Here</h1>
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Name</label>
@@ -150,10 +150,17 @@
                         <label for="inputZip" class="form-label">Zip</label>
                         <input type="text" th:value="${address.zip}" placeholder="Zip" name="address.zip"
                                class="form-control" id="inputZip"
-                               th:classappend="${address.zip}=='' ? 'is-invalid' : ''">
+                               th:classappend="${zip_true} ? 'is-invalid' : ''">
                         <div class="text-danger" th:if="${zip_true}">Zip code must be of 6 digits</div>
                     </div>
                     <br>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload photo identity proof</label>
+                        <br>
+                        <input type="file" name="file" class="form-control-file"  th:classappend="${img_true} ? 'is-invalid' : ''"
+                               id="exampleFormControlFile1">
+                        <div class="text-danger" th:if="${img_true}">Please upload a photo identity proof</div>
+                    </div>
                     <div class="col-12">
                         <div class="form-check">
                             <input class="form-check-input" name="agree" type="checkbox" id="gridCheck"

@@ -12,6 +12,7 @@ import javax.validation.constraints.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.List;
 
 @Entity
 public class Person {
@@ -63,6 +64,122 @@ public class Person {
     private List<OrderOnTheWay> orderOnTheWayBy;
     @OneToMany(mappedBy = "person")
     private List<Visit> visits;
+    private Boolean isAdhaarVerified;
+    private byte[] adhaar;
+    private boolean isEmailVerified;
+    private boolean isPhoneVerified;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+    @OneToMany(mappedBy = "person")
+    private List<Message> message;
+
+    public List<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<Message> message) {
+        this.message = message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getId() == person.getId() && getAccountBalance() == person.getAccountBalance() && isAgree() == person.isAgree() && isEmailVerified() == person.isEmailVerified() && isPhoneVerified() == person.isPhoneVerified() && isAccountNonExpired() == person.isAccountNonExpired() && isAccountNonLocked() == person.isAccountNonLocked() && isCredentialsNonExpired() == person.isCredentialsNonExpired() && isEnabled() == person.isEnabled() && Objects.equals(getName(), person.getName()) && Objects.equals(getPhone(), person.getPhone()) && Objects.equals(getUserName(), person.getUserName()) && Objects.equals(getPassword(), person.getPassword()) && Objects.equals(getEmail(), person.getEmail()) && Arrays.equals(getImage(), person.getImage()) && Objects.equals(getRole(), person.getRole()) && Objects.equals(getPayment(), person.getPayment()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getOrderRequested(), person.getOrderRequested()) && Objects.equals(getOrderCompletedByUser(), person.getOrderCompletedByUser()) && Objects.equals(getOrderCompleted(), person.getOrderCompleted()) && Objects.equals(getOrderPending(), person.getOrderPending()) && Objects.equals(getOrderReceived(), person.getOrderReceived()) && Objects.equals(getOrderOnTheWay(), person.getOrderOnTheWay()) && Objects.equals(getOrderCompletedByUserFor(), person.getOrderCompletedByUserFor()) && Objects.equals(getOrderCompletedBy(), person.getOrderCompletedBy()) && Objects.equals(getOrderPendingFrom(), person.getOrderPendingFrom()) && Objects.equals(getOrderReceivedFrom(), person.getOrderReceivedFrom()) && Objects.equals(getOrderOnTheWayBy(), person.getOrderOnTheWayBy()) && Objects.equals(getVisits(), person.getVisits()) && Objects.equals(isAdhaarVerified, person.isAdhaarVerified) && Arrays.equals(getAdhaar(), person.getAdhaar());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getId(), getName(), getPhone(), getUserName(), getPassword(), getEmail(), getAccountBalance(), getRole(), getPayment(), isAgree(), getAddress(), getOrderRequested(), getOrderCompletedByUser(), getOrderCompleted(), getOrderPending(), getOrderReceived(), getOrderOnTheWay(), getOrderCompletedByUserFor(), getOrderCompletedBy(), getOrderPendingFrom(), getOrderReceivedFrom(), getOrderOnTheWayBy(), getVisits(), isAdhaarVerified, isEmailVerified(), isPhoneVerified(), isAccountNonExpired(), isAccountNonLocked(), isCredentialsNonExpired(), isEnabled());
+        result = 31 * result + Arrays.hashCode(getImage());
+        result = 31 * result + Arrays.hashCode(getAdhaar());
+        return result;
+    }
+
+    public Boolean getAdhaarVerified() {
+        return isAdhaarVerified;
+    }
+
+    public void setAdhaarVerified(Boolean adhaarVerified) {
+        isAdhaarVerified = adhaarVerified;
+    }
+
+    public byte[] getAdhaar() {
+        return adhaar;
+    }
+
+    public Person(int id, String name, String phone, String userName, String password, String email, int accountBalance, String role, boolean agree, Address address, byte[] adhaar, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.accountBalance = accountBalance;
+        this.role = role;
+        this.agree = agree;
+        this.address = address;
+        this.adhaar = adhaar;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public void setAdhaar(byte[] adhaar) {
+        this.adhaar = adhaar;
+    }
+
+    public boolean isEmailVerified() {
+        return isEmailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        isEmailVerified = emailVerified;
+    }
+
+    public boolean isPhoneVerified() {
+        return isPhoneVerified;
+    }
+
+    public void setPhoneVerified(boolean phoneVerified) {
+        isPhoneVerified = phoneVerified;
+    }
+
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
 
     public Person(String name, String phone, String userName, String password, String email, byte[] image, int accountBalance, String role, List<Payment> payment, boolean agree, Address address) {
         this.name = name;
@@ -198,21 +315,6 @@ public class Person {
                 ", orderOnTheWayBy=" + orderOnTheWayBy +
                 ", visits=" + visits +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return getId() == person.getId() && getPhone() == person.getPhone() && getAccountBalance() == person.getAccountBalance() && isAgree() == person.isAgree() && Objects.equals(getName(), person.getName()) && Objects.equals(getUserName(), person.getUserName()) && Objects.equals(getPassword(), person.getPassword()) && Objects.equals(getEmail(), person.getEmail()) && Arrays.equals(getImage(), person.getImage()) && Objects.equals(getRole(), person.getRole()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getOrderRequested(), person.getOrderRequested()) && Objects.equals(getOrderCompletedByUser(), person.getOrderCompletedByUser()) && Objects.equals(getOrderCompleted(), person.getOrderCompleted()) && Objects.equals(getOrderPending(), person.getOrderPending()) && Objects.equals(getOrderReceived(), person.getOrderReceived()) && Objects.equals(getOrderOnTheWay(), person.getOrderOnTheWay()) && Objects.equals(getOrderCompletedByUserFor(), person.getOrderCompletedByUserFor()) && Objects.equals(getOrderCompletedBy(), person.getOrderCompletedBy()) && Objects.equals(getOrderPendingFrom(), person.getOrderPendingFrom()) && Objects.equals(getOrderReceivedFrom(), person.getOrderReceivedFrom()) && Objects.equals(getOrderOnTheWayBy(), person.getOrderOnTheWayBy()) && Objects.equals(getVisits(), person.getVisits());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(getId(), getName(), getPhone(), getUserName(), getPassword(), getEmail(), getAccountBalance(), getRole(), isAgree(), getAddress(), getOrderRequested(), getOrderCompletedByUser(), getOrderCompleted(), getOrderPending(), getOrderReceived(), getOrderOnTheWay(), getOrderCompletedByUserFor(), getOrderCompletedBy(), getOrderPendingFrom(), getOrderReceivedFrom(), getOrderOnTheWayBy(), getVisits());
-        result = 31 * result + Arrays.hashCode(getImage());
-        return result;
     }
 
     public boolean isAgree() {

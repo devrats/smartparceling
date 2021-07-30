@@ -20,7 +20,7 @@ public class OrderCompleted {
     private Person person;
     @ManyToOne
     private Person user;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     private Orders order;
 
     @Override

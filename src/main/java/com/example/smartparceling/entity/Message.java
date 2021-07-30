@@ -1,8 +1,8 @@
 /*   Created by IntelliJ IDEA.
  *   Author: Devvrat Sharma (devrats)
- *   Date: 22-Jul-21
- *   Time: 6:44 PM
- *   File: OrderRequested.java
+ *   Date: 29-Jul-21
+ *   Time: 7:50 PM
+ *   File: Message.java
  */
 
 package com.example.smartparceling.entity;
@@ -11,41 +11,35 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class OrderRequested {
+public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String message;
     @ManyToOne
     private Person person;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Orders order;
 
     @Override
     public String toString() {
-        return "OrderRequested{" +
+        return "Message{" +
                 "id=" + id +
+                ", message='" + message + '\'' +
                 ", person=" + person +
-                ", order=" + order +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderRequested)) return false;
-        OrderRequested that = (OrderRequested) o;
-        return getId() == that.getId() && Objects.equals(getPerson(), that.getPerson()) && Objects.equals(getOrder(), that.getOrder());
+        if (!(o instanceof Message)) return false;
+        Message message1 = (Message) o;
+        return getId() == message1.getId() && Objects.equals(getMessage(), message1.getMessage()) && Objects.equals(getPerson(), message1.getPerson());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPerson(), getOrder());
-    }
-
-    public OrderRequested(Person person, Orders order) {
-        this.person = person;
-        this.order = order;
+        return Objects.hash(getId(), getMessage(), getPerson());
     }
 
     public int getId() {
@@ -56,6 +50,14 @@ public class OrderRequested {
         this.id = id;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Person getPerson() {
         return person;
     }
@@ -64,20 +66,17 @@ public class OrderRequested {
         this.person = person;
     }
 
-    public Orders getOrder() {
-        return order;
+    public Message() {
     }
 
-    public void setOrder(Orders order) {
-        this.order = order;
-    }
-
-    public OrderRequested() {
-    }
-
-    public OrderRequested(int id, Person person, Orders order) {
-        this.id = id;
+    public Message(String message, Person person) {
+        this.message = message;
         this.person = person;
-        this.order = order;
+    }
+
+    public Message(int id, String message, Person person) {
+        this.id = id;
+        this.message = message;
+        this.person = person;
     }
 }

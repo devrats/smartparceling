@@ -12,12 +12,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Orders {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "This Field cannot be blank")
     private String thing;
@@ -34,8 +36,8 @@ public class Orders {
     private OrderOnTheWay orderOnTheWay;
     @OneToOne(mappedBy = "order")
     private OrderPending orderPending;
-    @OneToOne(mappedBy = "order")
-    private OrderReceived orderReceived;
+    @OneToMany(mappedBy = "order")
+    private List<OrderReceived> orderReceived;
     @OneToOne(mappedBy = "order")
     private OrderRequested orderRequested;
 
@@ -141,11 +143,11 @@ public class Orders {
         this.orderPending = orderPending;
     }
 
-    public OrderReceived getOrderReceived() {
+    public List<OrderReceived> getOrderReceived() {
         return orderReceived;
     }
 
-    public void setOrderReceived(OrderReceived orderReceived) {
+    public void setOrderReceived(List<OrderReceived> orderReceived) {
         this.orderReceived = orderReceived;
     }
 
@@ -167,7 +169,7 @@ public class Orders {
         this.orderRequested = orderRequested;
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderReceived orderReceived) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, List<OrderReceived> orderReceived) {
         this.id = id;
         this.thing = thing;
         this.from = from;
@@ -210,7 +212,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderCompleted orderCompleted, OrderOnTheWay orderOnTheWay, OrderPending orderPending, OrderReceived orderReceived, OrderRequested orderRequested) {
+    public Orders(int id, String thing, Address from, Address to, float weight, Date date, OrderCompleted orderCompleted, OrderOnTheWay orderOnTheWay, OrderPending orderPending, List<OrderReceived> orderReceived, OrderRequested orderRequested) {
         this.id = id;
         this.thing = thing;
         this.from = from;

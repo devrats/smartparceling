@@ -19,7 +19,7 @@ public class OrderPending {
     private Person person;
     @ManyToOne
     private Person owner;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     private Orders order;
 
     @Override

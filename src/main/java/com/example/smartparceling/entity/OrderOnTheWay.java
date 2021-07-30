@@ -21,7 +21,7 @@ public class OrderOnTheWay {
     private Person person;
     @ManyToOne
     private Person user;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     private Orders order;
 
     @Override

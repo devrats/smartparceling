@@ -14,6 +14,7 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,8 @@ public class UserServiceController {
     private OrderRequestedRepository orderRequestedRepository;
     @Autowired
     private OrderReceivedRepository orderReceivedRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
 
     @PostMapping("/update")
@@ -79,7 +82,6 @@ public class UserServiceController {
         Address from = orderRequested.getOrder().getFrom();
         Address to = orderRequested.getOrder().getTo();
         Orders order = orderRequested.getOrder();
-        orderRequested.getOrder().setId(2);
         orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
         orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
         Person person = personRepository.findPersonByUserName(principal.getName());
@@ -219,7 +221,7 @@ public class UserServiceController {
 
     @RequestMapping("/paySuccess")
     @ResponseBody
-    public String paySuccess(@RequestBody Map<String, Object> data, Principal principal) {
+    public ResponseEntity<String> paySuccess(@RequestBody Map<String, Object> data, Principal principal) {
         Payment payment = paymentRepository.findPaymentByPaymentId((String) data.get("razorpay_order_id"));
         payment.setStatus((String) data.get("status"));
         payment.setTransactionId((String) data.get("razorpay_payment_id"));
@@ -228,6 +230,6 @@ public class UserServiceController {
         float amount = payment.getAmount();
         person.setAccountBalance(person.getAccountBalance() + (int) amount);
         personRepository.save(person);
-        return payment.toString();
+        return ResponseEntity.ok("");
     }
 }

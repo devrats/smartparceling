@@ -27,6 +27,7 @@ public class HomeController {
     }
     @RequestMapping("/register")
     public String register(Model model){
+        model.addAttribute("img_true",false);
         model.addAttribute("person",new Person());
         model.addAttribute("address",new Address());
         model.addAttribute("zip_true",false);

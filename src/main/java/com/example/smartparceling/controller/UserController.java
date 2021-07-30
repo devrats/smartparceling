@@ -7,6 +7,7 @@
 
 package com.example.smartparceling.controller;
 
+import com.example.smartparceling.database.MessageRepository;
 import com.example.smartparceling.database.PersonRepository;
 import com.example.smartparceling.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,25 @@ public class UserController {
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private MessageRepository messageRepository;
 
     @RequestMapping("/dashboard/{path}")
     public String dashboard(@PathVariable("path") int path, Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
+        List<Message> message = person.getMessage();
+        List<String> messages = new ArrayList<>();
+        if(!message.isEmpty()){
+            for (Message message1 : message) {
+                messages.add(message1.getMessage());
+                messageRepository.delete(message1);
+            }
+            model.addAttribute("msg",messages);
+            message.clear();
+            person.setMessage(message);
+            model.addAttribute("title","msg");
+            return "Message";
+        }
         model.addAttribute("person",person);
         model.addAttribute("title", "Dashboard");
         model.addAttribute("value", path);

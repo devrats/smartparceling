@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="Head::frag(${title})">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body onload="start()">
+<nav th:replace="Navigation::nav"/>
+<div th:replace="SideBar::side"></div>
+<i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<section class="dashboard_banner" id="banneres">
+
+    <h1 class="guide">Messages</h1>
+    <div class="container text-center botton1">
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Mesaages</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${msg}">
+                    <th scope="row" th:text="${e}"> </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <a th:href="@{/user/dashboard/1}"> <input type="submit" class="btn btn-outline-danger btn-warning bot"
+                                                  value="Home"> </a>
+    </div>
+    <footer th:replace="About::foot"/>
+</section>
+</body>
+</html>

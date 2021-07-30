@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/user")
 public class UserActionServiceController {
@@ -40,48 +41,73 @@ public class UserActionServiceController {
     private OrderCompletedRepository orderCompletedRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private MessageRepository messageRepository;
 
     @RequestMapping("/acceptOrder/{id}")
     public String acceptOrder(@PathVariable("id") int id, Model model, Principal principal) {
-        boolean isOwner = false;
-        OrderReceived orderReceived = orderReceivedRepository.findOrderReceivedById(id);
         Person person = personRepository.findPersonByUserName(principal.getName());
-        List<OrderReceived> orderReceived1 = person.getOrderReceived();
-        for (OrderReceived orderReceived2 : orderReceived1) {
-            if (orderReceived.getPerson().getId() == orderReceived2.getPerson().getId()) {
-                isOwner = true;
-                break;
+        if(person.getAdhaarVerified()){
+            boolean isOwner = false;
+            OrderReceived orderReceived = orderReceivedRepository.findOrderReceivedById(id);
+            List<OrderReceived> orderReceived1 = person.getOrderReceived();
+            for (OrderReceived orderReceived2 : orderReceived1) {
+                if (orderReceived.getPerson().getId() == orderReceived2.getPerson().getId()) {
+                    isOwner = true;
+                    break;
+                }
             }
-        }
-        if (isOwner) {
-            Person user = personRepository.findPersonById(orderReceived.getOwner().getId());
-            OrderPending orderPending = new OrderPending();
-            OrderOnTheWay orderOnTheWay = new OrderOnTheWay();
-            orderPending.setOrder(orderReceived.getOrder());
-            orderPending.setPerson(orderReceived.getPerson());
-            orderPending.setOwner(orderReceived.getOwner());
-            orderOnTheWay.setOrder(orderReceived.getOrder());
-            orderOnTheWay.setPerson(orderReceived.getOwner());
-            orderOnTheWay.setUser(orderReceived.getPerson());
-            List<OrderPending> orderPending1 = person.getOrderPending();
-            List<OrderOnTheWay> orderOnTheWay1 = user.getOrderOnTheWay();
-            orderOnTheWay1.add(orderOnTheWay);
-            orderPending1.add(orderPending);
-            orderPendingRepository.save(orderPending);
-            orderOnTheWayRepository.save(orderOnTheWay);
-            OrderRequested orderRequested = orderRequestedRepository.
-                    findOrderRequestedByOrder(orderReceived.getOrder());
-            List<OrderRequested> orderRequested1 = user.getOrderRequested();
-            orderRequested1.remove(orderRequested);
-            orderReceived1.remove(orderReceived);
-            person.setOrderReceived(orderReceived1);
-            user.setOrderRequested(orderRequested1);
-            personRepository.save(person);
-            personRepository.save(user);
-            orderRequestedRepository.delete(orderRequested);
-            orderReceivedRepository.delete(orderReceived);
-            return "redirect:/user/dashboard/1";
-        } else {
+            if (isOwner) {
+                Person user = personRepository.findPersonById(orderReceived.getOwner().getId());
+                OrderPending orderPending = new OrderPending();
+                OrderOnTheWay orderOnTheWay = new OrderOnTheWay();
+                orderPending.setOrder(orderReceived.getOrder());
+                orderPending.setPerson(orderReceived.getPerson());
+                orderPending.setOwner(orderReceived.getOwner());
+                orderOnTheWay.setOrder(orderReceived.getOrder());
+                orderOnTheWay.setPerson(orderReceived.getOwner());
+                orderOnTheWay.setUser(orderReceived.getPerson());
+                List<OrderPending> orderPending1 = person.getOrderPending();
+                List<OrderOnTheWay> orderOnTheWay1 = user.getOrderOnTheWay();
+                orderOnTheWay1.add(orderOnTheWay);
+                orderPending1.add(orderPending);
+                OrderRequested orderRequested = orderRequestedRepository.
+                        findOrderRequestedByOrder(orderReceived.getOrder());
+                List<OrderRequested> orderRequested1 = user.getOrderRequested();
+                orderRequested1.remove(orderRequested);
+                orderReceived1.remove(orderReceived);
+                person.setOrderReceived(orderReceived1);
+                user.setOrderRequested(orderRequested1);
+                List<Message> message = user.getMessage();
+                Message message1 = new Message();
+                message1.setMessage("Your order has been accepted and details have been mailed!");
+                message1.setPerson(user);
+                message1.setId(2);
+                message.add(message1);
+                message1.setPerson(user);
+                user.setMessage(message);
+                List<OrderReceived> orderReceived3 = orderReceivedRepository.findOrderReceivedsByOrder(orderRequested.getOrder());
+                for (OrderReceived received : orderReceived3) {
+                    orderReceivedRepository.delete(received);
+                }
+                orderPendingRepository.save(orderPending);
+                orderOnTheWayRepository.save(orderOnTheWay);
+                messageRepository.save(message1);
+                personRepository.save(person);
+                personRepository.save(user);
+                orderRequestedRepository.delete(orderRequested);
+                return "redirect:/user/dashboard/1";
+            } else {
+                return "redirect:/user/dashboard/1";
+            }
+
+        } else{
+            List<Message> message = person.getMessage();
+            Message message1 = new Message();
+            message1.setMessage("Your photo identity proof is not verified yet...");
+            message1.setPerson(person);
+            message.add(message1);
+            person.setMessage(message);
             return "redirect:/user/dashboard/1";
         }
     }
@@ -121,6 +147,13 @@ public class UserActionServiceController {
             orderOnTheWays.remove(orderOnTheWay);
             person.setOrderOnTheWay(orderOnTheWays);
             user.setOrderPending(orderPendings);
+            List<Message> message = user.getMessage();
+            Message message1 = new Message();
+            message1.setMessage("Congo you have completed an order");
+            message1.setPerson(user);
+            message.add(message1);
+            user.setMessage(message);
+            messageRepository.save(message1);
             personRepository.save(person);
             personRepository.save(user);
             orderPendingRepository.delete(orderPending);
@@ -166,6 +199,13 @@ public class UserActionServiceController {
             orderPendingList.remove(orderPending);
             person.setOrderPending(orderPendingList);
             user.setOrderOnTheWay(orderOnTheWays);
+            List<Message> message = user.getMessage();
+            Message message1 = new Message();
+            message1.setMessage("Your order has been completed");
+            message1.setPerson(user);
+            message.add(message1);
+            user.setMessage(message);
+            messageRepository.save(message1);
             personRepository.save(person);
             personRepository.save(user);
             orderOnTheWayRepository.delete(orderOnTheWay);
@@ -252,6 +292,14 @@ public class UserActionServiceController {
             orderRequested.setOrder(orderOnTheWay.getOrder());
             List<OrderRequested> orderRequestedList = person.getOrderRequested();
             orderRequestedList.add(orderRequested);
+            List<Message> message = user.getMessage();
+            Message message1 = new Message();
+            message1.setMessage("Your order on the way has been cancelled by user your details are" +
+                    " there soon someone will accept it");
+            message1.setPerson(user);
+            message.add(message1);
+            user.setMessage(message);
+            messageRepository.save(message1);
             person.setOrderRequested(orderRequestedList);
             orderRequestedRepository.save(orderRequested);
             orderPendingRepository.delete(orderPending);
@@ -290,6 +338,13 @@ public class UserActionServiceController {
             List<OrderOnTheWay> orderOnTheWays = user.getOrderOnTheWay();
             orderOnTheWays.remove(orderOnTheWay);
             user.setOrderOnTheWay(orderOnTheWays);
+            List<Message> message = user.getMessage();
+            Message message1 = new Message();
+            message1.setMessage("An order you have accepted is cancelled by owner");
+            message1.setPerson(user);
+            message.add(message1);
+            user.setMessage(message);
+            messageRepository.save(message1);
             orderRequestedRepository.save(orderRequested);
             orderPendingRepository.delete(orderPending);
             orderOnTheWayRepository.delete(orderOnTheWay);
