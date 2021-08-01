@@ -147,6 +147,8 @@ public class UserActionServiceController {
             List<OrderCompletedByUser> orderCompletedByUser1 = user.getOrderCompletedByUser();
             orderCompletedByUser1.add(orderCompletedByUser);
             orderCompleted1.add(orderCompleted);
+            person.setAccountBalance(person.getAccountBalance()-orderOnTheWay.getOrder().getCharge());
+            user.setAccountBalance(user.getAccountBalance()+orderOnTheWay.getOrder().getCharge());
             orderCompletedRepository.save(orderCompleted);
             orderCompletedByUserRepository.save(orderCompletedByUser);
             OrderPending orderPending = orderPendingRepository.
@@ -199,6 +201,8 @@ public class UserActionServiceController {
             List<OrderCompletedByUser> orderCompletedByUser1 = person.getOrderCompletedByUser();
             orderCompletedByUser1.add(orderCompletedByUser);
             orderCompleted1.add(orderCompleted);
+            person.setAccountBalance(person.getAccountBalance()+orderPending.getOrder().getCharge());
+            user.setAccountBalance(user.getAccountBalance()-orderPending.getOrder().getCharge());
             orderCompletedRepository.save(orderCompleted);
             orderCompletedByUserRepository.save(orderCompletedByUser);
             OrderOnTheWay orderOnTheWay = orderOnTheWayRepository.
