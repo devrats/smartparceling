@@ -386,3 +386,14 @@ a {
     font-weight: bold;
     font-size: 47px;
 }
+
+#profilepicture{
+    display: none;
+    position: absolute;
+    top: 325px;
+    height: 25rem;
+    width: 36rem;
+    z-index: 6;
+    left: 255px;
+    opacity: 0.9;
+}

@@ -54,9 +54,9 @@
                                id="inputAddress2" placeholder="Street/Area">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputCity" class="form-label">City</label>
+                        <label for="from_places" class="form-label">City</label>
                         <input type="text" th:value="${from.city}" name="order.from.city" placeholder="City"
-                               class="form-control" id="inputCity"
+                               class="form-control" id="from_places"
                                th:classappend="${from.city}=='' ? 'is-invalid' : ''">
                         <div class="invalid-feedback" th:if="${from.city}==''">This field cannot be blank</div>
                     </div>
@@ -126,9 +126,9 @@
                                id="inputAddress21" placeholder="Street/Area">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputCity1" class="form-label">City</label>
+                        <label for="to_places" class="form-label">City</label>
                         <input type="text" th:value="${to.city}" name="order.to.city" placeholder="City"
-                               class="form-control" id="inputCity1"
+                               class="form-control" id="to_places"
                                th:classappend="${to.city}=='' ? 'is-invalid' : ''">
                         <div class="invalid-feedback" th:if="${to.city}==''">This field cannot be blank</div>
                     </div>

@@ -19,8 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -123,7 +125,21 @@ public class UserServiceController {
             model.addAttribute("title", "Request Orders");
             return "RequestOrder";
         } else {
+            orderRepository.save(orderRequested.getOrder());
             orderRequestedRepository.save(orderRequested);
+            List<Integer> visitByPerson = visitRepository.findVisitByPerson(order.getFrom().getCity(), order.getFrom().getState(),
+                    order.getTo().getCity(), order.getTo().getState(), order.getWeight(), order.getDate());
+            for (Integer byPerson : visitByPerson) {
+                Person personById = personRepository.findPersonById(byPerson);
+                List<OrderReceived> orderReceived = personById.getOrderReceived();
+                OrderReceived orderReceived1 = new OrderReceived();
+                orderReceived1.setOrder(order);
+                orderReceived1.setPerson(personById);
+                orderReceived1.setOwner(person);
+                orderReceived.add(orderReceived1);
+                orderReceivedRepository.save(orderReceived1);
+                personRepository.save(personById);
+            }
             personRepository.save(person);
             return "redirect:/user/dashboard/1";
         }
@@ -286,6 +302,15 @@ public class UserServiceController {
             return "redirect:/user/dashboard/1";
         }
 
+    }
+
+    @RequestMapping("profileUpdate")
+    public String profileUpdate(@RequestParam("file") MultipartFile file,Principal principal) throws IOException {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        byte[] bytes = file.getBytes();
+        person.setImage(bytes);
+        personRepository.save(person);
+        return "redirect:/user/profile";
     }
 
     @RequestMapping("/paySuccess")

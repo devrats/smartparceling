@@ -77,6 +77,7 @@ public class UserActionServiceController {
                 orderPending1.add(orderPending);
                 OrderRequested orderRequested = orderRequestedRepository.
                         findOrderRequestedByOrder(orderReceived.getOrder());
+                orderRequestedRepository.delete(orderRequested);
                 List<OrderRequested> orderRequested1 = user.getOrderRequested();
                 orderRequested1.remove(orderRequested);
                 orderReceived1.remove(orderReceived);
@@ -104,7 +105,6 @@ public class UserActionServiceController {
                 messageRepository.save(message1);
                 personRepository.save(person);
                 personRepository.save(user);
-                orderRequestedRepository.delete(orderRequested);
                 return "redirect:/user/dashboard/1";
             } else {
                 return "redirect:/user/dashboard/1";
@@ -151,6 +151,8 @@ public class UserActionServiceController {
             orderCompletedByUserRepository.save(orderCompletedByUser);
             OrderPending orderPending = orderPendingRepository.
                     findOrderPendingByOrder(orderOnTheWay.getOrder());
+            orderPendingRepository.delete(orderPending);
+            orderOnTheWayRepository.delete(orderOnTheWay);
             List<OrderPending> orderPendings = user.getOrderPending();
             orderPendings.remove(orderPending);
             orderOnTheWays.remove(orderOnTheWay);
@@ -165,8 +167,6 @@ public class UserActionServiceController {
             messageRepository.save(message1);
             personRepository.save(person);
             personRepository.save(user);
-            orderPendingRepository.delete(orderPending);
-            orderOnTheWayRepository.delete(orderOnTheWay);
             return "redirect:/user/dashboard/1";
         } else {
             return "redirect:/user/dashboard/1";
@@ -303,13 +303,13 @@ public class UserActionServiceController {
             orderRequestedList.add(orderRequested);
             List<Message> message = user.getMessage();
             Message message1 = new Message();
-            message1.setMessage("Your order on the way has been cancelled by user your details are" +
-                    " there soon someone will accept it");
+            message1.setMessage("One of your order has been cancelled by owner");
             message1.setPerson(user);
             message.add(message1);
             user.setMessage(message);
             messageRepository.save(message1);
             person.setOrderRequested(orderRequestedList);
+            orderRepository.save(orderRequested.getOrder());
             orderRequestedRepository.save(orderRequested);
             orderPendingRepository.delete(orderPending);
             orderOnTheWayRepository.delete(orderOnTheWay);
@@ -349,11 +349,13 @@ public class UserActionServiceController {
             user.setOrderOnTheWay(orderOnTheWays);
             List<Message> message = user.getMessage();
             Message message1 = new Message();
-            message1.setMessage("An order you have accepted is cancelled by owner");
+            message1.setMessage("Your order on the way has been cancelled by user your details are" +
+                    "there soon someone will accept it");
             message1.setPerson(user);
             message.add(message1);
             user.setMessage(message);
             messageRepository.save(message1);
+            orderRepository.save(orderRequested.getOrder());
             orderRequestedRepository.save(orderRequested);
             orderPendingRepository.delete(orderPending);
             orderOnTheWayRepository.delete(orderOnTheWay);

@@ -8,14 +8,21 @@
 package com.example.smartparceling.controller;
 
 import com.example.smartparceling.database.MessageRepository;
+import com.example.smartparceling.database.OrderCompletedRepository;
+import com.example.smartparceling.database.OrderRequestedRepository;
 import com.example.smartparceling.database.PersonRepository;
 import com.example.smartparceling.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +35,10 @@ public class UserController {
     private PersonRepository personRepository;
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private OrderCompletedRepository orderCompletedRepository;
+    @Autowired
+    private OrderRequestedRepository orderRequestedRepository;
 
     @RequestMapping("/dashboard/{path}")
     public String dashboard(@PathVariable("path") int path, Model model, Principal principal) {
@@ -46,6 +57,10 @@ public class UserController {
                 model.addAttribute("title", "msg");
                 return "Message";
             }
+            int request = orderRequestedRepository.countOrderRequestedByPerson(person);
+            int complete = orderCompletedRepository.countOrderCompletedByPerson(person);
+            model.addAttribute("request",request);
+            model.addAttribute("complete",complete);
             model.addAttribute("person", person);
             model.addAttribute("title", "Dashboard");
             model.addAttribute("value", path);
@@ -60,6 +75,17 @@ public class UserController {
     @RequestMapping("/profile")
     public String profile(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
+        try {
+            String path = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\profile.jpg";
+            byte[] file1 = person.getImage();
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
+            fileOutputStream.write(file1);
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("person", person);
         model.addAttribute("address", person.getAddress());
         model.addAttribute("title", "Profile");

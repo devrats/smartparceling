@@ -8,11 +8,29 @@
 <div th:replace="Navigation::nav"></div>
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<div class="container text-center">
+<div class="card ms-auto" id="profilepicture">
+    <div class="card-body">
+        <form th:action="@{/user/profileUpdate}" class="form" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input type="file" name="file" placeholder="file" class="form-control"
+                       id="exampleInputPassword1">
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary login_bot">Submit</button>
+                <button type="button" onclick="hideProPic()" class="btn btn-primary login_bot">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
 <section class="profile">
     <section id="banneres">
         <div class="card">
             <div class="card-body container text-center">
-                <img src="" class="dp" th:src="@{/img/WhatsApp Image 2021-07-20 at 21.45.31.png}">
+                <a onclick="profileUpload()">
+                    <img src="" class="dp" th:src="@{/img/profile.jpg}"> </a>
                 <h1 class="welcome_note">Welcome To Your Profile</h1>
             </div>
         </div>

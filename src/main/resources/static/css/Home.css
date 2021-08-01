@@ -328,3 +328,14 @@ a{
 #order_receive{
     display: none;
 }
+
+#profilepicture{
+    display: none;
+    position: absolute;
+    top: 275px;
+    height: 14rem;
+    width: 18rem;
+    z-index: 6;
+    left: 47%;
+    opacity: 0.9;
+}

@@ -2,6 +2,7 @@ package com.example.smartparceling.database;
 
 import com.example.smartparceling.entity.OrderRequested;
 import com.example.smartparceling.entity.Orders;
+import com.example.smartparceling.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,4 +26,5 @@ public interface OrderRequestedRepository extends JpaRepository<OrderRequested, 
 
     public OrderRequested findOrderRequestedById(Integer orderRequestedInt);
     public OrderRequested findOrderRequestedByOrder(Orders order);
+    public int countOrderRequestedByPerson(Person person);
 }

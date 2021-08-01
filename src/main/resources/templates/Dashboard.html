@@ -30,11 +30,11 @@
         </div>
         <div class="card-body" th:if="${value}==1">
             <h5 class="card-title">Your Requested Orders Till Now</h5>
-            <p class="card-text">5</p>
+            <p class="card-text" th:text="${request}"></p>
         </div>
         <div class="card-body" th:if="${value}==2">
             <h5 class="card-title">Your Completed Orders Till Now</h5>
-            <p class="card-text">5</p>
+            <p class="card-text" th:text="${complete}"></p>
         </div>
         <div class="card-body" th:if="${value}==3">
             <h5 class="card-title">Pika Coins In Your Account</h5>

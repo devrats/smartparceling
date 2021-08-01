@@ -28,8 +28,9 @@ const start = () => {
         $(".dashboard_banner").css("padding-left", "0px")
         let spans = document.getElementsByTagName("link")[2]
         spans.remove()
-        $('.table').dataTable( {
-            "order": [] });
+        $('.table').dataTable({
+            "order": []
+        });
     } else {
         $(".sidebar").css("display", "block")
         $(".bar").css("display", "none")
@@ -160,19 +161,21 @@ function paymentSuccess(razorpay_payment_id, razorpay_order_id, paid) {
     $.ajax(
         {
             url: '/user/paySuccess',
-            data: JSON.stringify({"razorpay_payment_id": razorpay_payment_id
-                ,"razorpay_order_id":razorpay_order_id, "status": paid}),
+            data: JSON.stringify({
+                "razorpay_payment_id": razorpay_payment_id
+                , "razorpay_order_id": razorpay_order_id, "status": paid
+            }),
             contentType: 'application/json',
             type: 'POST',
             dataType: 'json',
-            success : function (response){
+            success: function (response) {
                 swal.fire(
                     'Good job!',
                     'payment successful',
                     'success'
                 )
             },
-            error : function (error){
+            error: function (error) {
                 console.log(error)
                 swal.fire(
                     'error',
@@ -184,10 +187,33 @@ function paymentSuccess(razorpay_payment_id, razorpay_order_id, paid) {
     )
 }
 
-function showOrderRecieved(){
-    if($("#order_receive").is(":visible")){
-        $("#order_receive").css("display","none")
-    } else{
-        $("#order_receive").css("display","block")
+function showOrderRecieved() {
+    if ($("#order_receive").is(":visible")) {
+        $("#order_receive").css("display", "none")
+    } else {
+        $("#order_receive").css("display", "block")
     }
+}
+
+function sizeError() {
+    swal.fire(
+        'error',
+        'Photo identity proof file exceed given limit',
+        'error'
+    )
+    location.replace("/user/dashboard/1")
+}
+
+function profileUpload() {
+    Swal.fire({title: 'Update profile picture?', showCancelButton: true}).then(result => {
+        if (result.value) {
+            $('#profilepicture').css("display", "block")
+        } else {
+
+        }
+    })
+}
+
+function hideProPic(){
+    $('#profilepicture').css("display", "none")
 }

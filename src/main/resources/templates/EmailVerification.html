@@ -8,23 +8,23 @@
 <section class="profile">
     <section id="banneres">
         <div class="card mx-auto scroll">
-            <div class="card-body">
-                <h1 class="request"> Verify your email</h1>
+            <h1 class="request"> Verify your email</h1>
+            <div class="card-body" style="text-align: left">
                 <div class="rahul">
-                Hello <span th:text="${name}"></span>
-                <br>
-                Are you ready to gain access to all of the assets we prepared for clients of Smart Parceling
-                <br>
-                First, you must complete your registration by entering otp below:
-                <br>
-                This will verify your email address, and then you&#8217;ll officially be a part of our family.
-                <br>
-                See you there!
-                <br>
-                Best regards, the Smart Parceling team
-                <br>
-                we have sent the otp on <span th:text="${email}"></span> <br>
-                <a href="#" th:href="@{/user/changeEmailDisplay}"> click here to change</a>
+                    Hello <span th:text="${name}"></span>
+                    <br>
+                    Are you ready to gain access to all of the assets we prepared for clients of Smart Parceling
+                    <br>
+                    First, you must complete your registration by entering otp below:
+                    <br>
+                    This will verify your email address, and then you&#8217;ll officially be a part of our family.
+                    <br>
+                    See you there!
+                    <br>
+                    Best regards, the Smart Parceling team
+                    <br>
+                    we have sent the otp on <span th:text="${email}"></span> <br>
+                    <a href="#" th:href="@{/user/changeEmailDisplay}"> click here to change</a>
                 </div>
                 <form th:action="@{/user/emailVerification}" class="form" th:if="${nonchange}">
                     <div class="form-group">

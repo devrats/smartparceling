@@ -20,9 +20,11 @@ public class Mobile {
         try {
             // Construct data
             String apiKey = "apikey=" + "NTYzNjYxNzczNTU3NDQ0NjM3NGE0ZjY5Njk0NjMyNDM=";
-            String message = "&message=" + otp;
-            String sender = "&sender=" + "smart parceling";
-            String numbers = "&numbers=" + phone;
+            String message = "&message=" +
+                    " Hi there, thank you for sending your first test message from Textlocal. Get 20% off today with our code:"
+                    + otp + "is your Smart Parceling OTP. Do not share it with anyone";
+            String sender = "&sender=" + "TSN";
+            String numbers = "&numbers=" + "8532066858";
 
             // Send data
             HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();

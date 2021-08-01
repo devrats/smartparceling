@@ -11,6 +11,7 @@ import com.example.smartparceling.database.PersonRepository;
 import com.example.smartparceling.entity.Address;
 import com.example.smartparceling.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class HomeServiceController {
@@ -72,12 +76,16 @@ public class HomeServiceController {
             model.addAttribute("title", "Sign Up");
             return "Login";
         } else {
+            Path path = Paths.get(new ClassPathResource("").getFile().getAbsolutePath() +
+                    "\\static\\img\\pro.png");
+            byte[] data = Files.readAllBytes(path);
+            person.setImage(data);
             byte[] fileArray = file.getBytes();
             System.out.println(file.getName());
             person.setAdhaar(fileArray);
             person.setAdhaarVerified(false);
             person.setEmailVerified(false);
-            person.setPhoneVerified(false);
+            person.setPhoneVerified(true);
             person.setAccountNonExpired(true);
             person.setEnabled(true);
             person.setCredentialsNonExpired(true);

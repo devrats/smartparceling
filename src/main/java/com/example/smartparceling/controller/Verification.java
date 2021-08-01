@@ -101,7 +101,7 @@ public class Verification {
         model.addAttribute("nonchange",true);
         int number = rnd.nextInt(999999);
         otp = String.format("%06d", number);
-        mobile.sendSms(person.getPhone(),otp);
+        System.out.println(mobile.sendSms(person.getPhone(), otp));
         return "PhoneVerification";
     }
 

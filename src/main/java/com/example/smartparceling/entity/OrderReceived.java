@@ -20,7 +20,7 @@ public class OrderReceived {
     private Person person;
     @ManyToOne
     private Person owner;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Orders order;
 
     @Override
