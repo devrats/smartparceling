@@ -40,6 +40,15 @@ public class Orders {
     private List<OrderReceived> orderReceived;
     @OneToOne(mappedBy = "order")
     private OrderRequested orderRequested;
+    private int charge;
+
+    public int getCharge() {
+        return charge;
+    }
+
+    public void setCharge(int charge) {
+        this.charge = charge;
+    }
 
     @Override
     public String toString() {

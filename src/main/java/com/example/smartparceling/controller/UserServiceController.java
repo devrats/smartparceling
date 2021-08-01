@@ -7,6 +7,9 @@
 
 package com.example.smartparceling.controller;
 
+import com.example.smartparceling.charge.Charge;
+import com.example.smartparceling.charge.Distance;
+import com.example.smartparceling.charge.GeoCodeService;
 import com.example.smartparceling.database.*;
 import com.example.smartparceling.entity.*;
 import com.razorpay.Order;
@@ -82,49 +85,63 @@ public class UserServiceController {
 
     @RequestMapping("/requestOrderNow")
     public String requestOrderNow(Model model, Principal principal,
-                                  @ModelAttribute @Valid OrderRequested orderRequested, BindingResult result) {
+                                  @ModelAttribute @Valid OrderRequested orderRequested, BindingResult result)
+            throws IOException, InterruptedException {
         Address from = orderRequested.getOrder().getFrom();
         Address to = orderRequested.getOrder().getTo();
         Orders order = orderRequested.getOrder();
+        model.addAttribute("zip_true1", false);
+        model.addAttribute("zip_true2", false);
+        model.addAttribute("weight", false);
+        model.addAttribute("date", false);
+        model.addAttribute("addressValid", false);
+        model.addAttribute("notEnoughBalance", false);
+        model.addAttribute("order", order);
+        model.addAttribute("from", from);
+        model.addAttribute("to", to);
+        model.addAttribute("title", "Request Orders");
+        model.addAttribute("fees",0);
+        List calculateFrom = GeoCodeService.calculate
+                (order.getFrom().getCity() + ", " + order.getFrom().getState() + ", India");
+        List calculateTo = GeoCodeService.calculate
+                (order.getTo().getCity() + ", " + order.getFrom().getState() + ", India");
+        if(calculateFrom.isEmpty() || calculateTo.isEmpty()){
+            model.addAttribute("addressValid",true);
+            return "RequestOrder";
+        }
+        float distance = Distance.distFrom(Float.parseFloat((String) calculateFrom.get(0)),Float.parseFloat((String) calculateFrom.get(1))
+        ,Float.parseFloat((String) calculateTo.get(0)),Float.parseFloat((String) calculateTo.get(1)));
+        int charge = new Charge().charge(distance);
         orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
         orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
+        orderRequested.getOrder().setCharge(charge);
         Person person = personRepository.findPersonByUserName(principal.getName());
         List<OrderRequested> orderRequestedList1 = person.getOrderRequested();
         orderRequestedList1.add(orderRequested);
         orderRequested.setPerson(person);
-        model.addAttribute("zip_true1", false);
-        model.addAttribute("zip_true2", false);
         if (order.getThing() == "" || order.getWeight() == 0.0) {
-            model.addAttribute("order", order);
-            model.addAttribute("from", from);
-            model.addAttribute("to", to);
             model.addAttribute("weight", true);
-            model.addAttribute("title", "Request Orders");
             return "RequestOrder";
         } else if (order.getDate() == null) {
-            model.addAttribute("order", order);
-            model.addAttribute("from", from);
-            model.addAttribute("to", to);
             model.addAttribute("date", true);
-            model.addAttribute("title", "Request Orders");
             return "RequestOrder";
         } else if (from.getHouseNumber() == "" || from.getStreet().equals("") || from.getCity().equals("") ||
                 from.getZip().length() != 6 || from.getState().equals("Choose...")) {
             model.addAttribute("zip_true1", true);
-            model.addAttribute("order", order);
-            model.addAttribute("from", from);
-            model.addAttribute("to", to);
-            model.addAttribute("title", "Request Orders");
             return "RequestOrder";
         } else if (to.getHouseNumber() == "" || to.getState().equals("") || to.getCity().equals("") ||
                 to.getZip().length() != 6 || to.getState().equals("Choose...")) {
             model.addAttribute("zip_true2", true);
-            model.addAttribute("order", order);
-            model.addAttribute("from", from);
-            model.addAttribute("to", to);
-            model.addAttribute("title", "Request Orders");
             return "RequestOrder";
-        } else {
+        }else if(charge>=person.getAccountBalance()){
+            model.addAttribute("notEnoughBalance", true);
+            model.addAttribute("fees",charge);
+            return "RequestOrder";
+        }else if (charge==0){
+            model.addAttribute("addressValid",true);
+            return "RequestOrder";
+        }
+        else {
             orderRepository.save(orderRequested.getOrder());
             orderRequestedRepository.save(orderRequested);
             List<Integer> visitByPerson = visitRepository.findVisitByPerson(order.getFrom().getCity(), order.getFrom().getState(),

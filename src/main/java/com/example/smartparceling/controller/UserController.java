@@ -113,6 +113,9 @@ public class UserController {
         model.addAttribute("zip_true2", false);
         model.addAttribute("date", false);
         model.addAttribute("weight", false);
+        model.addAttribute("addressValid", false);
+        model.addAttribute("notEnoughBalance", false);
+        model.addAttribute("fees",0);
         model.addAttribute("title", "Request Orders");
         return "RequestOrder";
     }

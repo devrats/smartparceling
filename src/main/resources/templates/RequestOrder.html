@@ -18,6 +18,9 @@
                 </div>
                 <form class="row g-3 form" style="text-align: left" th:action="@{/user/requestOrderNow}" method="post">
                     <h1 class="request">Request Your Order</h1>
+                    <div class="text-danger" th:if="${addressValid}">Entered city is not valid please check spellings</div>
+                    <div class="text-danger" th:if="${notEnoughBalance}"> <span th:text="${fees}"></span>
+                        is required balance Not enough balance for this order please recharge your account</div>
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Item</label>
                         <input type="text" class="form-control" th:value="${order.thing}" name="order.thing"

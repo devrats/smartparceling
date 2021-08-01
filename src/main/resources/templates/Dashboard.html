@@ -60,6 +60,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -72,6 +73,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"></td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href="#" th:href="@{'/user/acceptOrder/' + ${e.id}}"> <input type="submit"
@@ -99,6 +101,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                     <th scope="col"> Action</th>
                 </tr>
                 </thead>
@@ -110,6 +113,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"></td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href="#" th:href="@{'/user/cancelRequestedOrder/' + ${e.id}}"> <input type="submit"
@@ -134,6 +138,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -146,6 +151,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"></td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href="#" th:href="@{'/user/completeOnTheWayOrder/' + ${e.id}}">
@@ -173,7 +179,8 @@
                     <th scope="col">To</th>
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
-                    <th scope="col">Via</th>
+                    <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                     <th scope="col"> Action</th>
                 </tr>
                 </thead>
@@ -186,6 +193,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"></td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                     <td>
                         <div class="container text-center">
                             <a href="#" th:href="@{'/user/completePendingOrder/' + ${e.id}}">

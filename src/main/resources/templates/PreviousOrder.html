@@ -22,6 +22,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -49,6 +51,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Weight (in kgs)</th>
                     <th scope="col">Thing</th>
+                    <th scope="col">Charge</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +62,7 @@
                     <td th:text="${#dates.format(e.getOrder().getDate(),'yyyy-MM-dd')}"> </td>
                     <td th:text="${e.getOrder().getWeight()}"></td>
                     <td th:text="${e.getOrder().getThing()}"></td>
+                    <td th:text="${e.getOrder().getCharge()}"></td>
                 </tr>
                 </tbody>
             </table>
