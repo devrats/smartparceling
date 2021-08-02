@@ -100,17 +100,17 @@ public class UserServiceController {
         model.addAttribute("from", from);
         model.addAttribute("to", to);
         model.addAttribute("title", "Request Orders");
-        model.addAttribute("fees",0);
+        model.addAttribute("fees", 0);
         List calculateFrom = GeoCodeService.calculate
-                (order.getFrom().getCity() +  ", India");
+                (order.getFrom().getCity() + ", India");
         List calculateTo = GeoCodeService.calculate
                 (order.getTo().getCity() + ", India");
-        if(calculateFrom.isEmpty() || calculateTo.isEmpty()){
-            model.addAttribute("addressValid",true);
+        if (calculateFrom.isEmpty() || calculateTo.isEmpty()) {
+            model.addAttribute("addressValid", true);
             return "RequestOrder";
         }
-        float distance = Distance.distFrom(Float.parseFloat((String) calculateFrom.get(0)),Float.parseFloat((String) calculateFrom.get(1))
-        ,Float.parseFloat((String) calculateTo.get(0)),Float.parseFloat((String) calculateTo.get(1)));
+        float distance = Distance.distFrom(Float.parseFloat((String) calculateFrom.get(0)), Float.parseFloat((String) calculateFrom.get(1))
+                , Float.parseFloat((String) calculateTo.get(0)), Float.parseFloat((String) calculateTo.get(1)));
         int charge = new Charge().charge(distance);
         orderRequested.getOrder().getFrom().setOrderFrom(orderRequested.getOrder());
         orderRequested.getOrder().getTo().setOrderTo(orderRequested.getOrder());
@@ -133,15 +133,14 @@ public class UserServiceController {
                 to.getZip().length() != 6 || to.getState().equals("Choose...")) {
             model.addAttribute("zip_true2", true);
             return "RequestOrder";
-        }else if(charge>=person.getAccountBalance()){
+        } else if (charge >= person.getAccountBalance()) {
             model.addAttribute("notEnoughBalance", true);
-            model.addAttribute("fees",charge);
+            model.addAttribute("fees", charge);
             return "RequestOrder";
-        }else if (charge==0){
-            model.addAttribute("addressValid",true);
+        } else if (charge == 0) {
+            model.addAttribute("addressValid", true);
             return "RequestOrder";
-        }
-        else {
+        } else {
             orderRepository.save(orderRequested.getOrder());
             orderRequestedRepository.save(orderRequested);
             List<Integer> visitByPerson = visitRepository.findVisitByPerson(order.getFrom().getCity(), order.getFrom().getState(),
@@ -261,18 +260,19 @@ public class UserServiceController {
         model.addAttribute("creditAccount", creditAccount);
         model.addAttribute("title", "Credit Account");
         model.addAttribute("upi", false);
-        model.addAttribute("amount",false);
-        model.addAttribute("amountupi",false);
-        model.addAttribute("amt",false);
-        model.addAttribute("amtupi",false);
-        model.addAttribute("person",person);
+        model.addAttribute("amount", false);
+        model.addAttribute("amountupi", false);
+        model.addAttribute("amt", false);
+        model.addAttribute("amtupi", false);
+        model.addAttribute("person", person);
         if (result.hasErrors()) {
             return "CreditAccount";
-        }if(creditAccount.getAmount()==0){
-            model.addAttribute("amount",true);
+        }
+        if (creditAccount.getAmount() == 0) {
+            model.addAttribute("amount", true);
             return "CreditAccount";
-        } else if((person.getAccountBalance()-creditAccount.getAmount())<=10){
-            model.addAttribute("amt",true);
+        } else if ((person.getAccountBalance() - creditAccount.getAmount()) <= 10) {
+            model.addAttribute("amt", true);
             return "CreditAccount";
         } else {
             List<CreditAccount> creditAccounts = person.getCreditAccounts();
@@ -292,18 +292,18 @@ public class UserServiceController {
         model.addAttribute("creditAccount", new CreditAccount());
         model.addAttribute("title", "Credit Account");
         model.addAttribute("upi", false);
-        model.addAttribute("person",person);
-        model.addAttribute("amount",false);
-        model.addAttribute("amountupi",false);
-        model.addAttribute("amt",false);
-        model.addAttribute("amtupi",false);
-        if(amt==0){
-            model.addAttribute("amountupi",true);
+        model.addAttribute("person", person);
+        model.addAttribute("amount", false);
+        model.addAttribute("amountupi", false);
+        model.addAttribute("amt", false);
+        model.addAttribute("amtupi", false);
+        if (amt == 0) {
+            model.addAttribute("amountupi", true);
             return "CreditAccount";
-        }else if((person.getAccountBalance()-amt)<=10){
-            model.addAttribute("amtupi",true);
+        } else if ((person.getAccountBalance() - amt) <= 10) {
+            model.addAttribute("amtupi", true);
             return "CreditAccount";
-        }else if (upi.isEmpty() || upi.isBlank()) {
+        } else if (upi.isEmpty() || upi.isBlank()) {
             model.addAttribute("upi", true);
             return "CreditAccount";
         } else {
@@ -322,7 +322,7 @@ public class UserServiceController {
     }
 
     @RequestMapping("profileUpdate")
-    public String profileUpdate(@RequestParam("file") MultipartFile file,Principal principal) throws IOException {
+    public String profileUpdate(@RequestParam("file") MultipartFile file, Principal principal) throws IOException {
         Person person = personRepository.findPersonByUserName(principal.getName());
         byte[] bytes = file.getBytes();
         person.setImage(bytes);
@@ -341,7 +341,7 @@ public class UserServiceController {
         float amount = payment.getAmount();
         person.setAccountBalance(person.getAccountBalance() + (int) amount);
         personRepository.save(person);
-        return ResponseEntity.ok(Map.of("msg","updated"));
+        return ResponseEntity.ok(Map.of("msg", "updated"));
     }
 
 }

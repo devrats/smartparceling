@@ -16,7 +16,7 @@ import java.net.URL;
 
 @Controller
 public class Mobile {
-    public String sendSms(String otp,String phone) {
+    public String sendSms(String otp, String phone) {
         try {
             // Construct data
             String apiKey = "apikey=" + "NTYzNjYxNzczNTU3NDQ0NjM3NGE0ZjY5Njk0NjMyNDM=";
@@ -43,8 +43,8 @@ public class Mobile {
 
             return stringBuffer.toString();
         } catch (Exception e) {
-            System.out.println("Error SMS "+e);
-            return "Error "+e;
+            System.out.println("Error SMS " + e);
+            return "Error " + e;
         }
     }
 }

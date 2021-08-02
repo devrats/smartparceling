@@ -157,7 +157,8 @@
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Upload photo identity proof</label>
                         <br>
-                        <input type="file" name="file" class="form-control-file"  th:classappend="${img_true} ? 'is-invalid' : ''"
+                        <input type="file" name="file" class="form-control-file"
+                               th:classappend="${img_true} ? 'is-invalid' : ''"
                                id="exampleFormControlFile1">
                         <div class="text-danger" th:if="${img_true}">Please upload a photo identity proof</div>
                     </div>

@@ -24,7 +24,7 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
-    public void sendEmail(String to, String subject, String message,boolean file1) {
+    public void sendEmail(String to, String subject, String message, boolean file1) {
 
         String host = "smtp.gmail.com";
         Properties properties = System.getProperties();
@@ -48,7 +48,7 @@ public class EmailService {
             mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(to)));
             mimeMessage.setSubject(subject);
             mimeMessage.setText(message);
-            if(file1){
+            if (file1) {
                 MimeBodyPart messageBodyPart = new MimeBodyPart();
                 Multipart multipart = new MimeMultipart();
                 String file = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\proof.png";

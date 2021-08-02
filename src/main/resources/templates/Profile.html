@@ -9,21 +9,21 @@
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
 <div class="container text-center">
-<div class="card ms-auto" id="profilepicture">
-    <div class="card-body">
-        <form th:action="@{/user/profileUpdate}" class="form" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <input type="file" name="file" placeholder="file" class="form-control"
-                       id="exampleInputPassword1">
-            </div>
-            <br>
-            <div class="container text-center">
-                <button type="submit" class="btn btn-primary login_bot">Submit</button>
-                <button type="button" onclick="hideProPic()" class="btn btn-primary login_bot">Cancel</button>
-            </div>
-        </form>
+    <div class="card ms-auto" id="profilepicture">
+        <div class="card-body">
+            <form th:action="@{/user/profileUpdate}" class="form" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input type="file" name="file" placeholder="file" class="form-control"
+                           id="exampleInputPassword1">
+                </div>
+                <br>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary login_bot">Submit</button>
+                    <button type="button" onclick="hideProPic()" class="btn btn-primary login_bot">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 <section class="profile">
     <section id="banneres">

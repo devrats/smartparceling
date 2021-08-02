@@ -10,7 +10,7 @@ package com.example.smartparceling.database;
 import com.example.smartparceling.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PaymentRepository extends JpaRepository<Payment,String> {
+public interface PaymentRepository extends JpaRepository<Payment, String> {
 
     public Payment findPaymentByPaymentId(String razorpay_order_id);
 }

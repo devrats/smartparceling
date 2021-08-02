@@ -23,7 +23,7 @@ public class Email {
             "\n" +
             otp + "\n" +
             "\n" +
-            "Do not share this OTP with anyone." +  "\nSmart Parceling takes your account security very seriously. Smart Parceling Customer Service will never ask you to disclose or verify your Smart Parceling password, OTP, credit card, or banking account number. If you receive a suspicious email with a link to update your account information, do not click on the link—instead, report the email to Smart Parceling for investigation.\n" +
+            "Do not share this OTP with anyone." + "\nSmart Parceling takes your account security very seriously. Smart Parceling Customer Service will never ask you to disclose or verify your Smart Parceling password, OTP, credit card, or banking account number. If you receive a suspicious email with a link to update your account information, do not click on the link—instead, report the email to Smart Parceling for investigation.\n" +
             "\n" +
             "Thank you!\n" +
             "\n";
@@ -101,8 +101,8 @@ public class Email {
     public Email() {
     }
 
-    public String getMsg(String name,String email,String phone) {
-        return  "Here are the details of the person you have to contact \n" +
+    public String getMsg(String name, String email, String phone) {
+        return "Here are the details of the person you have to contact \n" +
                 "Name: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\n" +
                 "please be polite to other user.\n we are happy to help you and always there for you";
     }
@@ -132,7 +132,7 @@ public class Email {
                 "\n" +
                 otp + "\n" +
                 "\n" +
-                "Do not share this OTP with anyone." +  "\nSmart Parceling takes your account security very seriously. Smart Parceling Customer Service will never ask you to disclose or verify your Smart Parceling password, OTP, credit card, or banking account number. If you receive a suspicious email with a link to update your account information, do not click on the link—instead, report the email to Smart Parceling for investigation.\n" +
+                "Do not share this OTP with anyone." + "\nSmart Parceling takes your account security very seriously. Smart Parceling Customer Service will never ask you to disclose or verify your Smart Parceling password, OTP, credit card, or banking account number. If you receive a suspicious email with a link to update your account information, do not click on the link—instead, report the email to Smart Parceling for investigation.\n" +
                 "\n" +
                 "Thank you!\n" +
                 "\n";

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface PersonRepository extends JpaRepository<Person, Integer> {
     Person findPersonByUserName(String userName);
+
     Person findPersonById(int id);
 
 }

@@ -214,6 +214,6 @@ function profileUpload() {
     })
 }
 
-function hideProPic(){
+function hideProPic() {
     $('#profilepicture').css("display", "none")
 }

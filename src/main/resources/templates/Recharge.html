@@ -12,17 +12,21 @@
     <h1 class="recharge_msg">Recharge Your Account</h1>
     <div class="card">
         <div class="card-body recharge" style="text-align: left">
-            <div class="balance_info">Your Current Account Balance <br> <span th:text="${person.accountBalance}"> </span> Pika Coins </div>
-            Recharge your account with pika coins and use then for transferring your order at a very affordable price. <br>
+            <div class="balance_info">Your Current Account Balance <br> <span
+                    th:text="${person.accountBalance}"> </span> Pika Coins
+            </div>
+            Recharge your account with pika coins and use then for transferring your order at a very affordable price.
+            <br>
             1 &#8377; is equal to 1 pica coin.
             <br>
-                <div class="mb-3">
-                    <label for="payment_amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="payment_amount" placeholder="Amount" required>
-                </div>
-                <div class="container text-center">
-                    <button type="submit" onclick="payment()" class="btn btn-outline-success btn-warning bot">Recharge</button>
-                </div>
+            <div class="mb-3">
+                <label for="payment_amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" id="payment_amount" placeholder="Amount" required>
+            </div>
+            <div class="container text-center">
+                <button type="submit" onclick="payment()" class="btn btn-outline-success btn-warning bot">Recharge
+                </button>
+            </div>
         </div>
     </div>
     <h1 class="guide">Previous Payments</h1>
@@ -42,11 +46,11 @@
                 <tbody>
                 <tr th:each="e : ${person.payment}">
                     <th th:text="${e.paymentId}"></th>
-                    <td th:text="${e.transactionId}"> </td>
+                    <td th:text="${e.transactionId}"></td>
                     <td th:text="${e.status}"></td>
                     <td th:text="${e.amount}"></td>
                     <td th:text="${e.date}"></td>
-                    <td th:text="${e.taxReceipt}"> </td>
+                    <td th:text="${e.taxReceipt}"></td>
                 </tr>
                 </tbody>
             </table>

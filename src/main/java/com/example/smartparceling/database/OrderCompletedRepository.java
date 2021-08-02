@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Component
 @Repository
-public interface OrderCompletedRepository extends JpaRepository<OrderCompleted,Integer> {
+public interface OrderCompletedRepository extends JpaRepository<OrderCompleted, Integer> {
 
     public int countOrderCompletedByPerson(Person person);
+
     public OrderCompleted findOrderCompletedByOrder(Orders order);
 }

@@ -56,13 +56,13 @@ public class UserController {
             }
             int request = orderRequestedRepository.countOrderRequestedByPerson(person);
             int complete = orderCompletedRepository.countOrderCompletedByPerson(person);
-            model.addAttribute("request",request);
-            model.addAttribute("complete",complete);
+            model.addAttribute("request", request);
+            model.addAttribute("complete", complete);
             model.addAttribute("person", person);
             model.addAttribute("title", "Dashboard");
             model.addAttribute("value", path);
             return "Dashboard";
-        } else if(!person.isEmailVerified()) {
+        } else if (!person.isEmailVerified()) {
             return "redirect:/user/email";
         } else {
             return "redirect:/user/phone";
@@ -112,7 +112,7 @@ public class UserController {
         model.addAttribute("weight", false);
         model.addAttribute("addressValid", false);
         model.addAttribute("notEnoughBalance", false);
-        model.addAttribute("fees",0);
+        model.addAttribute("fees", 0);
         model.addAttribute("title", "Request Orders");
         return "RequestOrder";
     }
@@ -144,16 +144,16 @@ public class UserController {
     }
 
     @RequestMapping("/creditAccount")
-    public String creditAccount(Model model,Principal principal){
+    public String creditAccount(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        model.addAttribute("person",person);
-        model.addAttribute("amount",false);
-        model.addAttribute("amountupi",false);
-        model.addAttribute("amt",false);
-        model.addAttribute("amtupi",false);
-        model.addAttribute("creditAccount",new CreditAccount());
-        model.addAttribute("title","Credit Account");
-        model.addAttribute("upi",false);
+        model.addAttribute("person", person);
+        model.addAttribute("amount", false);
+        model.addAttribute("amountupi", false);
+        model.addAttribute("amt", false);
+        model.addAttribute("amtupi", false);
+        model.addAttribute("creditAccount", new CreditAccount());
+        model.addAttribute("title", "Credit Account");
+        model.addAttribute("upi", false);
         return "CreditAccount";
     }
 }

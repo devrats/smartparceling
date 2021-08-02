@@ -7,11 +7,11 @@
 
 package com.example.smartparceling.charge;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GeoCodeService {
 
@@ -32,7 +32,7 @@ public class GeoCodeService {
 
             String lat = position.get("lat").asText();
             String lng = position.get("lng").asText();
-            return List.of(lat,lng);
+            return List.of(lat, lng);
         }
         return List.of();
     }

@@ -27,7 +27,7 @@ public class Person {
     @NotBlank(message = "This field cannot be blank")
     private String userName;
     @NotBlank(message = "This field cannot be blank")
-    @Size(min = 8,message = "Password must contain 8 to 20 character")
+    @Size(min = 8, message = "Password must contain 8 to 20 character")
     private String password;
     @NotBlank(message = "This field cannot be blank")
     private String email;

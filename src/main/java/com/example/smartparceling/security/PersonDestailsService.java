@@ -24,7 +24,7 @@ public class PersonDestailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Person personByUserName = personRepository.findPersonByUserName(s);
-        if(personByUserName==null){
+        if (personByUserName == null) {
             throw new UsernameNotFoundException("Invalid username or password");
         }
         PersonDetail personDetail = new PersonDetail(personByUserName);

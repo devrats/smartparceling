@@ -14,7 +14,7 @@
 }
 
 .banner {
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("../img/foto-blogartikel-10-767x511.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/foto-blogartikel-10-767x511.png");
     background-size: cover;
     max-width: 100%;
     height: 100vh;
@@ -47,13 +47,13 @@ h1 {
     width: 108%;
 }
 
-.banner .card .card-header{
+.banner .card .card-header {
     color: olive;
     font-weight: bold;
     font-family: cursive;
 }
 
-.footer{
+.footer {
     background-color: #e2e2e2;
     font-family: "Times New Roman";
     font-weight: bold;
@@ -63,11 +63,11 @@ h1 {
     text-align: center;
 }
 
-body{
+body {
     background-color: #e2e2e2;
 }
 
-.register{
+.register {
     text-align: center;
     font-weight: bold;
     font-family: "Edwardian Script ITC";
@@ -76,13 +76,13 @@ body{
     font-size: 15vh;
 }
 
-.icon{
+.icon {
     justify-content: center;
     width: 15vh;
     hight: 15vh;
 }
 
-.sidebar{
+.sidebar {
     background-color: whitesmoke;
     width: 15%;
     position: fixed;
@@ -94,7 +94,7 @@ body{
     padding-top: 60px;
 }
 
-.sidebar a{
+.sidebar a {
     padding: 10px 25px;
     display: block;
     color: black;
@@ -105,7 +105,7 @@ body{
     width: 100%;
 }
 
-h4{
+h4 {
     font-family: cursive;
     color: crimson;
     font-size: 25px;
@@ -113,37 +113,37 @@ h4{
     padding-bottom: 1px;
 }
 
-.sidebar a:hover{
+.sidebar a:hover {
     background-color: burlywood;
 }
 
-.sidebar .present{
+.sidebar .present {
     background-color: blueviolet;
     color: whitesmoke;
 }
 
-.sidebar .cross{
+.sidebar .cross {
     position: absolute;
     padding-top: 5px;
     left: 90%;
     font-size: 25px;
 }
 
-.bar{
+.bar {
     position: fixed;
     font-size: 25px;
     display: block;
     padding-top: 62px;
 }
 
-.dashboard_banner{
+.dashboard_banner {
     padding-left: 9%;
     padding-top: 62px;
     padding-right: 2%;
     width: 95rem;
 }
 
-.greet{
+.greet {
     text-align: center;
     font-weight: bolder;
     font-style: italic;
@@ -154,7 +154,7 @@ h4{
     color: brown;
 }
 
-.card-title{
+.card-title {
     font-family: cursive;
     font-style: italic;
     font-weight: bold;
@@ -162,7 +162,7 @@ h4{
     color: darkblue;
 }
 
-.card-text{
+.card-text {
     font-family: cursive;
     font-style: italic;
     font-weight: bold;
@@ -170,14 +170,14 @@ h4{
     color: maroon;
 }
 
-.card-header-tabs{
+.card-header-tabs {
     font-weight: bold;
     font-style: italic;
     font-family: "Times New Roman";
     font-size: 20px;
 }
 
-.guide{
+.guide {
     font-style: italic;
     font-weight: bold;
     font-size: 40px;
@@ -188,17 +188,17 @@ h4{
     color: black;
 }
 
-.bot{
+.bot {
     width: 26%;
     color: black;
 }
 
-.botton1{
+.botton1 {
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.dp{
+.dp {
     padding-top: 50px;
     border-radius: 100%;
     height: 20rem;
@@ -206,19 +206,20 @@ h4{
     object-fit: cover;
 }
 
-.edit{
+.edit {
     color: blue;
     font-family: "Times New Roman";
     font-size: 18px;
     text-decoration: none;
 
 }
-.lol a:hover{
+
+.lol a:hover {
     color: brown;
     font-size: 18.5px;
 }
 
-.list-group-item{
+.list-group-item {
     color: darkmagenta;
     font-family: "Times New Roman";
     font-weight: bold;
@@ -226,7 +227,7 @@ h4{
     font-size: 20px;
 }
 
-.action{
+.action {
     height: 22px;
     width: 55px;
     font-size: 12px;
@@ -236,11 +237,11 @@ h4{
     padding: 0px 0px 0px 0px;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.recharge{
+.recharge {
     font-size: 20px;
     font-style: italic;
     font-weight: initial;
@@ -258,21 +259,21 @@ a{
     padding-top: 10px
 }
 
-.request{
+.request {
     text-align: center;
     font-weight: bold;
     font-style: italic;
     color: crimson;
-    font-family:'Times New Roman';
+    font-family: 'Times New Roman';
     font-size: 10vh;
 }
 
-.request_icon{
+.request_icon {
     height: 18vh;
     width: 18vh;
 }
 
-.edit_icon{
+.edit_icon {
     height: 18vh;
     width: 18vh;
 }
@@ -289,7 +290,7 @@ a{
     color: indigo;
 }
 
-.remove{
+.remove {
     height: 22px;
     width: 55px;
     font-size: 14px;
@@ -299,25 +300,25 @@ a{
     padding: 0px 0px 0px 0px;
 }
 
-.login{
+.login {
     padding-top: 80px;
     width: 50rem;
 }
 
-.login_card{
+.login_card {
     width: 22rem;
 }
 
-.receive_icon{
+.receive_icon {
     height: 22vh;
     width: 22vh;
 }
 
-.home_button{
+.home_button {
     padding-top: 110px;
 }
 
-.balance_info{
+.balance_info {
     color: black;
     font-family: "Times New Roman";
     font-style: italic;
@@ -325,11 +326,11 @@ a{
     font-size: 25px;
 }
 
-#order_receive{
+#order_receive {
     display: none;
 }
 
-#profilepicture{
+#profilepicture {
     display: none;
     position: absolute;
     top: 275px;

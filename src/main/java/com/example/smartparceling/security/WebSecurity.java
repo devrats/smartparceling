@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PersonDestailsService getPersonDestailsService(){
+    public PersonDestailsService getPersonDestailsService() {
         PersonDestailsService personDestailsService = new PersonDestailsService();
         return personDestailsService;
     }
@@ -47,7 +47,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable();
     }
 
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(getPersonDestailsService());
         daoAuthenticationProvider.setPasswordEncoder(getBCryptPasswordEncoder());

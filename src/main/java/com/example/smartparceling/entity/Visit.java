@@ -10,10 +10,7 @@ package com.example.smartparceling.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.Period;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,9 +22,9 @@ public class Visit {
     private int id;
     @ManyToOne()
     private Person person;
-    @OneToOne(mappedBy = "visitFrom",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "visitFrom", cascade = CascadeType.ALL)
     private Address from;
-    @OneToOne(mappedBy = "visitTo",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "visitTo", cascade = CascadeType.ALL)
     private Address to;
     private float weight;
     private String via;

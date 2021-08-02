@@ -20,11 +20,13 @@ public interface OrderRequestedRepository extends JpaRepository<OrderRequested, 
             "INNER JOIN Address as b ON a.orderFrom.id = b.orderTo.id where " +
             "a.city=:cityFrom and a.state = :stateFrom and b.city= :cityTo and b.state = :stateTo and " +
             "y.weight<=:weight and y.date = :date")
-    public List<Integer> findOrder(@Param("cityFrom") String city ,@Param("stateFrom") String stateFrom
-            ,@Param("cityTo") String cityTo ,@Param("stateTo") String stateTo
-                                   ,@Param("weight") float weight, @Param("date") Date date);
+    public List<Integer> findOrder(@Param("cityFrom") String city, @Param("stateFrom") String stateFrom
+            , @Param("cityTo") String cityTo, @Param("stateTo") String stateTo
+            , @Param("weight") float weight, @Param("date") Date date);
 
     public OrderRequested findOrderRequestedById(Integer orderRequestedInt);
+
     public OrderRequested findOrderRequestedByOrder(Orders order);
+
     public int countOrderRequestedByPerson(Person person);
 }

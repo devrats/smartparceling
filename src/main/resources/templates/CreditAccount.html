@@ -8,105 +8,109 @@
 <nav th:replace="Navigation::nav"/>
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
-    <section id="banneres" class="dashboard_banner">
-        <div class="card mx-auto scroll">
-            <div class="card-body">
-                <div class="container text-center">
-                    <img class="icon" src="" th:src="@{https://static.thenounproject.com/png/936925-200.png}">
+<section id="banneres" class="dashboard_banner">
+    <div class="card mx-auto scroll">
+        <div class="card-body">
+            <div class="container text-center">
+                <img class="icon" src="" th:src="@{https://static.thenounproject.com/png/936925-200.png}">
+            </div>
+            <form class="row g-3 form" style="text-align: left" th:action="@{/user/creditAccountNow}"
+                  th:object="${creditAccount}"
+                  method="post">
+                <h1 class="request">Credit Account</h1>
+                <div class="mb-3">
+                    <label for="exampleInputName7" class="form-label">Amount to credit</label>
+                    <input th:value="${creditAccount.amount}" type="number" class="form-control" name="amount"
+                           id="exampleInputName7"
+                           placeholder="Amount to credit"
+                           th:classappend="${amount} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${amount}">This field cannot be blank</div>
+                    <div class="text-danger" th:if="${amt}">You have to maintan minimum balance</div>
                 </div>
-                <form class="row g-3 form" style="text-align: left" th:action="@{/user/creditAccountNow}" th:object="${creditAccount}"
-                      method="post">
-                    <h1 class="request">Credit Account</h1>
-                    <div class="mb-3">
-                        <label for="exampleInputName7" class="form-label">Amount to credit</label>
-                        <input th:value="${creditAccount.amount}" type="number" class="form-control" name="amount" id="exampleInputName7"
-                                placeholder="Amount to credit"
-                               th:classappend="${amount} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:if="${amount}">This field cannot be blank</div>
-                        <div class="text-danger" th:if="${amt}">You have to maintan minimum balance</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputName" class="form-label">Account Number</label>
-                        <input type="text" class="form-control" name="accountNumber" id="exampleInputName"
-                               th:value="${creditAccount.accountNumber}" placeholder="Account Number"
-                               th:classappend="${#fields.hasErrors('accountNumber')} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:each="e:${#fields.errors('accountNumber')}" th:text="${e}"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">IFSC code</label>
-                        <input type="text" th:value="${creditAccount.IFSCCode}" class="form-control" name="IFSCCode"
-                               placeholder="IFSC code" id="exampleInputEmail1"
-                               aria-describedby="emailHelp"
-                               th:classappend="${#fields.hasErrors('IFSCCode')} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:each="e:${#fields.errors('IFSCCode')}" th:text="${e}"></div>
-                        <div id="emailHelp" class="form-text">We'll never share your details with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPhone" class="form-label">Branch Name</label>
-                        <input type="text" th:value="${creditAccount.branchName}" placeholder="Branch name" name="branchName"
-                               class="form-control" id="exampleInputPhone"
-                               th:classappend="${#fields.hasErrors('branchName')} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:each="e:${#fields.errors('branchName')}" th:text="${e}"></div>
-                    </div>
-                    <div class="container text-center">
-                        <button type="submit" class="btn btn-outline-danger btn-warning bot">Submit</button>
-                    </div>
-                </form>
-                <br>
-                <h1 class="guide" style="text-align: center">Or</h1>
-                <hr>
-                <form class="row g-3 form" style="text-align: left" th:action="@{/user/creditAccountNowWithUpi}" method="post">
-                    <div class="mb-3">
-                        <label for="exampleInputName" class="form-label">Amount to credit</label>
-                        <input type="number" class="form-control" name="amount" id="exampleInputName9"
-                               placeholder="Amount to credit"
-                               th:classappend="${amountupi} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:if="${amountupi}">This field cannot be blank</div>
-                        <div class="text-danger" th:if="${amtupi}">You have to maintan minimum balance</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPhone1" class="form-label">UPI</label>
-                        <input type="text" th:value="${creditAccount.upi}" placeholder="UPI" name="upi"
-                               class="form-control" id="exampleInputPhone1"
-                               th:classappend="${upi} ? 'is-invalid' : ''">
-                        <div class="invalid-feedback" th:if="${upi}">This field cannot be blank</div>
-                    </div>
-                    <div class="container text-center">
-                        <button type="submit" class="btn btn-outline-danger btn-warning bot">Submit</button>
-                    </div>
-                </form>
-            </div>
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Account Number</label>
+                    <input type="text" class="form-control" name="accountNumber" id="exampleInputName"
+                           th:value="${creditAccount.accountNumber}" placeholder="Account Number"
+                           th:classappend="${#fields.hasErrors('accountNumber')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:each="e:${#fields.errors('accountNumber')}" th:text="${e}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">IFSC code</label>
+                    <input type="text" th:value="${creditAccount.IFSCCode}" class="form-control" name="IFSCCode"
+                           placeholder="IFSC code" id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
+                           th:classappend="${#fields.hasErrors('IFSCCode')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:each="e:${#fields.errors('IFSCCode')}" th:text="${e}"></div>
+                    <div id="emailHelp" class="form-text">We'll never share your details with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPhone" class="form-label">Branch Name</label>
+                    <input type="text" th:value="${creditAccount.branchName}" placeholder="Branch name"
+                           name="branchName"
+                           class="form-control" id="exampleInputPhone"
+                           th:classappend="${#fields.hasErrors('branchName')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:each="e:${#fields.errors('branchName')}" th:text="${e}"></div>
+                </div>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-outline-danger btn-warning bot">Submit</button>
+                </div>
+            </form>
+            <br>
+            <h1 class="guide" style="text-align: center">Or</h1>
+            <hr>
+            <form class="row g-3 form" style="text-align: left" th:action="@{/user/creditAccountNowWithUpi}"
+                  method="post">
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Amount to credit</label>
+                    <input type="number" class="form-control" name="amount" id="exampleInputName9"
+                           placeholder="Amount to credit"
+                           th:classappend="${amountupi} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${amountupi}">This field cannot be blank</div>
+                    <div class="text-danger" th:if="${amtupi}">You have to maintan minimum balance</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPhone1" class="form-label">UPI</label>
+                    <input type="text" th:value="${creditAccount.upi}" placeholder="UPI" name="upi"
+                           class="form-control" id="exampleInputPhone1"
+                           th:classappend="${upi} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${upi}">This field cannot be blank</div>
+                </div>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-outline-danger btn-warning bot">Submit</button>
+                </div>
+            </form>
         </div>
-        <h1 class="guide">Previous credit requests</h1>
-        <div class="card">
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Credit Request Id</th>
-                        <th scope="col">Account Number</th>
-                        <th scope="col">IFSC Code</th>
-                        <th scope="col">Branch name</th>
-                        <th scope="col">UPI Id</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Amount</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="e : ${person.creditAccounts}">
-                        <th scope="row" th:text="${e.getId()}"></th>
-                        <td th:text="${e.accountNumber}"></td>
-                        <td th:text="${e.IFSCCode}"></td>
-                        <td th:text="${e.branchName}"></td>
-                        <td th:text="${e.upi}"></td>
-                        <td th:text="${e.status}"></td>
-                        <td th:text="${e.amount}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+    </div>
+    <h1 class="guide">Previous credit requests</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Credit Request Id</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">IFSC Code</th>
+                    <th scope="col">Branch name</th>
+                    <th scope="col">UPI Id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${person.creditAccounts}">
+                    <th scope="row" th:text="${e.getId()}"></th>
+                    <td th:text="${e.accountNumber}"></td>
+                    <td th:text="${e.IFSCCode}"></td>
+                    <td th:text="${e.branchName}"></td>
+                    <td th:text="${e.upi}"></td>
+                    <td th:text="${e.status}"></td>
+                    <td th:text="${e.amount}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div th:replace="About::foot"/>
-    </section>
+    </div>
+    <div th:replace="About::foot"/>
+</section>
 </body>
 </html>

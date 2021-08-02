@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 @ControllerAdvice
 public class ErrorController {
 
-    @ExceptionHandler({SizeLimitExceededException.class,MaxUploadSizeExceededException.class})
-    public String sizeLimitExceedException(){
+    @ExceptionHandler({SizeLimitExceededException.class, MaxUploadSizeExceededException.class})
+    public String sizeLimitExceedException() {
         return "SizeError";
     }
 }
