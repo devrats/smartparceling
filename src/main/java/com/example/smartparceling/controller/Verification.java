@@ -48,7 +48,7 @@ public class Verification {
         int number = rnd.nextInt(999999);
         otp = String.format("%06d", number);
         Email email = new Email();
-        emailService.sendEmail(person.getEmail(),email.getHead2(),email.getMsg1(otp));
+        emailService.sendEmail(person.getEmail(),email.getHead2(),email.getMsg1(otp),false);
         return "EmailVerification";
     }
 

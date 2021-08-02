@@ -12,12 +12,17 @@ import com.example.smartparceling.email.Email;
 import com.example.smartparceling.email.EmailService;
 import com.example.smartparceling.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,10 +53,11 @@ public class UserActionServiceController {
     @Autowired
     private EmailService emailService;
 
+
     @RequestMapping("/acceptOrder/{id}")
     public String acceptOrder(@PathVariable("id") int id, Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
-        if(person.getAdhaarVerified()){
+        if (person.getAdhaarVerified()) {
             boolean isOwner = false;
             OrderReceived orderReceived = orderReceivedRepository.findOrderReceivedById(id);
             List<OrderReceived> orderReceived1 = person.getOrderReceived();
@@ -93,9 +99,9 @@ public class UserActionServiceController {
                 user.setMessage(message);
                 Email email = new Email();
                 emailService.sendEmail(user.getEmail(), email.getHead(),
-                        email.getMsg(person.getName(),person.getEmail(),person.getPhone()));
+                        email.getMsg(person.getName(), person.getEmail(), person.getPhone()), false);
                 emailService.sendEmail(person.getEmail(), email.getHead(),
-                        email.getMsg(user.getName(),user.getEmail(),user.getPhone()));
+                        email.getMsg(user.getName(), user.getEmail(), user.getPhone()), false);
                 List<OrderReceived> orderReceived3 = orderReceivedRepository.findOrderReceivedsByOrder(orderRequested.getOrder());
                 for (OrderReceived received : orderReceived3) {
                     orderReceivedRepository.delete(received);
@@ -110,13 +116,78 @@ public class UserActionServiceController {
                 return "redirect:/user/dashboard/1";
             }
 
-        } else{
+        } else {
             List<Message> message = person.getMessage();
             Message message1 = new Message();
             message1.setMessage("Your photo identity proof is not verified yet...");
             message1.setPerson(person);
             message.add(message1);
             person.setMessage(message);
+            messageRepository.save(message1);
+            personRepository.save(person);
+            return "redirect:/user/dashboard/1";
+        }
+    }
+
+    @RequestMapping("/report/{id}")
+    public String report(@PathVariable("id") int id, Model model, Principal principal) {
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        Orders ordersById = orderRepository.findOrdersById(id);
+        OrderCompleted orderCompleted = orderCompletedRepository.findOrderCompletedByOrder(ordersById);
+        if (orderCompleted.getPerson().getId() == person.getId()) {
+            Person user = orderCompleted.getUser();
+            try {
+                String path = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\proof.png";
+                byte[] file1 = user.getAdhaar();
+                FileOutputStream fileOutputStream = new FileOutputStream(path);
+                fileOutputStream.write(file1);
+                fileOutputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Email email = new Email();
+            emailService.sendEmail(person.getEmail(), email.getHead3(), email.getMsg3(), true);
+            return "redirect:/user/dashboard/1";
+        } else {
+            return "redirect:/user/dashboard/1";
+        }
+    }
+
+    @RequestMapping("/endVisit/{id}")
+    public String endVisit(@PathVariable("id") int id, Model model, Principal principal) {
+        boolean isOwner = false;
+        Person person = personRepository.findPersonByUserName(principal.getName());
+        List<Visit> visits = person.getVisits();
+        for (Visit visit : visits) {
+            if (person.getId() == visit.getPerson().getId()) {
+                isOwner = true;
+            }
+        }
+        if (isOwner) {
+            Visit visit = visitRepository.findVisitById(id);
+            List<OrderReceived> orderReceived = person.getOrderReceived();
+            List<OrderReceived> orderReceived1 = new ArrayList<>();
+            System.out.println(orderReceived.size());
+            for (OrderReceived received : orderReceived) {
+                if (received.getOrder().getFrom().getCity().equals(visit.getFrom().getCity()) &&
+                        received.getOrder().getFrom().getState().equals(visit.getFrom().getState()) &&
+                        received.getOrder().getTo().getCity().equals(visit.getTo().getCity()) &&
+                        received.getOrder().getTo().getState().equals(visit.getTo().getState()) &&
+                        received.getOrder().getDate().equals(visit.getDate())) {
+                    System.out.println("idhar aya");
+                    orderReceivedRepository.delete(received);
+                    orderReceived1.add(received);
+                }
+            }
+            orderReceived.removeAll(orderReceived1);
+            person.setOrderReceived(orderReceived);
+            visits.remove(visit);
+            personRepository.save(person);
+            visitRepository.delete(visit);
+            return "redirect:/user/dashboard/1";
+        } else {
             return "redirect:/user/dashboard/1";
         }
     }
@@ -147,8 +218,8 @@ public class UserActionServiceController {
             List<OrderCompletedByUser> orderCompletedByUser1 = user.getOrderCompletedByUser();
             orderCompletedByUser1.add(orderCompletedByUser);
             orderCompleted1.add(orderCompleted);
-            person.setAccountBalance(person.getAccountBalance()-orderOnTheWay.getOrder().getCharge());
-            user.setAccountBalance(user.getAccountBalance()+orderOnTheWay.getOrder().getCharge());
+            person.setAccountBalance(person.getAccountBalance() - orderOnTheWay.getOrder().getCharge());
+            user.setAccountBalance(user.getAccountBalance() + orderOnTheWay.getOrder().getCharge());
             orderCompletedRepository.save(orderCompleted);
             orderCompletedByUserRepository.save(orderCompletedByUser);
             OrderPending orderPending = orderPendingRepository.
@@ -201,8 +272,8 @@ public class UserActionServiceController {
             List<OrderCompletedByUser> orderCompletedByUser1 = person.getOrderCompletedByUser();
             orderCompletedByUser1.add(orderCompletedByUser);
             orderCompleted1.add(orderCompleted);
-            person.setAccountBalance(person.getAccountBalance()+orderPending.getOrder().getCharge());
-            user.setAccountBalance(user.getAccountBalance()-orderPending.getOrder().getCharge());
+            person.setAccountBalance(person.getAccountBalance() + orderPending.getOrder().getCharge());
+            user.setAccountBalance(user.getAccountBalance() - orderPending.getOrder().getCharge());
             orderCompletedRepository.save(orderCompleted);
             orderCompletedByUserRepository.save(orderCompletedByUser);
             OrderOnTheWay orderOnTheWay = orderOnTheWayRepository.
@@ -216,6 +287,7 @@ public class UserActionServiceController {
             Message message1 = new Message();
             message1.setMessage("Your order has been completed");
             message1.setPerson(user);
+            message1.setOrderId(orderPending.getOrder().getId());
             message.add(message1);
             user.setMessage(message);
             messageRepository.save(message1);
@@ -326,7 +398,7 @@ public class UserActionServiceController {
     }
 
     @RequestMapping("/cancelPendingOrder/{id}")
-    public String cancelPendingOrder(@PathVariable("id") int id, Model model, Principal principal){
+    public String cancelPendingOrder(@PathVariable("id") int id, Model model, Principal principal) {
         boolean isOwner = false;
         OrderPending orderPending = orderPendingRepository.findOrderPendingById(id);
         Person person = personRepository.findPersonByUserName(principal.getName());

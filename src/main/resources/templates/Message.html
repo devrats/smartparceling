@@ -13,22 +13,30 @@
     <h1 class="guide">Messages</h1>
     <div class="container text-center botton1">
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Mesaages</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="e : ${msg}">
-                    <th scope="row" th:text="${e}"> </th>
-                </tr>
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Mesaages</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="e : ${msg}">
+                        <td scope="row" th:text="${e.message}"></td>
+                        <td>
+                            <div class="container text-center" th:if="${e.message}=='Your order has been completed'">
+                                <a href="#" th:href="@{'/user/report/' + ${e.orderId}}">
+                                    <input type="submit"
+                                           class="btn btn-outline-success action"
+                                           value="report"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
         <a th:href="@{/user/dashboard/1}"> <input type="submit" class="btn btn-outline-danger btn-warning bot"
                                                   value="Home"> </a>
     </div>

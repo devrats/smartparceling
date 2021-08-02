@@ -7,18 +7,24 @@
 
 package com.example.smartparceling.email;
 
-import org.springframework.boot.autoconfigure.web.reactive.WebFluxProperties;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.IOException;
 import java.util.Properties;
 
 @Service
 public class EmailService {
 
-    public void sendEmail(String to, String subject, String message) {
+    public void sendEmail(String to, String subject, String message,boolean file1) {
 
         String host = "smtp.gmail.com";
         Properties properties = System.getProperties();
@@ -31,7 +37,7 @@ public class EmailService {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                PasswordAuthentication passwordAuthentication = new PasswordAuthentication("devvvrats@gmail.com", "Devvrat@25");
+                PasswordAuthentication passwordAuthentication = new PasswordAuthentication("smartparceling@gmail.com", "Smart@29");
                 return passwordAuthentication;
             }
         });
@@ -42,8 +48,21 @@ public class EmailService {
             mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(to)));
             mimeMessage.setSubject(subject);
             mimeMessage.setText(message);
+            if(file1){
+                MimeBodyPart messageBodyPart = new MimeBodyPart();
+                Multipart multipart = new MimeMultipart();
+                String file = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\proof.png";
+                String fileName = "photo identity proof";
+                DataSource source = new FileDataSource(file);
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName(fileName);
+                multipart.addBodyPart(messageBodyPart);
+                mimeMessage.setContent(multipart);
+            }
             Transport.send(mimeMessage);
         } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

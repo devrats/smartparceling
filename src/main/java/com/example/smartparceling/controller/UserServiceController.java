@@ -102,9 +102,9 @@ public class UserServiceController {
         model.addAttribute("title", "Request Orders");
         model.addAttribute("fees",0);
         List calculateFrom = GeoCodeService.calculate
-                (order.getFrom().getCity() + ", " + order.getFrom().getState() + ", India");
+                (order.getFrom().getCity() +  ", India");
         List calculateTo = GeoCodeService.calculate
-                (order.getTo().getCity() + ", " + order.getFrom().getState() + ", India");
+                (order.getTo().getCity() + ", India");
         if(calculateFrom.isEmpty() || calculateTo.isEmpty()){
             model.addAttribute("addressValid",true);
             return "RequestOrder";

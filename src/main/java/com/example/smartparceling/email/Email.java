@@ -27,6 +27,30 @@ public class Email {
             "\n" +
             "Thank you!\n" +
             "\n";
+    private String head3 = "You can report the person";
+
+    public String getMsg1() {
+        return msg1;
+    }
+
+    public String getHead3() {
+        return head3;
+    }
+
+    public void setHead3(String head3) {
+        this.head3 = head3;
+    }
+
+    public String getMsg3() {
+        return msg3;
+    }
+
+    public void setMsg3(String msg3) {
+        this.msg3 = msg3;
+    }
+
+    private String msg3 = "we are sending you details and photo identity proof of the user you want to report"
+            + "\nwe are happy to help you and always there for you";
 
     public Email(String name, String email, String phone) {
         this.name = name;

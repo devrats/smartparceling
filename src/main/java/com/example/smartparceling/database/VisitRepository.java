@@ -20,4 +20,6 @@ public interface VisitRepository extends JpaRepository<Visit,Integer> {
     public List<Integer> findVisitByPerson(@Param("cityFrom") String city , @Param("stateFrom") String stateFrom
             , @Param("cityTo") String cityTo , @Param("stateTo") String stateTo
             , @Param("weight") float weight, @Param("date") Date date);
+
+    public Visit findVisitById(int id);
 }

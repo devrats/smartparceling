@@ -13,4 +13,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface OrderRepository extends JpaRepository<Orders,Integer> {
+
+    public Orders findOrdersById(int id);
 }

@@ -19,10 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +44,13 @@ public class UserController {
         Person person = personRepository.findPersonByUserName(principal.getName());
         if (person.isEmailVerified() && person.isPhoneVerified()) {
             List<Message> message = person.getMessage();
-            List<String> messages = new ArrayList<>();
             if (!message.isEmpty()) {
                 for (Message message1 : message) {
-                    messages.add(message1.getMessage());
                     messageRepository.delete(message1);
                 }
-                model.addAttribute("msg", messages);
-                message.clear();
-                person.setMessage(message);
+                model.addAttribute("msg", message);
+                List<Message> messages = new ArrayList<>();
+                person.setMessage(messages);
                 model.addAttribute("title", "msg");
                 return "Message";
             }
@@ -76,7 +73,7 @@ public class UserController {
     public String profile(Model model, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
         try {
-            String path = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\profile.jpg";
+            String path = new ClassPathResource("").getFile().getAbsolutePath() + "\\static\\img\\profile.png";
             byte[] file1 = person.getImage();
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             fileOutputStream.write(file1);

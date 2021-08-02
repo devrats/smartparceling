@@ -126,6 +126,42 @@
             </table>
         </div>
     </div>
+    <h1 class="guide">Your Visits</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Visit Id</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Weight (in kgs)</th>
+                    <th scope="col">via</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${person.visits}">
+                    <th scope="row" th:text="${e.id}">
+                    </td>
+                    <td th:text="${e.getFrom().getCity()} + ', ' + ${e.getFrom().getState()}"></td>
+                    <td th:text="${e.getTo().getCity()} + ', ' + ${e.getTo().getState()}"></td>
+                    <td th:text="${#dates.format(e.date,'yyyy-MM-dd')}"></td>
+                    <td th:text="${e.weight}"></td>
+                    <td th:text="${e.via}"></td>
+                    <td>
+                        <div class="container text-center">
+                            <a href="#" th:href="@{'/user/endVisit/' + ${e.id}}"> <input type="submit"
+                                                                                      class="btn btn-outline-danger action"
+                                                                                      value="End Visit"> </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <h1 class="guide">Your orders on the way</h1>
     <div class="card">
         <div class="card-body">
