@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 public class GeoCoder {
@@ -25,7 +26,7 @@ public class GeoCoder {
 
         HttpClient httpClient = HttpClient.newHttpClient();
 
-        String encodedQuery = URLEncoder.encode(query, "UTF-8");
+        String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
         String requestUri = GEOCODING_RESOURCE + "?apiKey=" + API_KEY + "&q=" + encodedQuery;
 
         HttpRequest geocodingRequest = HttpRequest.newBuilder().GET().uri(URI.create(requestUri))

@@ -55,7 +55,7 @@ public class UserActionServiceController {
 
 
     @RequestMapping("/acceptOrder/{id}")
-    public String acceptOrder(@PathVariable("id") int id, Model model, Principal principal) {
+    public String acceptOrder(@PathVariable("id") int id, Principal principal) {
         Person person = personRepository.findPersonByUserName(principal.getName());
         if (person.getAdhaarVerified()) {
             boolean isOwner = false;

@@ -21,7 +21,7 @@ public class HomeController {
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("title", "Smart Parceling");
-        return "Home";
+        return "index";
     }
 
     @RequestMapping("/register")
