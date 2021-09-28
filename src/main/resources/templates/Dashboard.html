@@ -8,6 +8,9 @@
 <nav th:replace="Navigation::nav"/>
 <div th:replace="SideBar::side"></div>
 <i class="fas fa-bars bar" onclick="toggleBar()"></i>
+<div style="position: relative;">
+<div th:replace="ChatOption::chatOption"></div>
+</div>
 <section class="dashboard_banner" id="banneres">
 
     <h1 class="greet">Hello <span th:text="${person.userName}"/>!</h1>

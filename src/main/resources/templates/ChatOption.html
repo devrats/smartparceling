@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="Head::frag(${title})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="chat-option" th:fragment="chatOption">
+    <i class="fas fa-times cross"></i>
+    <br>
+    <a href="#" th:href="@{/user/receiveOrder}" th:classappend="${title}=='Receive Orders' ? 'present' : ''"> <i
+            class="fas fa-satellite-dish"></i></i> RECEIVE ORDERS</a>
+    <a href="#" th:href="@{/user/dashboard/1}" th:classappend="${title}=='Dashboard' ? 'present' : ''"> <i
+            class="fas fa-tachometer-alt"></i> DASHBOARD</a>
+    <a href="#" th:href="@{/user/profile}" th:classappend="${title}=='Profile' ? 'present' : ''"> <i
+            class="fas fa-user-circle"></i> PROFILE</a>
+
+</div>
+</body>
+</html>

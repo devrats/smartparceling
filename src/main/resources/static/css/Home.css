@@ -340,3 +340,46 @@ a {
     left: 47%;
     opacity: 0.9;
 }
+
+.chat-option {
+    background-color: black;
+    width: 15%;
+    overscroll-behavior: contain;
+    display: block;
+    height: 100%;
+    transition-delay: 0.3s;
+    padding-top: 60px;
+    float: right;
+    justify-items: right;
+    position: absolute;
+    right: 0;
+    z-index: 9;
+}
+
+.chat-option a {
+    padding: 10px 25px;
+    display: block;
+    color: white;
+    font-style: italic;
+    font-family: "Times New Roman";
+    font-size: 15px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.chat-option a:hover {
+    background-color: burlywood;
+}
+
+.chat-option .present {
+    background-color: blueviolet;
+    color: whitesmoke;
+}
+
+.chat-option .cross {
+    position: absolute;
+    padding-top: 5px;
+    right: 90%;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
