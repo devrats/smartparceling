@@ -217,3 +217,8 @@ function profileUpload() {
 function hideProPic() {
     $('#profilepicture').css("display", "none")
 }
+
+const toggleChat = () =>{
+$(".chat-option").toggle()
+
+}

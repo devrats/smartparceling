@@ -343,7 +343,7 @@ a {
 
 .chat-option {
     background-color: black;
-    width: 15%;
+    width: 18rem;
     overscroll-behavior: contain;
     display: block;
     height: 100%;
@@ -354,6 +354,7 @@ a {
     position: absolute;
     right: 0;
     z-index: 9;
+    display: none;
 }
 
 .chat-option a {
@@ -380,6 +381,7 @@ a {
     position: absolute;
     padding-top: 5px;
     right: 90%;
+    color: white;
     margin-bottom: 15px;
     font-size: 25px;
 }

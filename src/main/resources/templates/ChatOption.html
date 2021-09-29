@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="chat-option" th:fragment="chatOption">
-    <i class="fas fa-times cross"></i>
+    <i onclick="toggleChat()" class="fas fa-times cross"></i>
     <br>
     <a href="#" th:href="@{/user/receiveOrder}" th:classappend="${title}=='Receive Orders' ? 'present' : ''"> <i
             class="fas fa-satellite-dish"></i></i> RECEIVE ORDERS</a>
