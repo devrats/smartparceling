@@ -61,6 +61,14 @@ public class UserController {
             model.addAttribute("person", person);
             model.addAttribute("title", "Dashboard");
             model.addAttribute("value", path);
+            List<String> names = new ArrayList<>();
+            for (OrderOnTheWay orderOnTheWay : person.getOrderOnTheWay()) {
+                names.add(orderOnTheWay.getUser().getName());
+            }
+            for (OrderPending orderPending : person.getOrderPending()) {
+                names.add(orderPending.getOwner().getName());
+            }
+            model.addAttribute("names",names);
             return "Dashboard";
         } else if (!person.isEmailVerified()) {
             return "redirect:/user/email";

@@ -385,3 +385,36 @@ a {
     margin-bottom: 15px;
     font-size: 25px;
 }
+
+.card-heading{
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+    font-style: italic;
+    font-family: "Times New Roman", cursive;
+    font-size: 1.5vw;
+}
+
+.chat-box{
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-color: transparent;
+    display: none;
+}
+
+.chat-box-instruction{
+    text-align: center;
+    color: white;
+}
+
+.input-group1{
+    width: 96%;
+    margin-left: 2%;
+}
+
+.table12{
+    color: white;
+    margin-left: 25%;
+    font-size: 1.2vw;
+}

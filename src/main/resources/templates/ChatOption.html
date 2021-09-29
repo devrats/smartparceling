@@ -6,14 +6,33 @@
 </head>
 <body>
 <div class="chat-option" th:fragment="chatOption">
-    <i onclick="toggleChat()" class="fas fa-times cross"></i>
-    <br>
-    <a href="#" th:href="@{/user/receiveOrder}" th:classappend="${title}=='Receive Orders' ? 'present' : ''"> <i
-            class="fas fa-satellite-dish"></i></i> RECEIVE ORDERS</a>
-    <a href="#" th:href="@{/user/dashboard/1}" th:classappend="${title}=='Dashboard' ? 'present' : ''"> <i
-            class="fas fa-tachometer-alt"></i> DASHBOARD</a>
-    <a href="#" th:href="@{/user/profile}" th:classappend="${title}=='Profile' ? 'present' : ''"> <i
-            class="fas fa-user-circle"></i> PROFILE</a>
+    <div>
+        <i onclick="toggleChat()" class="fas fa-times cross"></i>
+        <br>
+        <div th:each="e: ${names}">
+            <a href="#" onclick="startChat()"> <span th:text="${e}"></span></a>
+        </div>
+    </div>
+    <div class="chatWindow">
+        <div class="chat-box" th:each="e:${names}">
+            <div th:id="${e}">
+                <div class="card-header chat-box-instruction card-heading">
+                    Please Be Polite And Do not Abuse Each Other
+                </div>
+                <div class="form-group input-group input-group1">
+                    <label for="message"></label>
+                    <input type="text" required class="form-control mb-2" style="margin-right: 6px"
+                           id="message" placeholder="Enter Your Message...">
+                    <div class="input-group-append">
+                        <button type="submit" onclick="sendMessage()" id="send" class="btn btn-primary mb-2">Send
+                        </button>
+                    </div>
+                </div>
+                <table class="table12">
+                </table>
+            </div>
+        </div>
+    </div>
 
 </div>
 </body>
