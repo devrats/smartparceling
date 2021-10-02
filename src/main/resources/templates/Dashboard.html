@@ -266,10 +266,10 @@
         })
 
         function connect() {
-            let socket = new SockJS('/user/server')
+            let socket = new SockJS('/user/server/')
             stompClient = Stomp.over(socket)
             stompClient.connect({}, function (frame) {
-                stompClient.subscribe("/users/queue/messages", function (response) {
+                stompClient.subscribe("/user/queue/messages", function (response) {
                     showMessage(JSON.parse(response.body))
                 });
             })

@@ -17,8 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
-
 @RestController
 @Controller
 public class MessageController {
@@ -26,10 +24,17 @@ public class MessageController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/message/{urls}")
-    @ResponseBody
-    public void message(@DestinationVariable String urls, @Payload Message1 message, Principal principal){
-        simpMessagingTemplate.convertAndSendToUser(urls, "/queue/messages",message);
-    }
+//    @MessageMapping("message/{urls}")
+//    @ResponseBody
+//    public void message(@DestinationVariable String urls, @Payload Message1 message){
+//        System.out.println(message);
+//        System.out.println(urls);
+//        simpMessagingTemplate.convertAndSend("/queue/messages",message);
+//    }
 
+    @MessageMapping("message/{urls}")
+    @ResponseBody
+    public void message(@DestinationVariable String urls, @Payload Message1 message){
+        simpMessagingTemplate.convertAndSendToUser(urls,"/queue/messages",message);
+    }
 }
