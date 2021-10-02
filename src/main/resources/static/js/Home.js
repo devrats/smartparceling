@@ -220,5 +220,8 @@ function hideProPic() {
 
 const toggleChat = () =>{
 $(".chat-option").toggle()
+}
 
+const startChat = () => {
+  console.log($(this).text())
 }

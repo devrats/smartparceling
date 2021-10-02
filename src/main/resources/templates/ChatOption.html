@@ -9,6 +9,7 @@
     <div>
         <i onclick="toggleChat()" class="fas fa-times cross"></i>
         <br>
+        <hr style="color: black">
         <div th:each="e: ${names}">
             <a href="#" onclick="startChat()"> <span th:text="${e}"></span></a>
         </div>
