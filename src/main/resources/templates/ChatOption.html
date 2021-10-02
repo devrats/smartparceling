@@ -6,35 +6,35 @@
 </head>
 <body>
 <div class="chat-option" th:fragment="chatOption">
-    <div>
+    <div class="chatWindow">
         <i onclick="toggleChat()" class="fas fa-times cross"></i>
         <br>
         <hr style="color: black">
         <div th:each="e: ${names}">
-            <a href="#" onclick="startChat()"> <span th:text="${e}"></span></a>
+            <a href="#" id="friendsName"> <span th:text="${e}"></span></a>
         </div>
     </div>
-    <div class="chatWindow">
-        <div class="chat-box" th:each="e:${names}">
-            <div th:id="${e}">
-                <div class="card-header chat-box-instruction card-heading">
-                    Please Be Polite And Do not Abuse Each Other
-                </div>
-                <div class="form-group input-group input-group1">
-                    <label for="message"></label>
-                    <input type="text" required class="form-control mb-2" style="margin-right: 6px"
-                           id="message" placeholder="Enter Your Message...">
-                    <div class="input-group-append">
-                        <button type="submit" onclick="sendMessage()" id="send" class="btn btn-primary mb-2">Send
-                        </button>
-                    </div>
-                </div>
-                <table class="table12">
-                </table>
+    <div class="chat-box" th:each="e:${names}">
+        <div class="chat-names" th:id="${e}">
+            <i id="backArrow" class="fas fa-arrow-left cross"></i>
+            <br>
+            <br>
+            <div class="card-header chat-box-instruction card-heading">
+                Please Be Polite And Do not Abuse Each Other
             </div>
+            <div class="form-group input-group input-group1">
+                <label for="message"></label>
+                <input type="text" required class="form-control mb-2" style="margin-right: 6px"
+                       id="message" placeholder="Enter Your Message...">
+                <div class="input-group-append">
+                    <button type="submit" onclick="sendMessage()" id="send" class="btn btn-primary mb-2">Send
+                    </button>
+                </div>
+            </div>
+            <table class="table12">
+            </table>
         </div>
     </div>
-
 </div>
 </body>
 </html>

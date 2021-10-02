@@ -63,10 +63,10 @@ public class UserController {
             model.addAttribute("value", path);
             List<String> names = new ArrayList<>();
             for (OrderOnTheWay orderOnTheWay : person.getOrderOnTheWay()) {
-                names.add(orderOnTheWay.getUser().getName());
+                names.add(orderOnTheWay.getUser().getUserName());
             }
             for (OrderPending orderPending : person.getOrderPending()) {
-                names.add(orderPending.getOwner().getName());
+                names.add(orderPending.getOwner().getUserName());
             }
             model.addAttribute("names",names);
             return "Dashboard";

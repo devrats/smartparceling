@@ -250,6 +250,21 @@
     </div>
     <footer th:replace="About::foot"/>
 </section>
+<script>
+    $(document).ready(function () {
+        $("#friendsName").click(function () {
+            let name = $(this).text()
+            let value = '#' + name.substr(1, name.length)
+            $(".chatWindow").hide("slow")
+            $(value).show("slow")
+        });
+        $("#backArrow").click(function () {
+            $(".chatWindow").show("slow")
+            let value = '#' + $(this).parent().attr("id")
+            $(value).hide("slow")
 
+        })
+    });
+</script>
 </body>
 </html>
