@@ -11,7 +11,7 @@
 <div th:replace="ChatOption::chatOption"></div>
 <section class="dashboard_banner" id="banneres">
 
-    <h1 class="greet">Hello <span th:text="${person.userName}"/>!</h1>
+    <h1 class="greet">Hello <span id="user-name" th:text="${person.userName}"/>!</h1>
     <div class="card text-center">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -252,6 +252,7 @@
 </section>
 <script>
     $(document).ready(function () {
+        connect()
         $("#friendsName").click(function () {
             let name = $(this).text()
             let value = '#' + name.substr(1, name.length)
@@ -262,7 +263,36 @@
             $(".chatWindow").show("slow")
             let value = '#' + $(this).parent().attr("id")
             $(value).hide("slow")
+        })
 
+        function connect() {
+            let socket = new SockJS('/user/server')
+            stompClient = Stomp.over(socket)
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe("/users/queue/messages", function (response) {
+                    showMessage(JSON.parse(response.body))
+                });
+            })
+        }
+
+
+        function showMessage(message) {
+            if (message.name=='Server'){
+                $(".table12").prepend(`<span style="color: red"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+            } else{
+                $(".table12").prepend(`<span> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+            }
+        }
+        $("#send").click(function() {
+            let message = $("#message").val()
+            let jasonOb = {
+                name: $("#user-name").text(),
+                text:message
+            }
+            let urls = $(this).parent().parent().parent().attr("id")
+            localStorage.setItem("urls",urls)
+            showMessage(jasonOb)
+            stompClient.send("/chatting/message/" + localStorage.getItem("urls"),{},JSON.stringify(jasonOb))
         })
     });
 </script>

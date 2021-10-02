@@ -8,4 +8,8 @@
 package com.example.smartparceling.entity;
 
 public class Message1 {
+
+    private String name;
+    private String text;
+
 }

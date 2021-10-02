@@ -218,7 +218,10 @@ function hideProPic() {
     $('#profilepicture').css("display", "none")
 }
 
-const toggleChat = () =>{
-$(".chat-option").toggle()
+const toggleChat = () => {
+    $(".chat-option").toggle()
 }
+
+//  chat optimization
+
 
