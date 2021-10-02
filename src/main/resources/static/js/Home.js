@@ -224,4 +224,48 @@ const toggleChat = () => {
 
 //  chat optimization
 
+function connect() {
+    let socket = new SockJS('/user/server/')
+    stompClient = Stomp.over(socket)
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe("/user/queue/messages", function (response) {
+            showMessage(JSON.parse(response.body))
+        });
+    })
+}
 
+
+function showMessage(message) {
+    if (message.name=='Server'){
+        $(".table12").prepend(`<span style="color: red"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+    } else{
+        $(".table12").prepend(`<span> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+    }
+}
+
+$(document).ready(function () {
+    connect()
+    $("#friendsName").click(function () {
+        let name = $(this).text()
+        let value = '#' + name.substr(1, name.length)
+        $(".chatWindow").hide("slow")
+        $(value).show("slow")
+    });
+    $("#backArrow").click(function () {
+        $(".chatWindow").show("slow")
+        let value = '#' + $(this).parent().attr("id")
+        $(value).hide("slow")
+    })
+    $("#send").click(function() {
+        console.log("oooo")
+        let message = $("#message").val()
+        let jasonOb = {
+            name: $("#user-name").text(),
+            text:message
+        }
+        let urls = $(this).parent().parent().parent().attr("id")
+        localStorage.setItem("urls",urls)
+        showMessage(jasonOb)
+        stompClient.send("/chatting/message/" + localStorage.getItem("urls"),{},JSON.stringify(jasonOb))
+    })
+});
