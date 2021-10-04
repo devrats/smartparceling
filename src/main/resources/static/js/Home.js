@@ -1,9 +1,6 @@
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-if(localStorage.getItem("connectChecker")==null){
-    localStorage.setItem("connectChecker","1")
-    connect()
-}
+connect()
 const start2 = () => {
     if (isMobile) {
         let spans = document.getElementsByTagName("link")[2]
@@ -243,8 +240,12 @@ function showMessage(message) {
     if (message.name=='Server'){
         $(".table12").prepend(`<span style="color: red"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
     } else{
-        $(".table12").prepend(`<span> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+        $(".table12").prepend(`<span style="color: mintcream"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
     }
+}
+
+function showMessage1(message) {
+    $(".table12").prepend(`<span style="color: burlywood"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
 }
 
 $(document).ready(function () {
@@ -268,7 +269,7 @@ $(document).ready(function () {
         }
         let urls = $(this).parent().parent().parent().attr("id")
         localStorage.setItem("urls",urls)
-        showMessage(jasonOb)
+        showMessage1(jasonOb)
         stompClient.send("/chatting/message/" + localStorage.getItem("urls"),{},JSON.stringify(jasonOb))
     })
 });

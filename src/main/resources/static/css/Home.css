@@ -342,7 +342,10 @@ a {
 }
 
 .chat-option {
-    background-color: black;
+    background-size: cover;
+    background: url("../img/chatwidow.jpg") center;
+    max-width: 100%;
+    height: 100vh;
     width: 18rem;
     overscroll-behavior: contain;
     display: block;
@@ -403,8 +406,8 @@ a {
 }
 
 .chat-box-instruction{
-    text-align: center;
-    color: white;
+    color: yellow;
+    font-size: 15px;
 }
 
 .input-group1{
