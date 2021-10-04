@@ -1,5 +1,9 @@
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+if(localStorage.getItem("connectChecker")==null){
+    localStorage.setItem("connectChecker","1")
+    connect()
+}
 const start2 = () => {
     if (isMobile) {
         let spans = document.getElementsByTagName("link")[2]
@@ -244,7 +248,6 @@ function showMessage(message) {
 }
 
 $(document).ready(function () {
-    connect()
     $("#friendsName").click(function () {
         let name = $(this).text()
         let value = '#' + name.substr(1, name.length)
