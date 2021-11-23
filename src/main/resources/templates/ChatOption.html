@@ -11,12 +11,12 @@
         <br>
         <hr style="color: black">
         <div th:each="e: ${names}">
-            <a href="#" id="friendsName"> <span th:text="${e}"></span></a>
+            <a href="#" onclick="chatting(this)" th:id="${e}"> <span th:text="${e}"></span></a>
         </div>
     </div>
-    <div class="chat-box" th:each="e:${names}">
-        <div class="chat-names" th:id="${e}">
-            <i id="backArrow" class="fas fa-arrow-left cross"></i>
+    <div class="chat-box">
+        <div th:each="e:${names}" class="chat-names" th:id="${e} + '1'">
+            <i id="backArrow" onclick="backArrow(this)" class="fas fa-arrow-left cross"></i>
             <br>
             <br>
             <div class="card-header chat-box-instruction card-heading">
@@ -24,11 +24,10 @@
                 * You are connected to each user till the parcel is transferred. <br>
             </div>
             <div class="form-group input-group input-group1">
-                <label for="message"></label>
                 <input type="text" required class="form-control mb-2" style="margin-right: 6px"
-                       id="message" placeholder="Enter Your Message...">
+                       th:id="${e} + 'message'" placeholder="Enter Your Message...">
                 <div class="input-group-append">
-                    <button type="submit" id="send" class="btn btn-primary mb-2">Send
+                    <button type="submit" onclick="send(this)" id="send" class="btn btn-primary mb-2">Send
                     </button>
                 </div>
             </div>

@@ -248,28 +248,32 @@ function showMessage1(message) {
     $(".table12").prepend(`<span style="color: burlywood"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
 }
 
-$(document).ready(function () {
-    $("#friendsName").click(function () {
-        let name = $(this).text()
-        let value = '#' + name.substr(1, name.length)
-        $(".chatWindow").hide("slow")
-        $(value).show("slow")
-    });
-    $("#backArrow").click(function () {
+function chatting(element) {
+    let name = element.id
+    let value = '#' + name.substr(0, name.length) + '1'
+    $(".chatWindow").hide("slow")
+    $(value).show("slow")
+}
+
+    function backArrow (element) {
         $(".chatWindow").show("slow")
-        let value = '#' + $(this).parent().attr("id")
+        let name = element.parentNode.id
+        let value = '#' + name
         $(value).hide("slow")
-    })
-    $("#send").click(function() {
-        console.log("oooo")
-        let message = $("#message").val()
+    }
+
+
+    function send(element) {
+        let name = element.parentNode.parentNode.firstElementChild.id
+        let value = '#' + name
+        let message = $(value).val()
         let jasonOb = {
             name: $("#user-name").text(),
             text:message
         }
-        let urls = $(this).parent().parent().parent().attr("id")
+        let urls = element.parentNode.parentNode.parentNode.id
+        urls = urls.substr(0,urls.length-1)
         localStorage.setItem("urls",urls)
         showMessage1(jasonOb)
         stompClient.send("/chatting/message/" + localStorage.getItem("urls"),{},JSON.stringify(jasonOb))
-    })
-});
+    }
