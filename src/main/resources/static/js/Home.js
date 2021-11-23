@@ -237,15 +237,17 @@ function connect() {
 
 
 function showMessage(message) {
+    let value = '#' + message.name + 'table'
     if (message.name=='Server'){
-        $(".table12").prepend(`<span style="color: red"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+        $(value).prepend(`<span style="color: red"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
     } else{
-        $(".table12").prepend(`<span style="color: mintcream"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+        $(value).prepend(`<span style="color: mintcream"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
     }
 }
 
-function showMessage1(message) {
-    $(".table12").prepend(`<span style="color: burlywood"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
+function showMessage1(message,url) {
+    let value = '#' + url + 'table'
+    $(value).prepend(`<span style="color: burlywood"> <b><i>${message.name} : </i></b>${message.text}</span> <br>`)
 }
 
 function chatting(element) {
@@ -274,6 +276,6 @@ function chatting(element) {
         let urls = element.parentNode.parentNode.parentNode.id
         urls = urls.substr(0,urls.length-1)
         localStorage.setItem("urls",urls)
-        showMessage1(jasonOb)
+        showMessage1(jasonOb,urls)
         stompClient.send("/chatting/message/" + localStorage.getItem("urls"),{},JSON.stringify(jasonOb))
     }
