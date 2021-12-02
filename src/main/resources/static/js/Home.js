@@ -206,6 +206,7 @@ function sizeError() {
 }
 
 function profileUpload() {
+    console.log("hello world")
     Swal.fire({title: 'Update profile picture?', showCancelButton: true}).then(result => {
         if (result.value) {
             $('#profilepicture').css("display", "block")

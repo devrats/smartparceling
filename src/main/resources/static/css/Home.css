@@ -358,6 +358,7 @@ a {
     right: 0;
     z-index: 9;
     display: none;
+    overflow: hidden;
 }
 
 .chat-option a {
